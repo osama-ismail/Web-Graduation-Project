@@ -1,0 +1,33 @@
+.form {
+    width: 30rem;
+    height: 30rem;
+    background-color: white;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.header {
+    margin: 3em 0 2em 0;
+}
+.inputs {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.submit-button {
+    background-color: red;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.submit-button:hover {
+    background-color: rgb(190, 0, 0);
+}

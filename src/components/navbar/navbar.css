@@ -1,0 +1,41 @@
+nav {
+    position: absolute;
+    width: 100%;
+}
+.wrapper {
+    padding: 22px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Left Navbar */
+#left {
+    flex: 1;
+}
+.logo {
+    color: white;
+    font-size: 20px;
+}
+
+/* Right Navbar */
+#right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.headers {
+    padding: 4px 2px;
+    font-size: 15px;
+    margin-left: 5px;
+    text-decoration: none;
+    color: white;
+    letter-spacing: 2px;
+    transition: 200ms;
+    margin: 3px 10px;
+    text-align: center;
+}
+.headers:hover {
+    color: rgb(223, 215, 215);
+}
