@@ -27,7 +27,8 @@ nav {
 }
 .headers {
     padding: 4px 2px;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: bold;
     margin-left: 5px;
     text-decoration: none;
     color: white;
