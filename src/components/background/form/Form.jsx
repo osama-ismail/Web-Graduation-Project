@@ -6,6 +6,7 @@ import SignIn from "./sign-in/SignIn.jsx";
 
 
 const FormSlide = styled.div`
+    width: 100%;
     transition: all 1s ease;
     transform: translateY(${(props) => props.slideIndex * -28}rem);
 `
