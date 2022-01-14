@@ -1,9 +1,8 @@
-import Navbar from "../components/navbar/Navbar"
-
+import Background from "../components/background/Background"
 const Home = () => {
     return (
         <div>
-            <Navbar />
+            <Background />
         </div>
     )
 }

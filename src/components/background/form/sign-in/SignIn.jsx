@@ -11,7 +11,7 @@ const SignIn = (props) => {
                 required
                 style={{
                     margin: "0 0 20px 0",
-                    width: "18em"
+                    width: "100%"
                 }}
             />
             <TextField
@@ -22,7 +22,7 @@ const SignIn = (props) => {
                 required
                 style={{
                     margin: "0 0 20px 0",
-                    width: "18em"
+                    width: "100%"
                 }}
             />
             <a className="forget-pass" href="#">Forgot your password?</a>

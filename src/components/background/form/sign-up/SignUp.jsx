@@ -11,7 +11,7 @@ const SignUp = (props) => {
                 required
                 style={{
                     margin: "0 0 20px 0",
-                    width: "18em"
+                    width: "100%"
                 }}
             />
             <TextField
@@ -21,7 +21,7 @@ const SignUp = (props) => {
                 required
                 style={{
                     margin: "0 0 20px 0",
-                    width: "18em"
+                    width: "100%"
                 }}
             />
             <TextField
@@ -32,7 +32,7 @@ const SignUp = (props) => {
                 required
                 style={{
                     margin: "0 0 20px 0",
-                    width: "18em"
+                    width: "100%"
                 }}
             />
             <button className="toggle" onClick={props.handleClick}>Have an account? login</button>
