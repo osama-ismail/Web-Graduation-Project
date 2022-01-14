@@ -1,13 +1,16 @@
 .form {
-    width: 30rem;
+    width: 25rem;
     height: 30rem;
+    border-radius: 7px;
     background-color: white;
-    margin-right: 2rem;
+    margin-right: 5rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: column;
+    overflow: hidden;
 }
+
 .header {
     margin: 2.5em 0 0.5em 0;
     min-width: 50px;
@@ -39,4 +42,26 @@
 }
 .submit-button:hover {
     background-color: rgb(190, 0, 0);
+}
+
+.toggle {
+    margin: 0 0 20px 0;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+.toggle:hover {
+    color: red;
+}
+
+.forget-pass {
+    margin: 0 0 25px 0;
+    text-decoration: none;
+    color: black;
+    transition: 0.2s;
+}
+.forget-pass:hover {
+    color: red;
 }

@@ -1,51 +1,35 @@
 import "./form.css";
-import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import styled from "styled-components";
+import SignUp from "./sign-up/SignUp.jsx";
+import SignIn from "./sign-in/SignIn.jsx";
+
+
+const FormSlide = styled.div`
+    transition: all 1s ease;
+    transform: translateY(${(props) => props.slideIndex * -28}rem);
+`
 
 
 const Form = () => {
+    const [slideIndex, setSlideIndex] = useState(0);
+    const handleClick = () => setSlideIndex(slideIndex === 0 ? 1 : 0)
+
     return (
-        <section className="form">
-            <div className="header">
-                <h1>Get started and explore <br /> our services</h1>
-            </div>
-            <div className="inputs">
-                <TextField
-                    id="standard-basic"
-                    label="Username"
-                    variant="standard"
-                    required
-                    style={{
-                        margin: "0 0 20px 0",
-                        width: "18em"
-                    }}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Email address"
-                    variant="standard"
-                    required
-                    style={{
-                        margin: "0 0 20px 0",
-                        width: "18em"
-                    }}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Password"
-                    variant="standard"
-                    type={"password"}
-                    required
-                    style={{
-                        margin: "0 0 20px 0",
-                        width: "18em"
-                    }}
-                />
-                <span style={{
-                    margin: "0 0 25px 0",
-                }}>Your personal data is safe with us.</span>
-                <button className="submit-button">Register</button>
-            </div>
-        </section>
+        <div className="form">
+            <FormSlide slideIndex={slideIndex}>
+                <div className="header">
+                    <h1>Get started and explore <br /> our services</h1>
+                </div>
+                <SignUp handleClick={handleClick} />
+            </FormSlide>
+            <FormSlide slideIndex={slideIndex}>
+                <div className="header">
+                    <h1>Get started and explore <br /> our services</h1>
+                </div>
+                <SignIn handleClick={handleClick} />
+            </FormSlide>
+        </div>
     )
 }
 
