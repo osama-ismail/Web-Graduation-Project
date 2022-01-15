@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -9,12 +8,11 @@ const Navbar = () => {
                     <div className="logo">Site Logo</div>
                 </section>
                 <section id="right">
-                    <NavLink className="headers" to="/">Home</NavLink>
-                    <NavLink className="headers" to="/services">Services</NavLink>
-                    <NavLink className="headers" to="/features">Features</NavLink>
-                    <NavLink className="headers" to="/team">Team</NavLink>
-                    <NavLink className="headers" to="/faq">FAQ</NavLink>
-                    <NavLink className="headers" to="/contact">Contact</NavLink>
+                    <a className="headers" to="/">ABOUT</a>
+                    <a className="headers" to="/services">SERVICES</a>
+                    <a className="headers" to="/features">FEATURES</a>
+                    <a className="headers" to="/faq">FAQ</a>
+                    <a className="headers" to="/contact">CONTACT</a>
                 </section>
             </main>
         </nav>

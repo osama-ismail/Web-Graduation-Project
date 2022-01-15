@@ -7,10 +7,10 @@ const backgroundStyle = {
     minHeight: "46.875rem",
     minWidth: "100%",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
+    borderBottomRadius: "50%",
 }
 
 
