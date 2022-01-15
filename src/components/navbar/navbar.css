@@ -1,3 +1,4 @@
+
 nav {
     position: absolute;
     width: 100%;
@@ -38,5 +39,5 @@ nav {
     text-align: center;
 }
 .headers:hover {
-    color: rgb(223, 215, 215);
+    color: red;
 }
