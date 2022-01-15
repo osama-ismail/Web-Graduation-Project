@@ -1,9 +1,13 @@
-import Background from "../components/background/Background"
+import React from 'react';
+import MainNavbar from "../components/main-nav-bar/Navbar";
+import Background from "../components/background/Background";
+
 const Home = () => {
     return (
-        <div>
+        <React.Fragment>
+            <MainNavbar />
             <Background />
-        </div>
+        </React.Fragment>
     )
 }
 
