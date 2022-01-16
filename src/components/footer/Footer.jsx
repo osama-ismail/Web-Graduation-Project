@@ -4,6 +4,7 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
+import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 
 const Ftr = styled.footer`
     background-color: #2f2f2f;
@@ -36,6 +37,11 @@ const Email = styled.a`
     margin: 10px 5px;
     display: flex;
     align-items: center;
+`
+
+const Phone = styled.span`
+    display: flex;
+    align-items; center;
 `
 
 const SocialMedia = styled.section`
@@ -79,7 +85,10 @@ const Footer = () => {
                             <MailOutlineRoundedIcon />
                             &nbsp;project@website.com
                         </Email>
-                        Phone
+                        <Phone>
+                            <LocalPhoneRoundedIcon />&nbsp;
+                            Any phone number
+                        </Phone>
                         <SocialMedia>
                             <FacebookRoundedIcon />
                             <InstagramIcon />
