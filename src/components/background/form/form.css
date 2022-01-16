@@ -71,7 +71,7 @@
 
 .forget-pass {
     margin: 0 0 25px 0;
-    text-decoration: none;
+    text-decoration: underline;
     color: black;
     transition: 0.2s;
 }
