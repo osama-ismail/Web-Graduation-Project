@@ -36,7 +36,7 @@ const SignUp = (props) => {
                 }}
             />
             <button className="toggle" onClick={props.handleClick}>Have an account? login</button>
-            <button className="submit-button">Register</button>
+            <button className="submit-button">Create account</button>
         </div>
     )
 }

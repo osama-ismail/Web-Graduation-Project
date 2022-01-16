@@ -26,7 +26,7 @@ const Form = () => {
             </FormSlide>
             <FormSlide slideIndex={slideIndex}>
                 <div className="header">
-                    <h1>Get started and explore <br /> our services</h1>
+                    <h1>Welcome Back</h1>
                 </div>
                 <SignIn handleClick={handleClick} />
             </FormSlide>

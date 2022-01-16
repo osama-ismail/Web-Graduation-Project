@@ -4,6 +4,7 @@ import Form from "./form/Form.jsx";
 
 const backgroundStyle = {
     backgroundImage: `url(${background})`,
+    backgroundPosition: "25% -3.5rem",
     minHeight: "46.875rem",
     minWidth: "100%",
     backgroundRepeat: "no-repeat",

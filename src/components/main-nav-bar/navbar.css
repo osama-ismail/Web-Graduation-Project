@@ -37,6 +37,7 @@ nav {
     transition: 200ms;
     margin: 3px 10px;
     text-align: center;
+    cursor: pointer;
 }
 .headers:hover {
     color: red;
