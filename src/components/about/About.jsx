@@ -24,6 +24,7 @@ const Article = styled.article`
 const SectionName = styled.h1`
     font-weight: 800;
     font-size: 45px;
+    font-style: italic;
 `
 
 const Paragraph = styled.p`
@@ -37,7 +38,7 @@ const About = () => {
         <Container>
             <Img src={RedCar} />
             <Article>
-                <SectionName>About App</SectionName>
+                <SectionName>About <span style={{ color: "#fe2112" }}>Tinker</span></SectionName>
                 <Paragraph>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Modi repellat, laudantium similique

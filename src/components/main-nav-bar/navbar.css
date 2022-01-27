@@ -1,10 +1,8 @@
-
 nav {
-    position: absolute;
     width: 100%;
 }
 .wrapper {
-    padding: 22px 25px;
+    padding: 0 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,8 +13,7 @@ nav {
     flex: 1;
 }
 .logo {
-    color: white;
-    font-size: 20px;
+    margin: 10px 0;
 }
 
 /* Right Navbar */
@@ -27,18 +24,17 @@ nav {
     align-items: center;
 }
 .headers {
-    padding: 4px 2px;
+    padding: 10px 5px;
     font-size: 16px;
     font-weight: bold;
-    margin-left: 5px;
+    margin: 0 1em;
     text-decoration: none;
-    color: white;
+    color: #232323;
     letter-spacing: 2px;
     transition: 200ms;
-    margin: 3px 10px;
     text-align: center;
     cursor: pointer;
 }
 .headers:hover {
-    color: red;
+    color: rgb(238, 26, 26);
 }
