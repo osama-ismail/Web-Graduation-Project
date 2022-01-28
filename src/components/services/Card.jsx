@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import "../Global-CSS/fade-in.css";
 
 const Container = styled.div`
     position: relative;
@@ -19,18 +20,18 @@ const Container = styled.div`
 
 const MaskTop = styled.div`
     position: absolute;
-    top: -12px;
+    top: -13px;
     left: 0;
     width: 50%;
-    height: 12px;
+    height: 13px;
     background-color: #eee;
 `
 
 const MaskLeft = styled.div`
     position: absolute;
-    top: -12px;
-    left: -12px;
-    width: 12px;
+    top: -13px;
+    left: -13px;
+    width: 13px;
     height: 50%;
     background-color: #eee;
 `
@@ -38,18 +39,18 @@ const MaskLeft = styled.div`
 const MaskRight = styled.div`
     position: absolute;
     bottom: 0;
-    right: -12px;
-    width: 12px;
+    right: -13px;
+    width: 13px;
     height: 50%;
     background-color: #eee;
 `
 
 const MaskBottom = styled.div`
     position: absolute;
-    bottom: -12px;
-    right: -12px;
+    bottom: -13px;
+    right: -13px;
     width: 50%;
-    height: 12px;
+    height: 13px;
     background-color: #eee;
 `
 
@@ -76,18 +77,34 @@ const Description = styled.p`
 `
 
 const Card = (props) => {
+    const [isVisible, setVisible] = React.useState(true);
+    const domRef = React.useRef();
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => setVisible(entry.isIntersecting));
+        });
+        const { current } = domRef;
+        observer.observe(current);
+        return () => observer.unobserve(current);
+    }, []);
     return (
-        <Container>
-            <MaskTop />
-            <MaskLeft />
-            <MaskRight />
-            <MaskBottom />
-            <LogoBox>
-                <Logo src={require("../../assets/Services/" + props.services.sourceImg)} />
-            </LogoBox>
-            <Header>{props.services.title}</Header>
-            <Description>{props.services.description}</Description>
-        </Container>
+        <div
+            className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+            ref={domRef}
+        >
+            {props.children}
+            <Container>
+                <MaskTop />
+                <MaskLeft />
+                <MaskRight />
+                <MaskBottom />
+                <LogoBox>
+                    <Logo src={require("../../assets/Services/" + props.services.sourceImg)} />
+                </LogoBox>
+                <Header>{props.services.title}</Header>
+                <Description>{props.services.description}</Description>
+            </Container>
+        </div>
     )
 }
 

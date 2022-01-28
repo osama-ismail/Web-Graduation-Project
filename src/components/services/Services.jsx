@@ -31,7 +31,12 @@ const Cards = styled.div`
 const Services = () => {
     return (
         <Container>
-            <TopHeader>Our Services</TopHeader>
+            <TopHeader>
+                <span style={{
+                    color: "red",
+                    fontStyle: "italic"
+                }}>Tinker</span> Services
+            </TopHeader>
             <MainSeparator src={ServicesSeparator} />
             <Cards>
                 {

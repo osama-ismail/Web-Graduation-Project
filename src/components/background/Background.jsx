@@ -1,5 +1,5 @@
 import background from "../../assets/images/slider/slider-img-1.jpg";
-import Form from "./form/Form.jsx";
+// import Form from "./form/Form.jsx";
 import styled from "styled-components";
 
 const backgroundStyle = {
@@ -97,11 +97,11 @@ const Paragraph = styled.p`
 
 const GetStarted = styled.button`
     margin-top: 2em;
-    font-size: 2vw;
+    font-size: 1.8vw;
     border: none;
     cursor: pointer;
-    padding: 0.4em 0.4em;
-    border-radius: 10px;
+    padding: 0.4em 0.7em;
+    border-radius: 40px;
     background-color: white;
     color: rgb(243, 27, 22, 0.949);
     font-weight: bold;
@@ -144,7 +144,7 @@ const Background = () => {
                 <Paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore etctrro dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation
                 </Paragraph>
-                <GetStarted>Get Started</GetStarted>
+                <GetStarted>Get Started!</GetStarted>
             </TextWrapper>
         </div>
     )
