@@ -5,7 +5,7 @@ nav {
     padding: 0 25px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
 }
 
 /* Left Navbar */
@@ -13,7 +13,7 @@ nav {
     flex: 1;
 }
 .logo {
-    margin: 10px 0;
+    margin: 20px 10px;
 }
 
 /* Right Navbar */
@@ -24,9 +24,11 @@ nav {
     align-items: center;
 }
 .headers {
-    padding: 10px 5px;
+    width: 100%;
     font-size: 16px;
     font-weight: bold;
+    font-style: italic;
+    padding: 0 1em;
     margin: 0 1em;
     text-decoration: none;
     color: #232323;
@@ -34,7 +36,13 @@ nav {
     transition: 200ms;
     text-align: center;
     cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
 .headers:hover {
-    color: rgb(238, 26, 26);
+    color: white;
+    background-color: rgba(243, 47, 22, 0.849);
 }

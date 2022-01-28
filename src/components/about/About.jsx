@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RedCar from "../../assets/images/RedCar.png";
+import RedCar from "../../assets/images/manWithCar.jpg";
 
 
 const Container = styled.div`
@@ -9,13 +9,20 @@ const Container = styled.div`
     flex-flow: row wrap;
 `
 
+const ImageWrapper = styled.div`
+    width: 500px;
+    display: flex;
+    align-items: center;
+    margin-right: 3em;
+`
+
 const Img = styled.img`
-    flex: 1;
+    width: 100%;
 `
 
 const Article = styled.article`
     padding: 2rem 1rem;
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,9 +43,13 @@ const Paragraph = styled.p`
 const About = () => {
     return (
         <Container>
-            <Img src={RedCar} />
+            <ImageWrapper>
+                <Img src={RedCar} />
+            </ImageWrapper>
             <Article>
-                <SectionName>About <span style={{ color: "#fe2112" }}>Tinker</span></SectionName>
+                <SectionName>
+                    About <span style={{ color: "#fe2112" }}>Tinker</span>
+                </SectionName>
                 <Paragraph>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Modi repellat, laudantium similique

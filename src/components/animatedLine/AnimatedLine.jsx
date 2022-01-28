@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Line = styled.div`
-    background-color: #e92132;
+    background-color: rgb(243, 47, 22, 0.849);
     height: 5px;
     width: 0%;
     animation-name: line-expanding;
-    animation-duration: 8s;
+    animation-duration: 12s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 
