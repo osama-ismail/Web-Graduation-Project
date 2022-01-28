@@ -1,17 +1,17 @@
 const services = [
     {
-        sourceImg: "map.png",
+        className: "fa fa-map-marker",
         title: "Using maps",
         description: "Put here some Description about this service"
     },
     {
-        sourceImg: "booking.jpg",
-        title: "Booking",
+        className: "fa fa-wrench",
+        title: "Car Repair",
         description: "Put here some Description about this service"
     },
     {
-        sourceImg: "communication.jpg",
-        title: "Communication",
+        className: "fa fa-car",
+        title: "Car Washing",
         description: "Put here some Description about this service"
     },
 ]

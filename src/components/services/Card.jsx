@@ -59,7 +59,7 @@ const LogoBox = styled.div`
     height: 60px;
 `
 
-const Logo = styled.img`
+const Logo = styled.i`
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -99,7 +99,15 @@ const Card = (props) => {
                 <MaskRight />
                 <MaskBottom />
                 <LogoBox>
-                    <Logo src={require("../../assets/Services/" + props.services.sourceImg)} />
+                    <i
+                        class={props.services.className}
+                        aria-hidden="true"
+                        style={{
+                            fontSize: "40px",
+                            color: 'white',
+                        }}
+                    >
+                    </i>
                 </LogoBox>
                 <Header>{props.services.title}</Header>
                 <Description>{props.services.description}</Description>

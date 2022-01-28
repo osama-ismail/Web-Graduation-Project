@@ -1,5 +1,4 @@
 import background from "../../assets/images/slider/slider-img-1.jpg";
-// import Form from "./form/Form.jsx";
 import styled from "styled-components";
 
 const backgroundStyle = {
@@ -137,7 +136,6 @@ const GetStarted = styled.button`
 const Background = () => {
     return (
         <div style={backgroundStyle}>
-            {/* <Form /> */}
             <TextWrapper>
                 <Title1>Car Repair</Title1>
                 <Title2>And Maintenance Service</Title2>

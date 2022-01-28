@@ -1,4 +1,4 @@
-import "../../form/form.css";
+import "../form.css";
 import TextField from "@mui/material/TextField";
 
 const SignUp = (props) => {
