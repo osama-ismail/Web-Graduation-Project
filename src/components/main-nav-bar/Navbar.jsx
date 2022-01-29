@@ -4,7 +4,7 @@ import Logo from "../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [showScrolledNav, setShowScrolledNav] = React.useState(false);
 
     window.addEventListener("scroll", () => {
@@ -19,7 +19,7 @@ const Navbar = () => {
             <main className="wrapper">
                 <section id="left">
                     <NavLink to="/">
-                        <img src={Logo} className="logo" />
+                        <img src={Logo} className="logo" alt="logo" />
                     </NavLink>
                 </section>
                 <section id="right">
@@ -34,7 +34,7 @@ const Navbar = () => {
                         About
                     </Link>
                     <Link
-                        to="ServicesElement"
+                        to="FAQElement"
                         spy={true}
                         smooth={true}
                         duration={500}
@@ -43,9 +43,30 @@ const Navbar = () => {
                     >
                         Services
                     </Link>
-                    <a href="#" className="headers">Contact</a>
-                    <a href="#" className="headers">FAQ</a>
+                    <Link
+                        to="FooterElement"
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        offset={-100}
+                        className="headers"
+                    >
+                        Contact
+                    </Link>
+                    <Link
+                        to="ServicesElement"
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        offset={-100}
+                        className="headers"
+                    >
+                        FAQ
+                    </Link>
                 </section>
+                <button id="navbar-list" onClick={props.handleEvent}>
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
             </main>
         </nav>
     )

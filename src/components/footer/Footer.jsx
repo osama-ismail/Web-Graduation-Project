@@ -75,7 +75,7 @@ const Copyright = styled.div`
 
 const Footer = () => {
     return (
-        <div>
+        <div id="FooterElement">
             <FooterSvg />
             <Ftr>
                 <Wrapper>
