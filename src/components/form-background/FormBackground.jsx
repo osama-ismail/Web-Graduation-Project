@@ -16,7 +16,7 @@ const backgroundStyle = {
 
 const FormBackground = () => {
     return (
-        <div style={backgroundStyle}>
+        <div id="FormBackgroundElement" style={backgroundStyle}>
             <Form />
         </div>
     )

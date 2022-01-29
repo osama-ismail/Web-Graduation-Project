@@ -59,13 +59,6 @@ const LogoBox = styled.div`
     height: 60px;
 `
 
-const Logo = styled.i`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-`
-
 const Header = styled.h2`
     color: white;
     margin: 1em 0;
@@ -100,7 +93,7 @@ const Card = (props) => {
                 <MaskBottom />
                 <LogoBox>
                     <i
-                        class={props.services.className}
+                        className={props.services.className}
                         aria-hidden="true"
                         style={{
                             fontSize: "40px",
