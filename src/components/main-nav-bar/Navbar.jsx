@@ -1,11 +1,21 @@
+import React from "react";
 import "./navbar.css";
 import Logo from "../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
-
+import { Link } from "react-scroll";
 
 const Navbar = () => {
+    const [showScrolledNav, setShowScrolledNav] = React.useState(false);
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY >= 50)
+            setShowScrolledNav(true)
+        else
+            setShowScrolledNav(false)
+    })
+
     return (
-        <nav className="navbar">
+        <nav className={showScrolledNav ? "navbar-scroll" : "navbar"}>
             <main className="wrapper">
                 <section id="left">
                     <NavLink to="/">
@@ -13,9 +23,26 @@ const Navbar = () => {
                     </NavLink>
                 </section>
                 <section id="right">
-                    <a href="#" className="headers">About</a>
-                    <a href="#" className="headers">Services</a>
-                    <a href="#" className="headers">Features</a>
+                    <Link
+                        to="AboutElement"
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        offset={-80}
+                        className="headers"
+                    >
+                        About
+                    </Link>
+                    <Link
+                        to="ServicesElement"
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                        offset={-100}
+                        className="headers"
+                    >
+                        Services
+                    </Link>
                     <a href="#" className="headers">Contact</a>
                     <a href="#" className="headers">FAQ</a>
                 </section>

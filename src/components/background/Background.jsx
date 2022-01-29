@@ -1,5 +1,6 @@
 import background from "../../assets/images/slider/slider-img-1.jpg";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
 const backgroundStyle = {
     backgroundImage: `url(${background})`,
@@ -142,7 +143,14 @@ const Background = () => {
                 <Paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore etctrro dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation
                 </Paragraph>
-                <GetStarted>Get Started!</GetStarted>
+                <Link
+                    to="FormBackgroundElement"
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                >
+                    <GetStarted>Get Started!</GetStarted>
+                </Link>
             </TextWrapper>
         </div>
     )

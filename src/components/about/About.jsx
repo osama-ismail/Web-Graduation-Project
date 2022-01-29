@@ -41,7 +41,7 @@ const Paragraph = styled.p`
 
 const About = () => {
     return (
-        <Container>
+        <Container id="AboutElement">
             <ImageWrapper>
                 <Img src={RedCar} />
             </ImageWrapper>
