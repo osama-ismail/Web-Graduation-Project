@@ -1,0 +1,10 @@
+.list-headers {
+    color: white;
+    cursor: pointer;
+    transition: 200ms;
+    font-size: 20px;
+    margin: 8px 0;
+}
+.list-headers:hover {
+    color: rgb(213, 35, 41);
+}
