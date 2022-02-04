@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import img from "../../assets/images/user.jpg";
-import UserList from "../user-list/UserList";
+import img from "../../assets/images/user.png";
 
 const Container = styled.button`
     cursor: pointer;
@@ -28,26 +27,23 @@ const UserSpan = styled.span`
     font-weight: bold;
 `
 
-const UserBox = () => {
+const UserBox = ({ handleUserBox }) => {
     const [spanColor, setSpanColor] = useState("black")
-    const [showList, setShowList] = useState(false)
 
     const handleClick = () => {
         if (spanColor === "red") {
             setSpanColor("black")
-            setShowList(false)
         }
         else if (spanColor === "black") {
             setSpanColor("red")
-            setShowList(true)
         }
+        handleUserBox();
     }
 
     return (
         <Container onClick={handleClick}>
             <UserImg />
             <UserSpan style={{ color: spanColor }}>Me</UserSpan>
-            {showList ? <UserList /> : null}
         </Container >
     );
 };

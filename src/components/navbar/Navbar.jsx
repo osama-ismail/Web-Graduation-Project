@@ -39,7 +39,7 @@ const Right = styled.section`
     justify-content: flex-end;
 `
 
-const Navbar = () => {
+const Navbar = ({ handleUserBox }) => {
     return (
         <Nav>
             <Left>
@@ -54,7 +54,7 @@ const Navbar = () => {
             </Center>
             <Right>
                 <NotificationBox />
-                <UserBox />
+                <UserBox handleUserBox={handleUserBox} />
             </Right>
         </Nav>
     );
