@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
+import NotificationBox from "../notification-box/NotificationBox";
+import UserBox from "../user-box/UserBox";
 
 const Nav = styled.nav`
     display: flex;
@@ -9,7 +11,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em;
-    background-color: #eee;
+    background-color: #f6f6f6;
 `
 // Left
 const Left = styled.section`
@@ -32,7 +34,9 @@ const SearchWrapper = styled.div`
 // Right
 const Right = styled.section`
     flex: 1;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 `
 
 const Navbar = () => {
@@ -48,7 +52,10 @@ const Navbar = () => {
                     Search
                 </SearchWrapper>
             </Center>
-            <Right>right</Right>
+            <Right>
+                <NotificationBox />
+                <UserBox />
+            </Right>
         </Nav>
     );
 };
