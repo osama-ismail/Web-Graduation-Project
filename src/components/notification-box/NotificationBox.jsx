@@ -29,16 +29,17 @@ const Counter = styled.span`
     text-align: center;
 `
 
-const NotificationBox = () => {
+const NotificationBox = ({ handleNotificationBox }) => {
     const [clickedFlag, setClickedFlag] = useState(false)
     const [showCounter, setShowCounter] = useState(true)
 
     const handleClick = () => {
         setClickedFlag(!clickedFlag)
         setShowCounter(!showCounter)
+        handleNotificationBox();
     }
 
-    let counter = 2;
+    let counter = 3;
 
     return (
         <Container border={clickedFlag} onClick={handleClick}>

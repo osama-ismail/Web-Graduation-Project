@@ -9,7 +9,7 @@ const Container = styled.button`
     align-items: center;
     margin: 0 1rem 0 2rem;
     border: none;
-    background-color: #f6f6f6;
+    background-color: #b2bec3;
     position: relative;
 `
 
