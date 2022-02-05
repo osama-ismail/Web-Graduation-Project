@@ -15,6 +15,7 @@ const List = styled.div`
     z-index: 100;
     padding: 10px;
     border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
     
     animation-name: navlist-animation;
     animation-function-time: ease-in-out;
