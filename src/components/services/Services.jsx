@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import ServicesSeparator from "../../assets/Services/ServicesSeparator.png";
+import ServicesSeparator from "../../assets/images/ServicesSeparator.png";
 import Card from "./Card";
 import services from './servicesData';
 
