@@ -2,7 +2,7 @@ import React from "react";
 import Home from './pages/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Map from "./pages/Map";
-import LoggedIn from "./pages/LoggedIn";
+import Garage from "./pages/Garage";
 
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/using-map" element={<Map />} />
-        <Route path="/login/:userid" element={<LoggedIn />} />
+        <Route path="/login/:userid" element={<Garage />} />
       </Routes>
     </BrowserRouter>
   );
