@@ -9,7 +9,8 @@ import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
 import { useState } from 'react';
-import { Responsive } from '../components/responsive/Responsive';
+import { Mobile, Tablet } from '../components/responsive/Responsive';
+import Team from '../components/GarageHome Page/team/Team';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -25,7 +26,7 @@ const BackgroundImg = styled.div`
     padding: 14rem 30px;
     transition: 300ms;
 
-    ${Responsive({ background: "none" })}
+    ${Mobile({ background: "none" })}
 `
 
 const BackgroundText = styled.div`
@@ -57,7 +58,7 @@ const Arrows = styled.div`
     display: flex;
     justify-content: space-between;
 
-    ${Responsive({ display: "none" })}
+    ${Mobile({ display: "none" })}
 `
 
 const Left = styled.button`
@@ -109,7 +110,7 @@ const Advantages = styled.div`
     justify-content: space-around;
     width: 100%;
 
-    ${Responsive({ flexDirection: "column" })}
+    ${Tablet({ flexDirection: "column" })}
 `
 
 const Advantage = styled.div`
@@ -119,7 +120,7 @@ const Advantage = styled.div`
     flex: 1;
     margin: 0 2rem;
 
-    ${Responsive({ marginTop: "2rem" })}
+    ${Tablet({ marginTop: "2rem" })}
 `
 
 const AdvantageLogo = styled.img`
@@ -229,6 +230,7 @@ const LoggedIn = () => {
                     }
                 </Advantages>
             </AdvantagesContainer>
+            <Team />
             <Footer />
         </Container>
     );

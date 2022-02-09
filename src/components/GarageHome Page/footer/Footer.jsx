@@ -1,16 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
-import { Responsive } from '../../responsive/Responsive';
+import { Mobile } from '../../responsive/Responsive';
 
 const Container = styled.div`
     background-color: black;
-    margin: 3rem 0 0 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     padding: 2rem 0;
 
-    ${Responsive({ flexDirection: "column" })}
+    ${Mobile({ flexDirection: "column" })}
 `
 
 const Title = styled.h2`
@@ -24,7 +23,7 @@ const Pages = styled.div`
     display: flex;
     flex-direction: column;
 
-    ${Responsive({ marginBottom: "2rem" })}
+    ${Mobile({ marginBottom: "2rem" })}
 `
 const Page = styled.a`
     color: #888;
@@ -42,7 +41,7 @@ const Services = styled.div`
     display: flex;
     flex-direction: column;
 
-    ${Responsive({ marginBottom: "2rem" })}
+    ${Mobile({ marginBottom: "2rem" })}
 `
 const Service = Page;
 
@@ -50,7 +49,7 @@ const Store = styled.div`
     display: flex;
     flex-direction: column;
 
-    ${Responsive({ marginBottom: "2rem" })}
+    ${Mobile({ marginBottom: "2rem" })}
 `
 const Item = Page;
 
