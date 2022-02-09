@@ -4,10 +4,12 @@ import React from 'react';
 // import UserList from "../components/user-list/UserList";
 import styled from "styled-components";
 import GarageService from '../components/GarageHome Page/garage-service/GarageService';
+import Footer from '../components/GarageHome Page/footer/Footer';
 import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
 import { useState } from 'react';
+import { Responsive } from '../components/responsive/Responsive';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -22,6 +24,8 @@ const BackgroundImg = styled.div`
     align-items: center;
     padding: 14rem 30px;
     transition: 300ms;
+
+    ${Responsive({ background: "none" })}
 `
 
 const BackgroundText = styled.div`
@@ -52,10 +56,11 @@ const Arrows = styled.div`
     margin: 30px 0;
     display: flex;
     justify-content: space-between;
+
+    ${Responsive({ display: "none" })}
 `
 
 const Left = styled.button`
-
     font-size: 30px;
     margin: 0 4px;
     padding: 1.5rem;
@@ -103,6 +108,8 @@ const Advantages = styled.div`
     flex-flow: row wrap;
     justify-content: space-around;
     width: 100%;
+
+    ${Responsive({ flexDirection: "column" })}
 `
 
 const Advantage = styled.div`
@@ -111,6 +118,8 @@ const Advantage = styled.div`
     align-items: center;
     flex: 1;
     margin: 0 2rem;
+
+    ${Responsive({ marginTop: "2rem" })}
 `
 
 const AdvantageLogo = styled.img`
@@ -220,6 +229,7 @@ const LoggedIn = () => {
                     }
                 </Advantages>
             </AdvantagesContainer>
+            <Footer />
         </Container>
     );
 };
