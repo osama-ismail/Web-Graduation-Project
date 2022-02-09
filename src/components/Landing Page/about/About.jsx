@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RedCar from "../../assets/images/manWithCar.jpg";
+import RedCar from "../../../assets/images/manWithCar.jpg";
 
 
 const Container = styled.div`

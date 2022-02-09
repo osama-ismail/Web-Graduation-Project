@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import "../Global-CSS/fade-in.css";
+import "../../Global-CSS/fade-in.css";
 
 const Container = styled.div`
     position: relative;

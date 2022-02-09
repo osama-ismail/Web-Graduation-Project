@@ -1,6 +1,6 @@
 import React from "react";
 import "./MainNavbar.css";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
 

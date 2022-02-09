@@ -1,4 +1,4 @@
-import background from "../../assets/images/slider/slider-img-1.jpg";
+import background from "../../../assets/images/slider/slider-img-1.jpg";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 

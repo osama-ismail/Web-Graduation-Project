@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { NavLink } from "react-router-dom";
-import NotificationBox from "../notification-box/NotificationBox";
-import UserBox from "../user-box/UserBox";
+import NotificationBox from "../../notification-box/NotificationBox";
+import UserBox from "../../user-box/UserBox";
 
 const Nav = styled.nav`
     display: flex;

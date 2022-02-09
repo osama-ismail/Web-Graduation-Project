@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import SignUp from "./sign-up/SignUp.jsx";
 import SignIn from "./sign-in/SignIn.jsx";
-import "../Global-CSS/fade-in.css";
+import "../../Global-CSS/fade-in.css";
 
 
 const FormSlide = styled.div`
