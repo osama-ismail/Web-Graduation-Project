@@ -7,19 +7,21 @@ import GarageService from '../components/garage-service/GarageService';
 import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
+import { useState } from 'react';
 
 const Container = styled.div`
     background-color: #0f0f0f;
 `
 
 const BackgroundImg = styled.div`
-    background-image: url(${require("../assets/images/slider/" + slider[1])});
+    background-image: ${props => `url(${require("../assets/images/slider/" + slider[props.imgIndex])})`};
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 14rem 30px;
+    transition: 300ms;
 `
 
 const BackgroundText = styled.div`
@@ -45,6 +47,29 @@ const AboutGarage = styled.a`
         background-color: rgb(190, 18, 47);
     }
 `
+
+const Arrows = styled.div`
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+`
+
+const Left = styled.button`
+    font-size: 30px;
+    margin: 0 4px;
+    padding: 1.5rem;
+    cursor: pointer;
+    background-color: rgb(207, 37, 63);
+    border: none;
+    transition: 400ms;
+    color: white;
+
+    &:hover {
+        background-color: rgb(190, 18, 47);
+    }
+`
+
+const Right = Left;
 
 const Services = styled.div`
     display: flex;
@@ -136,12 +161,33 @@ const LoggedIn = () => {
         /> */
     }
 
+    const [sliderIndex, setSliderIndex] = useState(0);
+
+    const incrementSliderIndex = () => {
+        setSliderIndex((sliderIndex + 1) % 3)
+    }
+
+    const decrementSliderIndex = () => {
+        if (sliderIndex !== 0)
+            setSliderIndex((sliderIndex - 1) % 3)
+        else
+            setSliderIndex(2)
+    }
+
     return (
         <Container>
-            <BackgroundImg>
+            <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>
                     <GarageName>Name of Garage <br /> from DataBase</GarageName>
                     <AboutGarage href="#">ABOUT US</AboutGarage>
+                    <Arrows>
+                        <Left onClick={decrementSliderIndex}>
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </Left>
+                        <Right onClick={incrementSliderIndex}>
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </Right>
+                    </Arrows>
                 </BackgroundText>
             </BackgroundImg>
             <Services>
