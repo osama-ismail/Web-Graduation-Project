@@ -1,4 +1,4 @@
-import background from "../../assets/images/background.jpg";
+import background from "../../../assets/images/background.jpg";
 import Form from "../form/Form";
 
 const backgroundStyle = {

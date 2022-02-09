@@ -3,7 +3,7 @@ import React from 'react';
 // import NotificationList from '../components/notification-list/NotificationList';
 // import UserList from "../components/user-list/UserList";
 import styled from "styled-components";
-import GarageService from '../components/garage-service/GarageService';
+import GarageService from '../components/GarageHome Page/garage-service/GarageService';
 import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
@@ -55,6 +55,7 @@ const Arrows = styled.div`
 `
 
 const Left = styled.button`
+
     font-size: 30px;
     margin: 0 4px;
     padding: 1.5rem;

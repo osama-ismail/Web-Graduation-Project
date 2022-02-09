@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
-import ServicesSeparator from "../../assets/images/ServicesSeparator.png";
+import ServicesSeparator from "../../../assets/images/ServicesSeparator.png";
 import Card from "./Card";
-import services from '../../iterated_variables/servicesData';
+import services from '../../../iterated_variables/servicesData';
 
 const Container = styled.div`
     display: flex;

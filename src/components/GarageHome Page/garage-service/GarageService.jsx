@@ -12,7 +12,7 @@ const Label = styled.a`
 `
 
 const Container = styled.div`
-    background-image: ${props => `url(${require("../../assets/images/garage-services/" + props.background)})`};
+    background-image: ${props => `url(${require("../../../assets/images/garage-services/" + props.background)})`};
     background-size: 170%;
     background-repeat: no-repeat;
     height: 25rem;
