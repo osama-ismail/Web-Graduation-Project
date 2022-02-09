@@ -7,7 +7,7 @@ import AnimatedLine from "../components/Landing Page/animatedLine/AnimatedLine";
 import BackToTop from "../components/Landing Page/backToTop/BackToTop";
 import FormBackground from "../components/Landing Page/form-background/FormBackground";
 import MainNavbar from '../components/Landing Page/main-nav-bar/MainNavbar';
-import NavList from "../components/navlist/NavList";
+import NavList from "../components/Landing Page/navlist/NavList";
 
 const Home = () => {
     const [showNavList, setShowNavList] = React.useState(false);

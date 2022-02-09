@@ -1,9 +1,19 @@
 import { css } from "styled-components";
 
-export const Responsive = (props) => {
+export const Mobile = (props) => {
     return (
         css`
-            @media only screen and (max-width: 380px) {
+            @media only screen and (max-width: 480px) {
+                ${props}
+            }
+        `
+    );
+};
+
+export const Tablet = (props) => {
+    return (
+        css`
+            @media only screen and (max-width: 740px) {
                 ${props}
             }
         `
