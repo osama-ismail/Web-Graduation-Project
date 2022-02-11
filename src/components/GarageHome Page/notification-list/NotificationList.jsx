@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Notification from '../notification/Notification';
-import { notifications } from "./NotificationsFakeData";
+import { notifications } from "../../../iterated_variables/NotificationsFakeData";
 
 const Container = styled.div`
     position: absolute;

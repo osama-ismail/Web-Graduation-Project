@@ -11,9 +11,11 @@ import { advantages } from "../iterated_variables/advantages";
 import { useState } from 'react';
 import { Mobile, Tablet } from '../components/responsive/Responsive';
 import Team from '../components/GarageHome Page/team/Team';
+import NavigationBar from '../components/GarageHome Page/navigation_bar/NavigationBar';
 
 const Container = styled.div`
     background-color: #0f0f0f;
+    position: relative;
 `
 
 const BackgroundImg = styled.div`
@@ -187,6 +189,7 @@ const LoggedIn = () => {
 
     return (
         <Container>
+            <NavigationBar />
             <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>
                     <GarageName>Name of Garage <br /> from DataBase</GarageName>
