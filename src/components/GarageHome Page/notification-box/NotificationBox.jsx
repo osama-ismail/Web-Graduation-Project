@@ -16,7 +16,7 @@ const Container = styled.button`
 `
 
 const Counter = styled.span`
-    background-color: red;
+    background-color: rgb(240, 18, 47);
     padding: 3px;
     color: white;
     font-size: 14px;
@@ -47,7 +47,7 @@ const NotificationBox = ({ handleNotificationBox }) => {
                 class="fa fa-bell"
                 aria-hidden="true"
                 style={{
-                    color: `${clickedFlag ? "rgb(243, 47, 22, 0.849)" : "black"}`
+                    color: `${clickedFlag ? "rgb(230, 18, 47)" : "black"}`
                 }}
             ></i>
             {showCounter ? <Counter>{counter}</Counter> : null}
