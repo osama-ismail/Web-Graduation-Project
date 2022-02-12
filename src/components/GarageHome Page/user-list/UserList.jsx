@@ -8,13 +8,15 @@ const Container = styled.div`
     background-color: rgb(17, 17, 17, 0.9);
     right: 0;
     top: 5.4rem;
-    margin: 0 3rem 0 0;
+    margin: 0 2rem 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     border-radius: 5px;
     z-index: 2;
+    box-shadow: 0px 0px 6px #777;
+    background-color: #0f0f0f;
 
     animation-name: list-animation;
     animation-duration: 400ms;
