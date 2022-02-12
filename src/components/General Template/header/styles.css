@@ -1,0 +1,12 @@
+.links {
+    color: #777;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 300ms;
+    text-transform: uppercase;
+    margin: 0 14px;
+}
+
+.links:hover {
+    color: rgb(190, 18, 47);
+}
