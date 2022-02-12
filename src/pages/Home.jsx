@@ -4,7 +4,7 @@ import About from '../components/Landing Page/about/About';
 import Footer from "../components/Landing Page/footer/Footer";
 import Services from "../components/Landing Page/services/Services";
 import AnimatedLine from "../components/Landing Page/animatedLine/AnimatedLine";
-import BackToTop from "../components/Landing Page/backToTop/BackToTop";
+import BackToTop from "../components/Global Components/backToTop/BackToTop";
 import FormBackground from "../components/Landing Page/form-background/FormBackground";
 import MainNavbar from '../components/Landing Page/main-nav-bar/MainNavbar';
 import NavList from "../components/Landing Page/navlist/NavList";

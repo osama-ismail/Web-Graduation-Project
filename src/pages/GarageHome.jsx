@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Mobile, Tablet } from '../components/responsive/Responsive';
 import Team from '../components/GarageHome Page/team/Team';
 import NavigationBar from '../components/GarageHome Page/navigation_bar/NavigationBar';
+import BackToTop from '../components/Global Components/backToTop/BackToTop';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -185,7 +186,9 @@ const LoggedIn = () => {
             }
             <NavigationBar
                 handleUserBox={handleUserClick}
-                handleNotificationBox={hanleNotificationClick} />
+                handleNotificationBox={hanleNotificationClick}
+            />
+            <BackToTop />
             <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>
                     <GarageName>Name of Garage <br /> from DataBase</GarageName>
