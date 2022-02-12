@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import img from "../../assets/images/user.png";
+import img from "../../../assets/images/user.png";
 
 const Container = styled.button`
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 1rem 0 2rem;
+    margin: 0 0 0 1.4rem;
     border: none;
-    background-color: #b2bec3;
+    background: none;
     position: relative;
 `
 
@@ -28,14 +28,14 @@ const UserSpan = styled.span`
 `
 
 const UserBox = ({ handleUserBox }) => {
-    const [spanColor, setSpanColor] = useState("black")
+    const [spanColor, setSpanColor] = useState("white")
 
     const handleClick = () => {
-        if (spanColor === "red") {
-            setSpanColor("black")
+        if (spanColor === "rgb(240, 18, 47)") {
+            setSpanColor("white")
         }
-        else if (spanColor === "black") {
-            setSpanColor("red")
+        else if (spanColor === "white") {
+            setSpanColor("rgb(240, 18, 47)")
         }
         handleUserBox();
     }

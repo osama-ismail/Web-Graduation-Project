@@ -1,7 +1,6 @@
 import React from 'react';
-// import Navbar from '../components/navbar/Navbar';
-// import NotificationList from '../components/notification-list/NotificationList';
-// import UserList from "../components/user-list/UserList";
+import NotificationList from '../components/GarageHome Page/notification-list/NotificationList';
+import UserList from "../components/GarageHome Page/user-list/UserList";
 import styled from "styled-components";
 import GarageService from '../components/GarageHome Page/garage-service/GarageService';
 import Footer from '../components/GarageHome Page/footer/Footer';
@@ -146,33 +145,17 @@ const AdvantageDetail = styled.p`
 `
 
 const LoggedIn = () => {
-    // const [showUserList, setShowUserList] = React.useState(false)
-    // const [showNotificationList, setShowNotificationList] = React.useState(false)
+    const [showUserList, setShowUserList] = React.useState(false)
+    const [showNotificationList, setShowNotificationList] = React.useState(false)
 
-    // const handleUserClick = () => {
-    //     setShowUserList(!showUserList)
-    // }
-
-    // const hanleNotificationClick = () => {
-    //     setShowNotificationList(!showNotificationList)
-    // }
-
-    {/* {
-                showUserList ?
-                    <UserList
-                        name={"Yazan Habash"}
-                        bio={"Computer Engineer and Musician"}
-                    /> : null
-            }
-            {
-                showNotificationList ?
-                    <NotificationList /> : null
-            }
-            <Navbar
-                handleUserBox={handleUserClick}
-                handleNotificationBox={hanleNotificationClick}
-        /> */
+    const handleUserClick = () => {
+        setShowUserList(!showUserList)
     }
+
+    const hanleNotificationClick = () => {
+        setShowNotificationList(!showNotificationList)
+    }
+
 
     const [sliderIndex, setSliderIndex] = useState(0);
 
@@ -189,7 +172,20 @@ const LoggedIn = () => {
 
     return (
         <Container>
-            <NavigationBar />
+            {
+                showUserList ?
+                    <UserList
+                        name={"Yazan Habash"}
+                        bio={"Computer Engineer and Musician"}
+                    /> : null
+            }
+            {
+                showNotificationList ?
+                    <NotificationList /> : null
+            }
+            <NavigationBar
+                handleUserBox={handleUserClick}
+                handleNotificationBox={hanleNotificationClick} />
             <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>
                     <GarageName>Name of Garage <br /> from DataBase</GarageName>

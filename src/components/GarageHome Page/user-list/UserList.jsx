@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    position: absolute;
+    position: fixed;
     width: 300px;
     height: 200px;
     background-color: rgb(17, 17, 17, 0.9);
@@ -14,6 +14,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     border-radius: 5px;
+    z-index: 2;
 
     animation-name: list-animation;
     animation-duration: 400ms;
