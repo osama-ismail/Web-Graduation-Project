@@ -19,3 +19,13 @@ export const Tablet = (props) => {
         `
     );
 };
+
+export const MediumScreen = (props) => {
+    return (
+        css`
+            @media only screen and (max-width: 1024px) {
+                ${props}
+            }
+        `
+    );
+};

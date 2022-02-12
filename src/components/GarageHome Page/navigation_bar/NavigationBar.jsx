@@ -5,6 +5,7 @@ import logo from "../../../assets/images/logo.png";
 import "./styles.css";
 import NotificationBox from "../notification-box/NotificationBox";
 import UserBox from "../user-box/UserBox";
+import { MediumScreen } from '../../responsive/Responsive';
 
 const Container = styled.div`
     display: flex;
@@ -20,12 +21,35 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     text-align: right;
+
+    ${MediumScreen({ display: "none" })}
+`
+
+const Menu = styled.div`
+    position: relative;
+    border: none;
+    padding: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: #ccc;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: none;
+
+    ${MediumScreen({ display: "flex" })}
 `
 
 const Center = styled.div`
     text-align: center;
     display: flex;
     align-items: center;
+    margin: 0 1rem;
+    
+    ${MediumScreen({ display: "none" })}
 `
 
 const Left = styled.div``
@@ -101,7 +125,7 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
     const [showBackground, setBackground] = React.useState(false)
 
     window.addEventListener("scroll", () => {
-        if (window.scrollY >= 50)
+        if (window.scrollY >= 100)
             setBackground(true)
         else
             setBackground(false)
@@ -114,6 +138,9 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
                     <Logo src={logo} alt="logo" />
                 </NavLink>
             </Left>
+            <Menu>
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </Menu>
             <Center>
                 <Catalog>
                     <i class="fa fa-bars" aria-hidden="true"></i>
