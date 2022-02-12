@@ -4,7 +4,7 @@ import Notification from '../notification/Notification';
 import { notifications } from "../../../iterated_variables/NotificationsFakeData";
 
 const Container = styled.div`
-    position: absolute;
+    position: fixed;
     right: 8em;
     top: 5.5rem;
     z-index: 10;
@@ -13,12 +13,14 @@ const Container = styled.div`
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0px 0px 6px #777;
+    background-color: #0f0f0f;
 `
 
 // Header
 const TopDiv = styled.div`
     padding: 1rem 0.4rem;
     margin: 7px;
+    color: rgb(230, 18, 47);
 `
 
 const TopHeader = styled.h3``

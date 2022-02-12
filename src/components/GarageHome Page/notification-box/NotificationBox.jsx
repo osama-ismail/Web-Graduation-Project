@@ -8,7 +8,6 @@ const Container = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 10px;
     cursor: pointer;
     font-size: 22px;
     background-color: #ccc;

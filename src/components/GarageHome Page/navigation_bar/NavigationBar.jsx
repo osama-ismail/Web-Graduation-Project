@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import logo from "../../../assets/images/logo.png";
 import "./styles.css";
 import NotificationBox from "../notification-box/NotificationBox";
+import UserBox from "../user-box/UserBox";
 
 const Container = styled.div`
     display: flex;
@@ -65,7 +66,7 @@ const SearchWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 0 0 10px;
+    margin: 0 1rem;
 
     &:hover > .search-txt {
         width: 120px;
@@ -86,7 +87,7 @@ const SearchButton = styled.a`
     font-size: 16px;
 `
 
-const NavigationBar = ({ handleNotificationBox }) => {
+const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
     const [showBackground, setBackground] = React.useState(false)
 
     window.addEventListener("scroll", () => {
@@ -124,6 +125,7 @@ const NavigationBar = ({ handleNotificationBox }) => {
                     </SearchButton>
                 </SearchWrapper>
                 <NotificationBox handleNotificationBox={handleNotificationBox} />
+                <UserBox handleUserBox={handleUserBox} />
             </Right>
         </Container >
     )

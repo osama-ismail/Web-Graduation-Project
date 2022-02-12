@@ -4,16 +4,23 @@ import styled from 'styled-components';
 const Container = styled.div`
     margin: 0 0 3px 0;
     padding: 8px 15px;
-    background-color: rgb(239, 241, 243);
+    background-color: #2f2f2f;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
     transition: 400ms;
+    border-radius: 10px;
+    color: rgb(200, 200, 200);
+
+    &:last-child {
+        margin: 0;
+    }
     
     &:hover {
         background-color: #bdc3c7;
+        color: black;
     }
 `
 
@@ -57,7 +64,7 @@ const Before = styled.span`
 const Notification = (props) => {
     return (
         <Container>
-            <Image src={require("../../assets/images/" + props.img)} />
+            <Image src={require("../../../assets/images/" + props.img)} />
             <Box>
                 <Text>
                     <UserName>{props.name} </UserName>
