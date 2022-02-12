@@ -10,21 +10,19 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    padding: 1em 2em;
-    position: fixed;
+    padding: 1em;
+    position: sticky;
+    top: 0;
     z-index: 100;
-    width: 100%;
 `
 
 const Right = styled.div`
-    text-align: right;
     display: flex;
     align-items: center;
-    flex: 1;
+    text-align: right;
 `
 
 const Center = styled.div`
-    margin: 0 1rem;
     text-align: center;
     display: flex;
     align-items: center;
@@ -34,6 +32,11 @@ const Left = styled.div``
 
 const Logo = styled.img``
 
+const CatalogSpan = styled.span`
+    text-transform: uppercase;
+    margin-left: 3px;
+`
+
 const Catalog = styled.div`
     background-color: black;
     padding: 10px 15px;
@@ -41,8 +44,15 @@ const Catalog = styled.div`
     border: 1px solid rgb(210, 210, 210, 0.2);
     color: white;
     transition: 300ms;
+    display: flex;
+    align-items: center;
 
     &:hover {
+        color: rgb(230, 18, 47);
+        background-color: #111;
+    }
+
+    &:hover: ${CatalogSpan} {
         color: rgb(230, 18, 47);
         background-color: #111;
     }
@@ -66,10 +76,10 @@ const SearchWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 1rem;
+    margin-left: 1em;
 
     &:hover > .search-txt {
-        width: 120px;
+        width: 130px;
         padding: 0 7px;
     }
 `
@@ -106,17 +116,17 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
             </Left>
             <Center>
                 <Catalog>
-                    <i class="fa fa-bars" aria-hidden="true"></i> CATALOG
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <CatalogSpan>Catalog</CatalogSpan>
                 </Catalog>
                 <NavLink to="#" className="navlinks">HOME</NavLink>
                 <NavLink to="#" className="navlinks">
-                    Services <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <span style={{ marginRight: "3px" }}>Services</span>
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </NavLink>
                 <NavLink to="#" className="navlinks">Shop</NavLink>
                 <NavLink to="#" className="navlinks">Blog</NavLink>
                 <NavLink to="#" className="navlinks">Contacts</NavLink>
-            </Center>
-            <Right>
                 <NavLink to="/login/:userid/booking" className="booking">Booking</NavLink>
                 <SearchWrapper>
                     <Input className="search-txt" type="text" placeholder="Type to search" />
@@ -124,6 +134,8 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </SearchButton>
                 </SearchWrapper>
+            </Center>
+            <Right>
                 <NotificationBox handleNotificationBox={handleNotificationBox} />
                 <UserBox handleUserBox={handleUserBox} />
             </Right>

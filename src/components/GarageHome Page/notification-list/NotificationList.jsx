@@ -5,7 +5,7 @@ import { notifications } from "../../../iterated_variables/NotificationsFakeData
 
 const Container = styled.div`
     position: fixed;
-    right: 8em;
+    right: 5em;
     top: 5.5rem;
     z-index: 10;
     width: 350px;

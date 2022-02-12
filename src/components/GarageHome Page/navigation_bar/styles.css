@@ -10,6 +10,8 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .navlinks:hover {
@@ -19,7 +21,8 @@
 .booking {
     color: white;
     text-decoration: none;
-    padding: 8px 20px;
+    padding: 10px 15px;
+    margin: 0 5px;
     background-color: black;
     border: 1px solid rgb(210, 210, 210, 0.2);
     transition: 200ms;
