@@ -3,7 +3,7 @@ import NotificationList from '../components/GarageHome Page/notification-list/No
 import UserList from "../components/GarageHome Page/user-list/UserList";
 import styled from "styled-components";
 import GarageService from '../components/GarageHome Page/garage-service/GarageService';
-import Footer from '../components/GarageHome Page/footer/Footer';
+import Footer from '../components/Global Components/footer/Footer';
 import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
