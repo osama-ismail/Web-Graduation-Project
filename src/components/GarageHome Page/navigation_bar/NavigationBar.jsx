@@ -121,7 +121,7 @@ const SearchButton = styled.a`
     font-size: 16px;
 `
 
-const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
+const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) => {
     const [showBackground, setBackground] = React.useState(false)
 
     window.addEventListener("scroll", () => {
@@ -142,7 +142,7 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox }) => {
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </Menu>
             <Center>
-                <Catalog>
+                <Catalog onClick={handleCatalog}>
                     <i class="fa fa-bars" aria-hidden="true"></i>
                     <CatalogSpan>Catalog</CatalogSpan>
                 </Catalog>

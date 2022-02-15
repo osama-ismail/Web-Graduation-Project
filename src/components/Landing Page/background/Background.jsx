@@ -43,7 +43,7 @@ const Title1 = styled.h1`
 const Title2 = styled.h1`
     color: white;
     font-weight: 900;
-    font-size: 0%;
+    font-size: 2.8rem;
 
     animation-name: title2-animation;
     animation-duration: 12s;
@@ -53,17 +53,14 @@ const Title2 = styled.h1`
 
     @keyframes title2-animation {
         10% {
-            font-size: 0%;
             transform: translateY(60%);
             opacity: 0;
         } 30% {
-            font-size: 2.8rem;
             transform: translateY(0);
             opacity: 0.8;
         } 60% {
             opacity: 1;
         } 100% {
-            font-size: 2.8rem;
             transform: translateY(0);
             opacity: 1;
         }
@@ -85,19 +82,21 @@ const Paragraph = styled.p`
         0% {
             opacity: 1;
             transform: translateX(-300%);
+            font-style: italic;
         } 60% {
             transform: translateX(0);
             opacity: 0.8;
         } 100% {
             opacity: 1;
             transform: translateX(0);
+            font-style: default;
         }
     }
 `
 
 const GetStarted = styled.button`
     margin-top: 2em;
-    font-size: 1.2em;
+    font-size: 1.8em;
     border: none;
     cursor: pointer;
     padding: 0.4em 0.7em;
