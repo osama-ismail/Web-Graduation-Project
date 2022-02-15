@@ -56,14 +56,14 @@ const NavList = () => {
             </Link>
             <hr />
             <Link
-                to="FAQElement"
+                to="FormElement"
                 spy={true}
                 smooth={true}
                 duration={500}
                 offset={-80}
                 className="list-headers"
             >
-                Frequently asked questions
+                Get Started and Register
             </Link>
             <hr />
             <Link

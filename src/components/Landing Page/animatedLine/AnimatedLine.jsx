@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Line = styled.div`
-    background-color: rgb(243, 47, 22, 0.849);
+    background-color: rgb(230, 18, 47);
     height: 5px;
     width: 0%;
     animation-name: line-expanding;

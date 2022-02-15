@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const [showScrolledNav, setShowScrolledNav] = React.useState(false);
 
     window.addEventListener("scroll", () => {
-        if (window.scrollY >= 50)
+        if (window.scrollY >= 100)
             setShowScrolledNav(true)
         else
             setShowScrolledNav(false)
@@ -34,7 +34,7 @@ const Navbar = (props) => {
                         About
                     </Link>
                     <Link
-                        to="FAQElement"
+                        to="ServicesElement"
                         spy={true}
                         smooth={true}
                         duration={500}
@@ -54,14 +54,14 @@ const Navbar = (props) => {
                         Contact
                     </Link>
                     <Link
-                        to="ServicesElement"
+                        to="FormElement"
                         spy={true}
                         smooth={true}
                         duration={500}
-                        offset={-100}
+                        offset={-200}
                         className="headers"
                     >
-                        FAQ
+                        Start
                     </Link>
                 </section>
                 <button id="navbar-list" onClick={props.handleEvent}>

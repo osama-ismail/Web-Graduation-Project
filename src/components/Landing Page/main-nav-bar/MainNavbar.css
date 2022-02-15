@@ -1,6 +1,6 @@
 .navbar {
     width: 100%;
-    background-color: white;
+    background-color: inherit;
     z-index: 1000;
 }
 .navbar-scroll {
@@ -8,7 +8,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #ddd;
+    background-color: inherit;
     opacity: 0.95;
 }
 .wrapper {
@@ -25,14 +25,14 @@
     padding: 5px;
     border: none;
     font-size: 26px;
-    background-color: rgba(243, 47, 22, 0.849);
+    background-color: rgb(230, 18, 47);
     cursor: pointer;
     border-radius: 50%;
     color: rgb(28, 28, 28);
     transition: 300ms;
 }
 #navbar-list:hover {
-    color: rgb(60, 60, 60);
+    color: #aaa;
 }
 
 /* Left Navbar */
@@ -58,10 +58,11 @@
     padding: 0 1em;
     margin: 0 1em;
     text-decoration: none;
-    color: #232323;
+    color: white;
     letter-spacing: 2px;
     transition: 200ms;
     text-align: center;
+    text-transform: uppercase;
     cursor: pointer;
     height: 100%;
     display: flex;
@@ -71,7 +72,7 @@
 }
 .headers:hover {
     color: white;
-    background-color: rgba(243, 47, 22, 0.849);
+    background-color: rgb(190, 25, 30);
 }
 
 @media only screen and (max-width: 720px) {

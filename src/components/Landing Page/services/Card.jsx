@@ -11,10 +11,10 @@ const Container = styled.div`
     transition: 0.3s;
     margin: 2em 2em 2em 2em;
     width: 15em;
-    border: 12px solid rgb(200, 25, 30);
+    border: 12px solid rgb(230, 18, 47);
 
     &:hover {
-        background-color: rgb(190, 25, 30);
+        background-color: rgb(230, 18, 47);
     }
 `
 
@@ -24,7 +24,7 @@ const MaskTop = styled.div`
     left: 0;
     width: 50%;
     height: 13px;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskLeft = styled.div`
@@ -33,7 +33,7 @@ const MaskLeft = styled.div`
     left: -13px;
     width: 13px;
     height: 50%;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskRight = styled.div`
@@ -42,7 +42,7 @@ const MaskRight = styled.div`
     right: -13px;
     width: 13px;
     height: 50%;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskBottom = styled.div`
@@ -51,7 +51,7 @@ const MaskBottom = styled.div`
     right: -13px;
     width: 50%;
     height: 13px;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const LogoBox = styled.div`

@@ -8,16 +8,20 @@ import BackToTop from "../components/Global Components/backToTop/BackToTop";
 import FormBackground from "../components/Landing Page/form-background/FormBackground";
 import MainNavbar from '../components/Landing Page/main-nav-bar/MainNavbar';
 import NavList from "../components/Landing Page/navlist/NavList";
+import styled from "styled-components";
+
+const Container = styled.div`
+    position: relative;
+    background-color: #0f0f0f;
+`
 
 const Home = () => {
     const [showNavList, setShowNavList] = React.useState(false);
 
-    const handleClickOnList = () => {
-        console.log('Clicked')
-        setShowNavList(!showNavList)
-    }
+    const handleClickOnList = () => setShowNavList(!showNavList)
+
     return (
-        <div style={{ position: "relative" }}>
+        <Container>
             <MainNavbar handleEvent={handleClickOnList} />
             {showNavList ? <NavList /> : null}
             <BackToTop />
@@ -27,7 +31,7 @@ const Home = () => {
             <Services />
             <FormBackground />
             <Footer />
-        </div>
+        </Container>
     )
 }
 
