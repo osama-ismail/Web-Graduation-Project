@@ -12,6 +12,7 @@ import { Mobile, Tablet } from '../components/responsive/Responsive';
 import Team from '../components/GarageHome Page/team/Team';
 import NavigationBar from '../components/GarageHome Page/navigation_bar/NavigationBar';
 import BackToTop from '../components/Global Components/backToTop/BackToTop';
+import Catalog from '../components/Global Components/catalog/Catalog';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -148,6 +149,8 @@ const AdvantageDetail = styled.p`
 const LoggedIn = () => {
     const [showUserList, setShowUserList] = React.useState(false)
     const [showNotificationList, setShowNotificationList] = React.useState(false)
+    const [showCatalog, setShowCatalog] = React.useState(false)
+    const [sliderIndex, setSliderIndex] = useState(0);
 
     const handleUserClick = () => {
         setShowUserList(!showUserList)
@@ -157,8 +160,9 @@ const LoggedIn = () => {
         setShowNotificationList(!showNotificationList)
     }
 
-
-    const [sliderIndex, setSliderIndex] = useState(0);
+    const handleCatalog = () => {
+        setShowCatalog(!showCatalog)
+    }
 
     const incrementSliderIndex = () => {
         setSliderIndex((sliderIndex + 1) % 3)
@@ -187,7 +191,9 @@ const LoggedIn = () => {
             <NavigationBar
                 handleUserBox={handleUserClick}
                 handleNotificationBox={hanleNotificationClick}
+                handleCatalog={handleCatalog}
             />
+            {showCatalog ? <Catalog /> : null}
             <BackToTop />
             <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>
