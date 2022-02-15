@@ -11,10 +11,10 @@ const Container = styled.div`
     transition: 0.3s;
     margin: 2em 2em 2em 2em;
     width: 15em;
-    border: 12px solid rgb(200, 25, 30);
+    border: 12px solid rgb(230, 18, 47);
 
     &:hover {
-        background-color: rgb(190, 25, 30);
+        background-color: rgb(230, 18, 47);
     }
 `
 

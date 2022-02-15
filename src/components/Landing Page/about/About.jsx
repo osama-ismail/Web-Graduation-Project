@@ -49,7 +49,7 @@ const About = () => {
             </ImageWrapper>
             <Article>
                 <SectionName>
-                    About <span style={{ color: "rgb(190, 25, 30)", fontStyle: "italic" }}>Tinker</span>
+                    About <span style={{ color: "rgb(230, 18, 47)", fontStyle: "italic" }}>Tinker</span>
                 </SectionName>
                 <Paragraph>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.

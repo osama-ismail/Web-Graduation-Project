@@ -25,14 +25,14 @@
     padding: 5px;
     border: none;
     font-size: 26px;
-    background-color: rgba(243, 47, 22, 0.849);
+    background-color: rgb(230, 18, 47);
     cursor: pointer;
     border-radius: 50%;
     color: rgb(28, 28, 28);
     transition: 300ms;
 }
 #navbar-list:hover {
-    color: rgb(60, 60, 60);
+    color: #aaa;
 }
 
 /* Left Navbar */

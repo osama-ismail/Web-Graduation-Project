@@ -19,6 +19,7 @@ const Home = () => {
     const [showNavList, setShowNavList] = React.useState(false);
 
     const handleClickOnList = () => setShowNavList(!showNavList)
+
     return (
         <Container>
             <MainNavbar handleEvent={handleClickOnList} />

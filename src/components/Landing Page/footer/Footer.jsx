@@ -1,10 +1,11 @@
 import FooterSvg from "./FooterSvg";
 import styled from "styled-components";
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
+import logoImg from "../../../assets/images/logo.png";
+import { Tablet } from "../../responsive/Responsive";
+
+const Container = styled.div``
 
 const Ftr = styled.footer`
     background-color: #2f2f2f;
@@ -16,18 +17,33 @@ const Wrapper = styled.div`
     justify-content: space-around;
     flex-flow: row wrap;
     padding: 0.5em;
+
+    ${Tablet({ flexFlow: "column nowrap", alignItems: "center" })}
 `
 
 const Logo = styled.div`
-    color: white;
-    text-align: center;
+    background-image: url(${logoImg});
+    background-repeat: no-repeat;
+    width: 200px;
+
+    ${Tablet({ height: "80px" })}
 `
 
 const Info = styled.div`
     color: white;
     display: flex;
+`
+
+const Right = styled.div`
+    display: flex;
     flex-direction: column;
-    align-items: center;
+`
+
+const Left = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 5px;
 `
 
 const Email = styled.a`
@@ -40,21 +56,13 @@ const Email = styled.a`
 `
 
 const Phone = styled.span`
-    display: flex;
-    align-items; center;
-`
-
-const SocialMedia = styled.section`
-    display: flex;
-    justify-content: space-around;
-    cursor: pointer;
     margin: 10px 5px;
-    width: 100%;
 `
 
 const MobileApp = styled.div`
     color: white;
     text-align: center;
+    margin: 10px 5px;
 `
 
 const Separator = styled.div`
@@ -75,25 +83,24 @@ const Copyright = styled.div`
 
 const Footer = () => {
     return (
-        <div id="FooterElement">
+        <Container id="FooterElement">
             <FooterSvg />
             <Ftr>
                 <Wrapper>
-                    <Logo>Site Logo Again (Image + Title)</Logo>
+                    <Logo />
                     <Info>
-                        <Email href="mailto:project@website.com">
+                        <Left>
                             <MailOutlineRoundedIcon />
-                            &nbsp;project@website.com
-                        </Email>
-                        <Phone>
-                            <LocalPhoneRoundedIcon />&nbsp;
-                            Any phone number
-                        </Phone>
-                        <SocialMedia>
-                            <FacebookRoundedIcon />
-                            <InstagramIcon />
-                            <LinkedInIcon />
-                        </SocialMedia>
+                            <LocalPhoneRoundedIcon />
+                        </Left>
+                        <Right>
+                            <Email href="mailto:project@website.com">
+                                project@website.com
+                            </Email>
+                            <Phone>
+                                123456789-00
+                            </Phone>
+                        </Right>
                     </Info>
                     <MobileApp>Mobile App Image</MobileApp>
                 </Wrapper>
@@ -102,8 +109,8 @@ const Footer = () => {
             <CopyrightWrapper>
                 <Copyright>Copyright © 2022 | All rights reserved</Copyright>
             </CopyrightWrapper>
-        </div>
+        </Container>
     )
 }
 
-export default Footer
+export default Footer;

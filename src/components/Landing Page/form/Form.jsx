@@ -37,7 +37,7 @@ const Form = () => {
                 margin: "0 5%"
             }}
         >
-            <section className="form">
+            <section id="FormElement" className="form">
                 <FormSlide slideIndex={slideIndex}>
                     <div className="header">
                         <h1>Get started and explore <br /> our services</h1>

@@ -19,7 +19,7 @@ const TextWrapper = styled.div`
 const Title1 = styled.h1`
     color: white;
     font-weight: 900;
-    font-size: 5vw;
+    font-size: 4rem;
     animation-name: title1-animation;
     animation-duration: 12s;
     animation-timing-function: ease-in-out;
@@ -57,13 +57,13 @@ const Title2 = styled.h1`
             transform: translateY(60%);
             opacity: 0;
         } 30% {
-            font-size: 4vw;
+            font-size: 2.8rem;
             transform: translateY(0);
             opacity: 0.8;
         } 60% {
             opacity: 1;
         } 100% {
-            font-size: 4vw;
+            font-size: 2.8rem;
             transform: translateY(0);
             opacity: 1;
         }
@@ -73,7 +73,7 @@ const Title2 = styled.h1`
 const Paragraph = styled.p`
     margin-top: 2rem;
     color: white;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     opacity: 0;
 
     animation-name: paragraph-animation;
@@ -97,7 +97,7 @@ const Paragraph = styled.p`
 
 const GetStarted = styled.button`
     margin-top: 2em;
-    font-size: 1.8vw;
+    font-size: 1.2em;
     border: none;
     cursor: pointer;
     padding: 0.4em 0.7em;
