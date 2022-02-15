@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const [showScrolledNav, setShowScrolledNav] = React.useState(false);
 
     window.addEventListener("scroll", () => {
-        if (window.scrollY >= 50)
+        if (window.scrollY >= 100)
             setShowScrolledNav(true)
         else
             setShowScrolledNav(false)

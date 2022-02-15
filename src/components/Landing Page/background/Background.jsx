@@ -103,14 +103,14 @@ const GetStarted = styled.button`
     padding: 0.4em 0.7em;
     border-radius: 40px;
     background-color: white;
-    color: rgb(243, 27, 22, 0.949);
+    color: rgb(230, 18, 47);
     font-weight: bold;
     transition: 150ms;
     opacity: 0;
 
     &:hover {
         color: white;
-        background-color: rgb(243, 37, 22, 0.849);
+        background-color: rgb(230, 18, 47);
     }
 
     animation-name: button-animation;

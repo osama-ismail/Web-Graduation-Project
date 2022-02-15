@@ -5,7 +5,7 @@ const Container = styled.button`
     position: fixed;
     width: 50px;
     height: 50px;
-    background-color: rgb(200, 25, 30);
+    background-color: rgb(190, 25, 30);
     right: 30px;
     bottom: 30px;
     border: none;

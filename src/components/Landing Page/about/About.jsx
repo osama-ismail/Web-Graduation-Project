@@ -31,11 +31,13 @@ const Article = styled.article`
 const SectionName = styled.h1`
     font-weight: 800;
     font-size: 45px;
+    color: white;
 `
 
 const Paragraph = styled.p`
     font-size: 20px;
     margin-top: 2em;
+    color: white;
 `
 
 
@@ -47,7 +49,7 @@ const About = () => {
             </ImageWrapper>
             <Article>
                 <SectionName>
-                    About <span style={{ color: "#fe2112", fontStyle: "italic" }}>Tinker</span>
+                    About <span style={{ color: "rgb(190, 25, 30)", fontStyle: "italic" }}>Tinker</span>
                 </SectionName>
                 <Paragraph>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.

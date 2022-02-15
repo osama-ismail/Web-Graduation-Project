@@ -13,6 +13,7 @@ const Container = styled.div`
 const TopHeader = styled.h1`
     font-size: 45px;
     font-weight: 800;
+    color: white;
 `
 
 const MainSeparator = styled.img`
@@ -21,7 +22,7 @@ const MainSeparator = styled.img`
 
 const Cards = styled.div`
     width: 90%;
-    background-color: #eee;
+    background-color: #0a0a0a;
     padding: 2em 0;
     display: flex;
     flex-wrap: wrap;
@@ -33,7 +34,7 @@ const Services = () => {
         <Container id="ServicesElement">
             <TopHeader>
                 <span style={{
-                    color: "red",
+                    color: "rgb(190, 25, 30)",
                     fontStyle: "italic"
                 }}>Tinker</span> Services
             </TopHeader>

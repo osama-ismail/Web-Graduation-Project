@@ -24,7 +24,7 @@ const MaskTop = styled.div`
     left: 0;
     width: 50%;
     height: 13px;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskLeft = styled.div`
@@ -33,7 +33,7 @@ const MaskLeft = styled.div`
     left: -13px;
     width: 13px;
     height: 50%;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskRight = styled.div`
@@ -42,7 +42,7 @@ const MaskRight = styled.div`
     right: -13px;
     width: 13px;
     height: 50%;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const MaskBottom = styled.div`
@@ -51,7 +51,7 @@ const MaskBottom = styled.div`
     right: -13px;
     width: 50%;
     height: 13px;
-    background-color: #eee;
+    background-color: #0a0a0a;
 `
 
 const LogoBox = styled.div`
