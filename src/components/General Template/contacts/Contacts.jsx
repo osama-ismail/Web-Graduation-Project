@@ -58,6 +58,7 @@ const Type = styled.h2`
 
 const Details = styled.p`
     color: #666;
+    white-space: pre-line;
 `
 
 const Contacts = () => {

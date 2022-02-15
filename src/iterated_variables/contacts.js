@@ -2,7 +2,7 @@ export const contacts = [
     {
         logo: "fa fa-building",
         type: "Office",
-        details: "United States Americ \n New York, NY 10002 \n 543 Lane Date Street"
+        details: "United States America \n New York, NY 10002 \n 543 Lane Date Street"
     },
     {
         logo: "fa fa-phone",
@@ -12,6 +12,6 @@ export const contacts = [
     {
         logo: "fa fa-clock-o",
         type: "Work Time",
-        details: "Mon - Fri: 9:00 AM - 6:00 /n Saturday: 9:00 AM - 5:00 /n Sunday: Closed"
+        details: "Mon - Fri: 9:00 AM - 6:00 \n Saturday: 9:00 AM - 5:00 \n Sunday: Closed"
     },
 ]
