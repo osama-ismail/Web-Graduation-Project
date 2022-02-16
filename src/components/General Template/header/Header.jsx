@@ -21,6 +21,10 @@ const PageName = styled.h1`
     font-family: 'Righteous',cursive;
     font-size: 38px;
     font-weight: 500;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
 `
 
 const Sequence = styled.h1`
@@ -38,14 +42,14 @@ const Span = styled.span`
     }
 `
 
-const Header = () => {
+const Header = ({ title }) => {
     return (
         <Container>
-            <PageName>Page Name</PageName>
+            <PageName>{title}</PageName>
             <Sequence>
                 <NavLink className="links" to="/">Home</NavLink>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <Span>Page Name</Span>
+                <Span>{title}</Span>
             </Sequence>
         </Container>
     )
