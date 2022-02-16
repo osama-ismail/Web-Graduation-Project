@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Mobile } from '../../responsive/Responsive';
+import { Mobile, Tablet } from '../../responsive/Responsive';
 
 const Container = styled.div`
     background-color: black;
@@ -9,7 +9,7 @@ const Container = styled.div`
     justify-content: space-around;
     padding: 2rem 0;
 
-    ${Mobile({ flexDirection: "column" })}
+    ${Tablet({ flexDirection: "column", padding: "0 0 10px 10px" })}
 `
 
 const Title = styled.h2`
