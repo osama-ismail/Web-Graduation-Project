@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ContactFom from '../components/General Template/contact-form/ContactFom';
 import Contacts from '../components/General Template/contacts/Contacts';
 import Header from '../components/General Template/header/Header';
+import Shop from '../components/General Template/shop/Shop';
 import BackToTop from '../components/Global Components/backToTop/BackToTop';
 import Footer from "../components/Global Components/footer/Footer";
 
@@ -19,6 +20,7 @@ const General = () => {
             <Header title={name} />
             {name === 'contacts' ? <Contacts /> : null}
             {name === 'contacts' ? <ContactFom /> : null}
+            {name === 'shop' ? <Shop /> : null}
             <Footer />
         </Container>
     )
