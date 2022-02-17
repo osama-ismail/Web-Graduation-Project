@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import ProductItem from '../product-item/ProductItem';
 import { products } from '../../../iterated_variables/products';
 import { Tablet } from '../../responsive/Responsive';
+import Categories from '../categories/Categories';
+import Calculator from '../calculator/Calculator';
 
 const Container = styled.div`
     color: white;
@@ -13,27 +15,12 @@ const Container = styled.div`
 `
 
 const Margin = styled.div`
-    border: 2px solid yellow;
-    flex: 1;
+    flex: 0.6;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     ${Tablet({ marginBottom: "1.5rem" })}
-`
-
-const Categories = styled.div`
-    height: 200px;
-    width: 200px;
-    border: 2px solid green;
-    margin-bottom: 1rem;
-`
-
-const Calculate = styled.div`
-    height: 200px;
-    width: 200px;
-    border: 2px solid green;
-    margin-bottom: 1rem;
 `
 
 const Filter = styled.div`
@@ -120,8 +107,8 @@ const Shop = () => {
     return (
         <Container>
             <Margin>
-                <Categories>Categories</Categories>
-                <Calculate>Calculate</Calculate>
+                <Categories />
+                <Calculator />
                 <Filter>Filter</Filter>
             </Margin>
             <Contents>
