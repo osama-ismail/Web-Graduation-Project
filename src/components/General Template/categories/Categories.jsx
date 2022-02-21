@@ -42,6 +42,7 @@ const Name = styled.span`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 85%;
     transition: 300ms;
     &:hover {
         color: rgb(190, 18, 47);
@@ -58,10 +59,11 @@ const Span = styled.span``
 
 const Categories = () => {
     const [showBox, setShowBox] = React.useState(false);
+    const [id, setId] = React.useState("");
 
     const handleClick = (e) => {
         setShowBox(!showBox);
-        // alert(e.target.value)
+        setId(e.target.id);
     }
 
     return (
@@ -71,11 +73,14 @@ const Categories = () => {
                 {categories.map(category => {
                     return (
                         <Item>
-                            <Name id="engine" onClick={handleClick}>
+                            <Name>
                                 <Span>{category.name}</Span>
-                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <i
+                                    id={category.name} onClick={handleClick}
+                                    class="fa fa-plus" aria-hidden="true"
+                                ></i>
                             </Name>
-                            {showBox ?
+                            {showBox && id === category.name ?
                                 <Box>
                                     {category.subItems.map(subItem => {
                                         return (
