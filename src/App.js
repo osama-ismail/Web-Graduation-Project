@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Map from "./pages/Map";
 import GarageHome from "./pages/GarageHome";
 import General from "./pages/General";
+import Profile from "./pages/Profile";
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/using-map" element={<Map />} />
         <Route path="/login/:userid" element={<GarageHome />} />
         <Route path="/:name" element={<General />} />
+        <Route path="/user-profile/:id" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
