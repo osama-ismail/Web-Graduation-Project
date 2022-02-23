@@ -2,7 +2,7 @@
     width: 25em;
     height: 30rem;
     border-radius: 7px;
-    background-color: white;
+    background-color: #0f0f0f;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,7 +24,7 @@
 }
 
 .header {
-    margin: 2.5em 0 0.5em 0;
+    margin: 1.5em 0 0 0;
     min-width: 100%;
 }
 .header h1 {
@@ -32,17 +32,19 @@
     font-weight: 700;
     min-width: 50px;
     text-align: center;
+    text-transform: uppercase;
+    color: white;
 }
 
 .inputs {
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 }
 .submit-button {
-    background-color: red;
+    background-color: rgb(190, 18, 47);
     border: 0;
     padding: 10px 20px;
     border-radius: 4px;
@@ -53,27 +55,40 @@
     width: 100%;
 }
 .submit-button:hover {
-    background-color: rgb(190, 0, 0);
+    box-shadow: 0 0 10px rgb(190, 18, 47);
 }
 
 .toggle {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     border: none;
-    background-color: white;
+    background-color: #0f0f0f;
+    color: rgb(190, 18, 47);
     cursor: pointer;
     font-size: 16px;
     transition: 0.2s;
-}
-.toggle:hover {
-    color: red;
 }
 
 .forget-pass {
     margin: 0 0 25px 0;
     text-decoration: underline;
-    color: black;
+    color: white;
     transition: 0.2s;
 }
-.forget-pass:hover {
-    color: red;
+
+#account-type {
+    margin: 10px 0;
+}
+
+#account-type span {
+    color: white;
+    font-size: 110%;
+    margin-right: 12px;
+}
+
+#select-account-type {
+    padding: 3px;
+    font-size: 110%;
+    background-color: rgb(190, 18, 47);
+    color: white;
+    outline: none;
 }

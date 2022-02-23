@@ -7,7 +7,7 @@ const SignUp = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
-
+    const [accountType, setAccountType] = useState('')
 
     const handel_signup = (e) => {
         if (!email.includes("@")) {
@@ -89,6 +89,28 @@ const SignUp = (props) => {
                     width: "100%"
                 }}
             />
+            <TextField
+                id="standard-basic"
+                label="Phone"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                variant="standard"
+                required
+                style={{
+                    margin: "0 0 20px 0",
+                    width: "100%"
+                }}
+            />
+            <div id="account-type">
+                <span>Account Type:</span>
+                <select
+                    id="select-account-type"
+                    onChange={(e) => setAccountType(e.target.value)}
+                >
+                    <option>Garage Account</option>
+                    <option>User Account</option>
+                </select>
+            </div>
             <button className="toggle" onClick={props.handleClick}>Have an account? login</button>
             <button className="submit-button" onClick={handel_signup}>Create account</button>
         </div>

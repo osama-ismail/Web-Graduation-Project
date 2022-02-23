@@ -10,7 +10,7 @@ import "../../Global-CSS/fade-in.css";
 const FormSlide = styled.div`
     width: 100%;
     transition: all 1s ease;
-    transform: translateY(${(props) => props.slideIndex * -28}rem);
+    transform: translateY(${(props) => props.slideIndex * -30}rem);
 `
 
 
@@ -40,7 +40,7 @@ const Form = () => {
             <section id="FormElement" className="form">
                 <FormSlide slideIndex={slideIndex}>
                     <div className="header">
-                        <h1>Get started and explore <br /> our services</h1>
+                        <h1>Sign up</h1>
                     </div>
                     <SignUp handleClick={handleClick} />
                 </FormSlide>
