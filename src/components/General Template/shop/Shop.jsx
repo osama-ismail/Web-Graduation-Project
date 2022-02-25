@@ -98,12 +98,15 @@ const Grid = styled.span`
 const Products = styled.div`
     margin-top: 1rem;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: ${props => props.direction} wrap;
     justify-content: space-between;
     padding: 1rem 0.5rem;
 `
 
 const Shop = () => {
+
+    const [displayDirection, setDisplayDirection] = React.useState("row")
+
     return (
         <Container>
             <Margin>
@@ -121,20 +124,21 @@ const Shop = () => {
                             <Option value="Date">Data</Option>
                         </Sort>
                         <List>
-                            <Horizontal>
+                            <Horizontal onClick={() => setDisplayDirection('column')}>
                                 <i class="fa fa-list" aria-hidden="true"></i>
                             </Horizontal>
-                            <Grid>
+                            <Grid onClick={() => setDisplayDirection('row')}>
                                 <i class="fa fa-th" aria-hidden="true"></i>
                             </Grid>
                         </List>
                     </Display>
                 </Control>
-                <Products>
+                <Products direction={displayDirection}>
                     {
                         products.map(product => {
                             return (
                                 <ProductItem
+                                    direction={displayDirection}
                                     image={product.image}
                                     name={product.name}
                                     price={product.price}
