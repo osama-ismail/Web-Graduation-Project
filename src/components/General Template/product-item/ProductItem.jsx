@@ -24,7 +24,7 @@ const Image = styled.div`
     background-size: 100% 100%;
     height: 200px;
     width: 200px;
-    transition: 300ms;
+    transition: 150ms;
     display: flex;
     align-items: flex-end;
 

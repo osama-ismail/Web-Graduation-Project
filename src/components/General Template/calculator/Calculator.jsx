@@ -14,9 +14,7 @@ const Header = styled.h3`
     margin-bottom: 10px;
 `
 
-const Form = styled.section`
-
-`
+const Form = styled.section``
 
 const Part = styled.div`
     display: flex;
