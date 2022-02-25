@@ -1,7 +1,27 @@
 import "../form.css";
-import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import axios from "axios";
+import { handleRegister } from "../../../../backend/handleRegister";
+import styled from "styled-components";
+
+const Container = styled.div`
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+`
+
+const Input = styled.input`
+    background-color: black;
+    padding: 12px 5px 12px 15px;
+    color: white;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    border: 1px solid rgb(210, 210, 210, 0.5);
+    margin-bottom: 2rem;
+`
+
 const SignUp = (props) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -9,93 +29,51 @@ const SignUp = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [accountType, setAccountType] = useState('')
 
-    const handel_signup = (e) => {
-        if (!email.includes("@")) {
-            console.log("enter an email")
-            return
-        }
-
-        e.preventDefault()
-        const user = [name, email, phoneNumber, password]
-        console.log(user)
-        axios.post(
-            "http://localhost:8080//users/signup",
-
-            JSON.stringify(user)
-            ,
-            {
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Accept": "application/json"
-                }
-            }
-        ).then((response) => {
-            console.log(response.data)
-        })
-
-        // fetch("http://localhost:8080//users/signup", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "application/json"
-        //     },
-        //     body: JSON.stringify(user)
-
-        // }).then((res) => res.json())
-        //     .then((data) => {
-        //         console.log(data.results);
-        //     }).catch((e) => {
-        //         console.log("failed with us");
-        //     });
-
+    const handleClick = (e) => {
+        handleRegister(e, { name, email, password, phoneNumber, accountType });
     }
+
     return (
-        <div className="inputs">
-            <TextField
-                id="standard-basic"
-                label="Username"
+        <Container>
+            <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                variant="standard"
                 required
+                placeholder="Name *"
                 style={{
                     margin: "0 0 20px 0",
                     width: "100%"
                 }}
             />
-            <TextField
-                id="standard-basic"
-                label="Email address"
+            <Input
                 value={email}
                 type={"email"}
                 onChange={(e) => setEmail(e.target.value)}
-                variant="standard"
                 required
+                placeholder="Email *"
                 style={{
                     margin: "0 0 20px 0",
                     width: "100%"
                 }}
             />
-            <TextField
-                id="standard-basic"
-                label="Password"
+            <Input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                variant="standard"
                 type={"password"}
                 required
+                placeholder="Password *"
                 style={{
                     margin: "0 0 20px 0",
-                    width: "100%"
+                    width: "100%",
+                    font: "small-caption",
+                    fontSize: "16px"
                 }}
             />
-            <TextField
-                id="standard-basic"
-                label="Phone"
+            <Input
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                variant="standard"
                 required
+                placeholder="Phone Number *"
                 style={{
                     margin: "0 0 20px 0",
                     width: "100%"
@@ -111,10 +89,14 @@ const SignUp = (props) => {
                     <option>User Account</option>
                 </select>
             </div>
-            <button className="toggle" onClick={props.handleClick}>Have an account? login</button>
-            <button className="submit-button" onClick={handel_signup}>Create account</button>
-        </div>
+            <button className="toggle" onClick={props.handleClick}>
+                Have an account? login
+            </button>
+            <button className="submit-button" onClick={handleClick}>
+                Create account
+            </button>
+        </Container>
     )
 }
 
-export default SignUp
+export default SignUp;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ContactFom from '../components/General Template/contact-form/ContactFom';
+import ContactFom from '../components/General Template/contact-form/ContactForm';
 import Contacts from '../components/General Template/contacts/Contacts';
 import Header from '../components/General Template/header/Header';
 import Shop from '../components/General Template/shop/Shop';
