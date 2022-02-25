@@ -24,18 +24,18 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
         console.log(response.data)
     })
 
-    fetch("http://localhost:8080//users/signup", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(user)
+    // fetch("http://localhost:8080//users/signup", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         "Accept": "application/json"
+    //     },
+    //     body: JSON.stringify(user)
 
-    }).then((res) => res.json())
-        .then((data) => {
-            console.log(data.results);
-        }).catch((e) => {
-            console.log("failed with us");
-        });
+    // }).then((res) => res.json())
+    //     .then((data) => {
+    //         console.log(data.results);
+    //     }).catch((e) => {
+    //         console.log("failed with us");
+    //     });
 }

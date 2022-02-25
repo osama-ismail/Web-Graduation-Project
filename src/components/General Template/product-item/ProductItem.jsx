@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: ${props => props.direction === 'row' ? 'column' : 'row'};
     align-items: center;
     padding: 2rem 1.5rem;
     background-color: black;
     margin: 0.5rem 0;
+    justify-content: ${props => props.direction === 'column' ? 'space-around' : 'center'}
 `
 
 const Buttons = styled.div`
     color: white;
-    opacity: 0;
-    display: none;
     transition: 0.5s;
-    transform: translateY(500%);
+    display: ${props => props.direction === 'column' ? 'flex' : 'none'};
+    flex-direction: ${props => props.direction === 'column' ? 'column' : 'row'};
 `
 
 const Image = styled.div`
@@ -34,12 +34,11 @@ const Image = styled.div`
     }
 
     &:hover ${Buttons} {
-        display: flex;
+        display: ${props => props.direction === "column" ? "none" : "flex"};
         width: 100%;
         justify-content: center;
         align-items: center;
         opacity: 1;
-        transform: translateY(0%);
     }
 `
 
@@ -93,21 +92,24 @@ const Price = styled.span`
     color: #aaa;
 `
 
-const ProductItem = ({ image, name, price }) => {
+const ProductItem = ({ direction, image, name, price }) => {
     return (
-        <Container>
-            <Image image={image} href="#">
-                <Buttons>
-                    <Button>
-                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </Button>
-                    <Button>
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </Button>
-                    <Button>
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    </Button>
-                </Buttons>
+        <Container direction={direction}>
+            <Image image={image} direction={direction} href="#">
+                {
+                    direction === 'row' ?
+                        <Buttons direction={direction}>
+                            <Button>
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            </Button>
+                            <Button>
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </Button>
+                            <Button>
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </Button>
+                        </Buttons> : null
+                }
             </Image>
             <Details>
                 <Name>
@@ -124,6 +126,20 @@ const ProductItem = ({ image, name, price }) => {
                     {price}
                 </Price>
             </Details>
+            {
+                direction === 'column' ?
+                    <Buttons direction={direction}>
+                        <Button>
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        </Button>
+                        <Button>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </Button>
+                        <Button>
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </Button>
+                    </Buttons> : null
+            }
         </Container>
     )
 }
