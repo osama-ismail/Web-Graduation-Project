@@ -65,7 +65,7 @@ const Navbar = (props) => {
                     </Link>
                 </section>
                 <button id="navbar-list" onClick={props.handleEvent}>
-                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <i className="fa fa-bars" aria-hidden="true"></i>
                 </button>
             </main>
         </nav>
