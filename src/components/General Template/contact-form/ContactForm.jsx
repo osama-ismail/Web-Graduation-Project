@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MediumScreen, Tablet } from '../../responsive/Responsive';
-import Map from '../map/Map';
+import Map from '../../Global Components/map/Map';
 
 const Container = styled.div`
     margin: 1rem 0 3rem 0;
@@ -66,7 +66,7 @@ const TextArea = styled.textarea`
 const ContactFom = () => {
     return (
         <Container>
-            <Map />
+            <Map width="600px" height="350px" />
             <Form>
                 <Box>
                     <Input className='input1' type="text" placeholder='Name *' />
@@ -84,4 +84,4 @@ const ContactFom = () => {
     )
 }
 
-export default ContactFom
+export default ContactFom;

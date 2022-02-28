@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
 
 const Container = styled.div`
-    height: 350px;
-    width: 600px;
+    height: ${props => props.height};
+    width: ${props => props.width};
 
     ${MediumScreen({ width: "80%" })}
 `
@@ -53,8 +53,7 @@ export default class App extends Component {
 
     render() {
         return (
-            // <Container id="map" style={{ border: '1px solid red', height: '100vh' }} />
-            <Container id="map" />
+            <Container id="map" width={this.props.width} height={this.props.height} />
         );
     }
 }
