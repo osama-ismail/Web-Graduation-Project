@@ -1,5 +1,10 @@
 import axios from "axios";
 
+export const submitLocation = (e, obj) => {
+    e.preventDefault();
+    // Send the 'obj' to url using axios
+}
+
 export const handleRegister = (e, { name, email, password, phoneNumber, accountType }) => {
     if (!email.includes("@")) {
         console.log("enter an email")
