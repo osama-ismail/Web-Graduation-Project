@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
+import { setLocation } from '../../Landing Page/mapForm/MapForm';
 
 const Container = styled.div`
     height: ${props => props.height};
     width: ${props => props.width};
+    border-radius: ${props => props.borderRadius};
 
     ${MediumScreen({ width: "80%" })}
 `
 
 let tt = null;
 let map = null;
+let marker = null;
 
 export default class App extends Component {
+    addMarker(e, obj) {
+        if (marker != null)
+            marker.remove();
+        marker = new this.tt.Marker(obj)
+            .setLngLat(e.lngLat)
+            .addTo(this.map)     // Don't forget to specify a map to be display
+        // console.log(e.lngLat)
+        // console.log(e.lngLat.lng + " " + e.lngLat.lat)
+        setLocation(e.lngLat);
+    }
+
     componentDidMount() {
         // snip
         tt = window.tt
@@ -42,18 +56,23 @@ export default class App extends Component {
             })
         })
 
-        new this.tt.Marker({
-            color: '#0f0f0f',
-            width: '40',
-            height: '50'
+        map.on('click', (event) => {
+            this.addMarker(event, {
+                color: 'rgb(190, 18, 47)',
+                width: '40',
+                height: '50'
+            });
         })
-            .setLngLat([35.21633, 31.76904])
-            .addTo(this.map) // Don't forget to specify a map to be display
     }
 
     render() {
         return (
-            <Container id="map" width={this.props.width} height={this.props.height} />
+            <Container
+                id="map"
+                width={this.props.width}
+                height={this.props.height}
+                borderRadius={this.props.borderRadius}
+            />
         );
     }
 }

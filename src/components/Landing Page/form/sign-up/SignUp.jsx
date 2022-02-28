@@ -92,10 +92,14 @@ const SignUp = (props) => {
             <button className="toggle" onClick={props.handleClick}>
                 Have an account? login
             </button>
-            <button className="submit-button" onClick={handleClick}>
+            <button className="submit-button" onClick={(e) => {
+                handleClick(e);
+                if (accountType === "Garage Account")
+                    props.appearMapForm();
+            }}>
                 Create account
             </button>
-        </Container>
+        </Container >
     )
 }
 

@@ -14,7 +14,7 @@ const FormSlide = styled.div`
 `
 
 
-const Form = () => {
+const Form = ({ appearMapForm }) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const handleClick = () => setSlideIndex(slideIndex === 0 ? 1 : 0)
 
@@ -42,7 +42,7 @@ const Form = () => {
                     <div className="header">
                         <h1>Sign up</h1>
                     </div>
-                    <SignUp handleClick={handleClick} />
+                    <SignUp handleClick={handleClick} appearMapForm={appearMapForm} />
                 </FormSlide>
                 <FormSlide slideIndex={slideIndex}>
                     <div className="header">
