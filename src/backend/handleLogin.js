@@ -11,8 +11,7 @@ export const handleLogin = (e, { email, password }) => {
     axios.post(
         "http://localhost:8080//users/login",
 
-        JSON.stringify(user)
-        ,
+        JSON.stringify(user),
         {
             headers: {
                 "Content-type": "application/json; charset=UTF-8",

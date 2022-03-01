@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Map from '../../Global Components/map/Map';
+import MapForForm from '../../Global Components/map/MapForForm';
 import { submitLocation } from '../../../backend/handleRegister';
 
 const Container = styled.div`
@@ -78,7 +78,7 @@ const MapForm = ({ closeMapForm }) => {
                 ></i>
             </ExitBtn>
             <Header>Choose your location</Header>
-            <Map width="70%" height="70%" borderRadius="9px" />
+            <MapForForm width="70%" height="70%" borderRadius="9px" />
             <SubmitBtn onClick={(e) => submitLocation(e, location)}>Submit</SubmitBtn>
         </Container>
     );

@@ -6,6 +6,7 @@ import "./styles.css";
 import NotificationBox from "../notification-box/NotificationBox";
 import UserBox from "../user-box/UserBox";
 import { MediumScreen } from '../../responsive/Responsive';
+import { Link } from "react-scroll";
 
 const Container = styled.div`
     display: flex;
@@ -146,14 +147,20 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) 
                     <i class="fa fa-bars" aria-hidden="true"></i>
                     <CatalogSpan>Catalog</CatalogSpan>
                 </Catalog>
-                <NavLink to="#" className="navlinks">HOME</NavLink>
-                <NavLink to="#" className="navlinks">
-                    <span style={{ marginRight: "3px" }}>Services</span>
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </NavLink>
-                <NavLink to="#" className="navlinks">Shop</NavLink>
+                <NavLink to="/garage-login/1" className="navlinks">HOME</NavLink>
+                <Link
+                    to="garage-services"
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className="navlinks"
+                >
+                    Services
+                </Link>
+                <NavLink to="/shop" className="navlinks">Shop</NavLink>
                 <NavLink to="#" className="navlinks">Blog</NavLink>
-                <NavLink to="#" className="navlinks">Contacts</NavLink>
+                <NavLink to="/contacts" className="navlinks">Contacts</NavLink>
                 <NavLink to="/login/:userid/booking" className="booking">Booking</NavLink>
                 <SearchWrapper>
                     <Input className="search-txt" type="text" placeholder="Type to search" />
