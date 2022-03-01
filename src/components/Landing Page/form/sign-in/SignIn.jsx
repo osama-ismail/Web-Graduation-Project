@@ -20,6 +20,7 @@ const Input = styled.input`
     outline: none;
     border: 1px solid rgb(210, 210, 210, 0.5);
     margin-bottom: 2rem;
+    border-radius: 3px;
 `;
 
 const SignIn = (props) => {

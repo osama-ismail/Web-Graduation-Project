@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import './UserList.css';
 
 const Container = styled.div`
     position: fixed;
@@ -55,36 +57,6 @@ const Name = styled.h2``
 
 const Bio = styled.span``
 
-const ViewProfile = styled.button`
-    margin: 0.5rem 0;
-    padding: 3px;
-    width: 95%;
-    font-size: 16px;
-    cursor: pointer;
-    border: 1px solid rgb(190, 25, 30);
-    border-radius: 30px;
-    transition: 100ms;
-
-    &:hover {
-        border: 2px solid rgb(250, 35, 30);
-        padding: 2px;
-        background-color: #ffcccc;
-        font-weight: bold;
-    }
-
-    animation-name: buttons;
-    animation-duration: 2s;
-    
-    @keyframes buttons {
-        from { opacity: 0 }
-        to { opacity: 1 }
-    }
-`
-
-const ChangePassword = ViewProfile
-
-const SignOut = ViewProfile
-
 const UserList = ({ name, bio }) => {
     return (
         <Container>
@@ -92,9 +64,9 @@ const UserList = ({ name, bio }) => {
                 <Name>{name}</Name>
                 <Bio>{bio}</Bio>
             </Info>
-            <ViewProfile>View Profile</ViewProfile>
-            <ChangePassword>Change Password</ChangePassword>
-            <SignOut>Sign Out</SignOut>
+            <NavLink id="user-list-items" to="#">View Profile</NavLink>
+            <NavLink id="user-list-items" to="#">Go to iDrive map</NavLink>
+            <NavLink id="user-list-items" to="#">Sign Out</NavLink>
         </Container>
     );
 };

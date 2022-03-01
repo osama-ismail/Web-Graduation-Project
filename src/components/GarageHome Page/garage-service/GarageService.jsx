@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const GarageService = ({ img, serviceName }) => {
     return (
-        <Container background={img}>
+        <Container id='garage-services' background={img}>
             <Label href="#">{serviceName}</Label>
         </Container>
     );

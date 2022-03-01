@@ -17,8 +17,7 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
     axios.post(
         "http://localhost:8080//users/signup",
 
-        JSON.stringify(user)
-        ,
+        JSON.stringify(user),
         {
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
