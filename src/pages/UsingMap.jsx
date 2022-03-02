@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MainMap from '../components/Global Components/map/MainMap';
-import { searchPlace } from '../components/Global Components/map/MainMap';
+import { searchPlace, clearMarkers, calculateRoute } from '../components/Global Components/map/MainMap';
 import { MediumScreen } from '../components/responsive/Responsive';
 
 const Container = styled.div`
@@ -22,6 +22,7 @@ const Left = styled.section`
     flex: 1.5;
     border: 1px solid #aaa;
     padding: 7px;
+    // overflow: scroll;
 `
 
 const Right = styled.section`
@@ -69,6 +70,21 @@ const SearchButton = styled.button`
     cursor: pointer;
 `
 
+const ClearBtn = styled.button`
+    background-color: black;
+    border: 1px solid rgb(210, 210, 210, 0.5);
+    color: white;
+    font-size: 110%;
+    padding: 0.4rem 0.7rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: 200ms;
+
+    &:hover {
+        background-color: rgb(190, 18, 48);
+    }
+`
+
 const Map = () => {
 
     const [searchValue, setSearchValue] = React.useState('');
@@ -87,6 +103,8 @@ const Map = () => {
                         <i className="fa fa-search" aria-hidden="true"></i>
                     </SearchButton>
                 </SearchWrapper>
+                <ClearBtn onClick={() => clearMarkers()}>Delete all markers</ClearBtn>
+                <ClearBtn onClick={() => calculateRoute()}>Create Route</ClearBtn>
             </Left>
             <Right>
                 <MainMap height="100%" width="100%" borderRadius="4px" />
