@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import MainMap from '../components/Global Components/map/MainMap';
-import { searchPlace, clearMarkers, calculateRoute } from '../components/Global Components/map/MainMap';
+import {
+    searchPlace,
+    clearMarkers,
+    calculateRoute,
+    lookingFor
+} from '../components/Global Components/map/MainMap';
 import { MediumScreen } from '../components/responsive/Responsive';
 
 const Container = styled.div`
@@ -70,24 +75,66 @@ const SearchButton = styled.button`
     cursor: pointer;
 `
 
-const ClearBtn = styled.button`
+const Buttons = styled.div`
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+`
+
+const Clear = styled.button`
     background-color: black;
     border: 1px solid rgb(210, 210, 210, 0.5);
     color: white;
     font-size: 110%;
     padding: 0.4rem 0.7rem;
-    margin-top: 0.5rem;
     cursor: pointer;
     transition: 200ms;
+    margin-right: 0.5rem;
 
     &:hover {
         background-color: rgb(190, 18, 48);
     }
 `
 
+const ListDiv = styled.div`
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+`
+
+const LookFor = styled.span`
+    color: white;
+    font-size: 120%;
+    margin-right: 0.4rem;
+`
+
+const DropList = styled.select`
+    padding: 3px;
+    font-size: 110%;
+    background-color: rgb(190, 18, 47);
+    color: white;
+    outline: none;
+`
+
+const Radius = styled.input`
+    border: none;
+    outline: none;
+    padding: 5px 0;
+    background: none;
+    color: white;
+    font-size: 16px;
+    transition: 400ms;
+    background-color: black;
+    margin: 0 0.5rem;
+    border: 1px solid rgb(210, 210, 210, 0.5);
+`
+
 const Map = () => {
 
     const [searchValue, setSearchValue] = React.useState('');
+    const [radius, setRadius] = React.useState(0);
+
+    let directions = '';
 
     return (
         <Container>
@@ -103,8 +150,27 @@ const Map = () => {
                         <i className="fa fa-search" aria-hidden="true"></i>
                     </SearchButton>
                 </SearchWrapper>
-                <ClearBtn onClick={() => clearMarkers()}>Delete all markers</ClearBtn>
-                <ClearBtn onClick={() => calculateRoute()}>Create Route</ClearBtn>
+                <Buttons>
+                    <Clear onClick={() => clearMarkers()}>Delete all markers</Clear>
+                    <Clear onClick={() => alert(calculateRoute())}>Create Route</Clear>
+                </Buttons>
+                <ListDiv>
+                    <LookFor>Look for </LookFor>
+                    <DropList onChange={(e) => lookingFor(e.target.value, radius)}>
+                        <optgroup label="Gas station">
+                            <option>Petrol</option>
+                            <option>Deisel</option>
+                        </optgroup>
+                        <option>Resturants</option>
+                        <option>Hospitals</option>
+                        <option>Hotels</option>
+                    </DropList>
+                    <Radius
+                        type="number"
+                        placeholder="radius in meters"
+                        onChange={(e) => setRadius(e.target.value)}
+                    />
+                </ListDiv>
             </Left>
             <Right>
                 <MainMap height="100%" width="100%" borderRadius="4px" />

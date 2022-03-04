@@ -15,10 +15,14 @@ const Container = styled.div`
 let tt = null;
 let map = null;
 let markers = [];
+let lll = ''
 
 export const clearMarkers = () => {
     markers.map(marker => marker.remove())
     markers = []
+    map.removeLayer('route')
+    map.removeSource('route')
+    lll = ''
 }
 
 export const searchPlace = (place) => {
@@ -33,18 +37,85 @@ export const searchPlace = (place) => {
     });
 }
 
-export const calculateRoute = () => {
-    let i;
-    let query = '';
-    alert(markers[0].getLngLat())
-    // for(i=0; i < markers.length; ++i) {
-    //     query += markers[i].getLng()
+export async function calculateRoute() {
+    // var routeOptions = {
+    //     key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
+    //     locations: [],
+    //     instructionsType: 'text',
+    //     travelMode: 'car'
     // }
-    axios.get(
-        "https://api.tomtom.com/routing/1/calculateRoute/52.50931%2C13.42936%3A52.50274%2C13.43872/json?traffic=true&travelMode=car&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD"
-    ).then((response) => {
-        console.log(response.data)
-    });
+    // let i = 0;
+    // for (i = 0; i < markers.length; ++i) {
+    //     routeOptions.locations.push(markers[i].getLngLat());
+    // }
+
+    // Execute the routing API
+
+    const locations = `${35.2544},${32.2211}:${35.2566},${31.8844}`
+
+    lll[lll.length - 1] = ''
+
+    alert(lll)
+
+    const { routes } = await tt.services.calculateRoute({
+        locations,
+        instructionsType: 'text',
+        key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
+    }).go()
+    // const { routes } = await tt.services.calculateRoute(routeOptions).go()
+    //     .then(function (routeData) {
+    //         console.log(routeData);
+    //         var geo = routeData.toGeoJson();
+    //         map.addLayer({
+    //             'id': 'route',
+    //             'type': 'line',
+    //             'source': {
+    //                 'data': geo,
+    //                 'type': 'geojson'
+    //             },
+    //             'paint': {
+    //                 'line-color': 'red',
+    //                 'line-width': 5
+    //             }
+    //         })
+    //     })
+
+    console.log(routes)
+    const routesDirections = routes.map(route => {
+        const { instructions } = route.guidance
+        return instructions.map(i => {
+            let result = ''
+
+            switch (i.maneuver) {
+                case 'TURN_LEFT':
+                    result += '↰ '
+                    break
+                case 'TURN_RIGHT':
+                    result += '↱  '
+                    break
+                case 'ARRIVE_RIGHT':
+                case 'ARRIVE_LEFT':
+                case 'WAYPOINT_REACHED':
+                    result += '☑ '
+                    break
+            }
+            result += i.message.replace('waypoint', 'pickup area')
+            return result
+        })
+    })
+    console.log(routesDirections)
+    return (routesDirections)
+}
+
+export const lookingFor = (place, radius) => {
+    var lng = undefined, lat = undefined;
+    navigator.geolocation.getCurrentPosition(position => {
+        lng = position.coords.longitude;
+        lat = position.coords.latitude;
+        axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD").then((response) => {
+            console.log(response.data)
+        })
+    })
 }
 
 export default class App extends Component {
@@ -55,6 +126,8 @@ export default class App extends Component {
         // console.log(e.lngLat)
         console.log(e.lngLat.lng + " " + e.lngLat.lat)
 
+        lll += `${e.lngLat.lng},${e.lngLat.lat}:`
+
         markers.push(marker);
 
         this.flyToLocation({
@@ -62,7 +135,7 @@ export default class App extends Component {
                 lng: e.lngLat.lng,
                 lat: e.lngLat.lat
             },
-            zoom: 10, // you can also specify zoom level
+            zoom: 10,   // you can also specify zoom level
         });
     }
 
@@ -84,7 +157,7 @@ export default class App extends Component {
         });
 
         for (i = 0; i < garagesPopups.length; ++i) {
-            var popup = new tt.Popup({ offset: popupOffsets }).setHTML('<div style="background-color: rgb(190, 18, 48)"><a style="color: white;text-decoration: none" href="/garage-login/' + `${garagesPopups[i].id}` + '">Garage ' + eval(i + 1) + '<br /><img width="60px" height="40px" src="../../../assets/images/garages-images/"' + `${imagesNames[i]}` + 'alt="image" /></a></div>');
+            var popup = new tt.Popup({ offset: popupOffsets }).setHTML('<div><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="/garage-login/' + `${garagesPopups[i].id}` + '"><h2>' + `${garagesPopups[i].name}` + '</h2><br /><img width="90%" height="90%" src="' + `${require("../../../assets/images/garages-images/" + imagesNames[i])}"` + 'alt="image" /></a></div>');
             markersPositions[i].setPopup(popup).togglePopup();
         }
     }
