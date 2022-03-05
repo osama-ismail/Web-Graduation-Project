@@ -81,7 +81,7 @@ const Buttons = styled.div`
     flex-wrap: wrap;
 `
 
-const Clear = styled.button`
+const Button = styled.button`
     background-color: black;
     border: 1px solid rgb(210, 210, 210, 0.5);
     color: white;
@@ -151,8 +151,8 @@ const Map = () => {
                     </SearchButton>
                 </SearchWrapper>
                 <Buttons>
-                    <Clear onClick={() => clearMarkers()}>Delete all markers</Clear>
-                    <Clear onClick={() => alert(calculateRoute())}>Create Route</Clear>
+                    <Button onClick={() => clearMarkers()}>Delete all markers</Button>
+                    <Button onClick={() => calculateRoute()}>Create Route</Button>
                 </Buttons>
                 <ListDiv>
                     <LookFor>Look for </LookFor>

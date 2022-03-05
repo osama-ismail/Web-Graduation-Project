@@ -15,14 +15,14 @@ const Container = styled.div`
 let tt = null;
 let map = null;
 let markers = [];
-let lll = ''
+var locations = ""
 
 export const clearMarkers = () => {
     markers.map(marker => marker.remove())
     markers = []
+    locations = ""
     map.removeLayer('route')
     map.removeSource('route')
-    lll = ''
 }
 
 export const searchPlace = (place) => {
@@ -38,49 +38,42 @@ export const searchPlace = (place) => {
 }
 
 export async function calculateRoute() {
-    // var routeOptions = {
-    //     key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
-    //     locations: [],
-    //     instructionsType: 'text',
-    //     travelMode: 'car'
-    // }
-    // let i = 0;
-    // for (i = 0; i < markers.length; ++i) {
-    //     routeOptions.locations.push(markers[i].getLngLat());
-    // }
+    var routeOptions = {
+        key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
+        locations: [],
+        instructionsType: 'text',
+        travelMode: 'car'
+    }
+    let i = 0;
+    for (i = 0; i < markers.length; ++i) {
+        routeOptions.locations.push(markers[i].getLngLat());
+    }
 
     // Execute the routing API
 
-    const locations = `${35.2544},${32.2211}:${35.2566},${31.8844}`
-
-    lll[lll.length - 1] = ''
-
-    alert(lll)
+    tt.services.calculateRoute(routeOptions).go()
+        .then(function (routeData) {
+            console.log(routeData);
+            var geo = routeData.toGeoJson();
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': {
+                    'data': geo,
+                    'type': 'geojson'
+                },
+                'paint': {
+                    'line-color': 'red',
+                    'line-width': 5
+                }
+            })
+        })
 
     const { routes } = await tt.services.calculateRoute({
         locations,
         instructionsType: 'text',
         key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
     }).go()
-    // const { routes } = await tt.services.calculateRoute(routeOptions).go()
-    //     .then(function (routeData) {
-    //         console.log(routeData);
-    //         var geo = routeData.toGeoJson();
-    //         map.addLayer({
-    //             'id': 'route',
-    //             'type': 'line',
-    //             'source': {
-    //                 'data': geo,
-    //                 'type': 'geojson'
-    //             },
-    //             'paint': {
-    //                 'line-color': 'red',
-    //                 'line-width': 5
-    //             }
-    //         })
-    //     })
-
-    console.log(routes)
     const routesDirections = routes.map(route => {
         const { instructions } = route.guidance
         return instructions.map(i => {
@@ -104,7 +97,7 @@ export async function calculateRoute() {
         })
     })
     console.log(routesDirections)
-    return (routesDirections)
+    return (routesDirections[0])
 }
 
 export const lookingFor = (place, radius) => {
@@ -126,7 +119,12 @@ export default class App extends Component {
         // console.log(e.lngLat)
         console.log(e.lngLat.lng + " " + e.lngLat.lat)
 
-        lll += `${e.lngLat.lng},${e.lngLat.lat}:`
+        if (markers.length == 0)
+            locations += "" + e.lngLat.lng + "," + e.lngLat.lat
+        else
+            locations += ":" + e.lngLat.lng + "," + e.lngLat.lat
+
+        console.log(locations)
 
         markers.push(marker);
 
