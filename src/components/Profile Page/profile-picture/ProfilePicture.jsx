@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import user from '../../assets/images/profile.png';
+import user from '../../../assets/images/profile.png';
 
 const EditProfileImg = styled.button`
     background-color: rgb(190, 18, 47);
@@ -29,9 +29,14 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 200ms;
 
     &:hover ${EditProfileImg} {
         display: flex;
+    }
+
+    &:hover {
+        border: 3px solid rgb(190, 18, 48);
     }
 `
 

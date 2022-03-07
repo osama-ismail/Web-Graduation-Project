@@ -17,6 +17,8 @@ let map = null;
 let markers = [];
 var locations = ""
 
+export var directionsRoutes = []
+
 export const clearMarkers = () => {
     markers.map(marker => marker.remove())
     markers = []
@@ -29,10 +31,10 @@ export const searchPlace = (place) => {
     axios.get(
         "https://api.tomtom.com/search/2/search/" + place + ".json?limit=1&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD"
     ).then((response) => {
-        console.log(response.data);
+        // console.log(response.data)
         map.flyTo({
             center: response.data.results[0].position,
-            zoom: 10, // you can also specify zoom level
+            zoom: 13, // you can also specify zoom level
         })
     });
 }
@@ -84,7 +86,7 @@ export async function calculateRoute() {
                     result += '↰ '
                     break
                 case 'TURN_RIGHT':
-                    result += '↱  '
+                    result += '↱ '
                     break
                 case 'ARRIVE_RIGHT':
                 case 'ARRIVE_LEFT':
@@ -96,8 +98,8 @@ export async function calculateRoute() {
             return result
         })
     })
-    console.log(routesDirections)
-    return (routesDirections[0])
+    // console.log(routesDirections[0])
+    directionsRoutes = routesDirections[0]
 }
 
 export const lookingFor = (place, radius) => {
@@ -106,7 +108,7 @@ export const lookingFor = (place, radius) => {
         lng = position.coords.longitude;
         lat = position.coords.latitude;
         axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD").then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
         })
     })
 }
@@ -117,14 +119,14 @@ export default class App extends Component {
             .setLngLat(e.lngLat)
             .addTo(this.map)     // Don't forget to specify a map to be display
         // console.log(e.lngLat)
-        console.log(e.lngLat.lng + " " + e.lngLat.lat)
+        // console.log(e.lngLat.lng + " " + e.lngLat.lat)
 
         if (markers.length == 0)
             locations += "" + e.lngLat.lng + "," + e.lngLat.lat
         else
             locations += ":" + e.lngLat.lng + "," + e.lngLat.lat
 
-        console.log(locations)
+        // console.log(locations)
 
         markers.push(marker);
 
@@ -133,7 +135,7 @@ export default class App extends Component {
                 lng: e.lngLat.lng,
                 lat: e.lngLat.lat
             },
-            zoom: 10,   // you can also specify zoom level
+            zoom: 13,   // you can also specify zoom level
         });
     }
 
@@ -211,13 +213,25 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            this.map.flyTo({
-                center: {
-                    lng: 35.21633,
-                    lat: 31.76904,
-                },
-                zoom: 10, // you can also specify zoom level
-            });
+            // this.map.flyTo({
+            //     center: {
+            //         lng: 35.21633,
+            //         lat: 31.76904,
+            //     },
+            //     zoom: 10, // you can also specify zoom level
+            // });
+            var longitude = undefined, latitude = undefined;
+            navigator.geolocation.getCurrentPosition(position => {
+                longitude = position.coords.longitude;
+                latitude = position.coords.latitude;
+                this.map.flyTo({
+                    center: {
+                        lng: longitude,
+                        lat: latitude
+                    },
+                    zoom: 13,
+                })
+            })
             map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
         });
