@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cover from '../assets/images/slider/slider-img-3.jpg';
-import ProfilePicture from '../components/Profile Page/ProfilePicture';
+import ProfilePicture from '../components/Profile Page/profile-picture/ProfilePicture';
 
 const Container = styled.div`
     background-color: #0f0f0f;
