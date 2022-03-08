@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import user from '../../../assets/images/profile.png';
+import { MediumScreen } from '../../responsive/Responsive';
 
 const EditProfileImg = styled.button`
     background-color: rgb(190, 18, 47);
@@ -30,6 +31,8 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     transition: 200ms;
+
+    ${MediumScreen({ marginLeft: "0" })}
 
     &:hover ${EditProfileImg} {
         display: flex;
