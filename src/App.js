@@ -15,7 +15,9 @@ const App = () => {
         <Route path="/using-map" element={<UsingMap />} />
         <Route path="/garage-login/:id" element={<GarageHome />} />
         <Route path="/:name" element={<General />} />
-        <Route path="/user-profile/:id" element={<Profile />} />
+        <Route path="/user-profile/edit-profile/:id" element={<Profile default={'edit'} />} />
+        <Route path="/user-profile/cart/:id" element={<Profile default={'cart'} />} />
+        <Route path="/user-profile/services/:id" element={<Profile default={'services'} />} />
       </Routes>
     </BrowserRouter>
   );
