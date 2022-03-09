@@ -6,6 +6,7 @@ import ProfileForm from '../components/Profile Page/profile-form/ProfileForm';
 import ProfilePicture from '../components/Profile Page/profile-picture/ProfilePicture';
 import Footer from '../components/Global Components/footer/Footer';
 import { MediumScreen, Tablet } from '../components/responsive/Responsive';
+import CartTable from '../components/Profile Page/cart-table/CartTable';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -56,9 +57,9 @@ const Email = styled.span`
     margin-top: 0.4rem;
 `
 
-const Profile = () => {
+const Profile = (props) => {
 
-    const [id, setId] = React.useState('edit')
+    const [id, setId] = React.useState(props.default)
 
     return (
         <Container>
@@ -74,6 +75,7 @@ const Profile = () => {
                 </Section>
             </Box>
             {id === "edit" ? <ProfileForm /> : null}
+            {id === "cart" ? <CartTable /> : null}
             <Footer />
         </Container>
     )

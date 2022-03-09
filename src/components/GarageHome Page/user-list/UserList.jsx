@@ -6,7 +6,7 @@ import './UserList.css';
 const Container = styled.div`
     position: fixed;
     width: 300px;
-    height: 200px;
+    height: auto;
     background-color: rgb(17, 17, 17, 0.9);
     right: 0;
     top: 5.4rem;
@@ -64,9 +64,10 @@ const UserList = ({ name, bio }) => {
                 <Name>{name}</Name>
                 <Bio>{bio}</Bio>
             </Info>
-            <NavLink id="user-list-items" to="#">View Profile</NavLink>
-            <NavLink id="user-list-items" to="#">Go to iDrive map</NavLink>
-            <NavLink id="user-list-items" to="#">Sign Out</NavLink>
+            <NavLink id="user-list-items" to="/user-profile/edit-profile/:id">View Profile</NavLink>
+            <NavLink id="user-list-items" to="/using-map">Go to iDrive map</NavLink>
+            <NavLink id="user-list-items" to="/user-profile/cart/:id">My Cart</NavLink>
+            <NavLink id="user-list-items" to="/">Sign Out</NavLink>
         </Container>
     );
 };

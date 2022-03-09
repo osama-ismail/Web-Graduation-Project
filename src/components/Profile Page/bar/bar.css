@@ -1,0 +1,14 @@
+.bar-item {
+    list-style-type: none;
+    padding: 8px 6px 12px 6px;
+    cursor: pointer;
+    transition: 170ms;
+    border-radius: 4px;
+    margin-right: 0.3rem;
+    font-size: 120%;
+    color: white;
+    text-decoration: none;
+}
+.bar-item:hover {
+    color: rgb(190, 18, 48);
+}
