@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import user from '../../../assets/images/profile.png';
 import { MediumScreen } from '../../responsive/Responsive';
+import { useParams } from 'react-router-dom';
+import axios from "axios";
+
 
 const EditProfileImg = styled.button`
     background-color: rgb(190, 18, 47);
@@ -43,13 +46,34 @@ const Container = styled.div`
     }
 `
 
-const Span = styled.span`
+const Input = styled.input`
     color: white;
     font-size: 130%;
     margin-left: 10px;
 `
 
 const ProfilePicture = () => {
+    const { id } = useParams();
+
+    const updateImage = (e) => {
+        e.preventDefault()
+        const url = `http://localhost:8080//users/${id}/profile/uploadProfileImage/`;
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        axios.post(url, formData, config)
+            .then((response) => {
+                console.log(response.data);
+            })
+    }
+
+    const getNewImage = () => {
+
+    }
     return (
         <Container>
             <EditProfileImg>
@@ -60,7 +84,13 @@ const ProfilePicture = () => {
                         color: "white"
                     }}
                 ></i>
-                <Span>Upload Image</Span>
+                <Input
+                    onChange={(e) => {
+                        updateImage(e)
+                        getNewImage()
+                    }}
+                    type="file"
+                />
             </EditProfileImg>
         </Container>
     )
