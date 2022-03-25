@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import user from '../../../assets/images/profile.png';
 import { MediumScreen } from '../../responsive/Responsive';
 import { useParams } from 'react-router-dom';
 import axios from "axios";
-
+import { Navigate } from "react-router-dom";
 
 const EditProfileImg = styled.button`
     background-color: rgb(190, 18, 47);
@@ -24,9 +23,8 @@ const EditProfileImg = styled.button`
 const Container = styled.div`
     width: 15rem;
     height: 15rem;
-    background-image: url(${user});
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     margin-left: 4rem;
     border-radius: 50%;
     border: 3px solid white;
@@ -48,12 +46,15 @@ const Container = styled.div`
 
 const Input = styled.input`
     color: white;
-    font-size: 130%;
+    font-size: 130 %;
     margin-left: 10px;
 `
 
 const ProfilePicture = () => {
-    const { id } = useParams();
+    const { id } = useParams()
+
+    const [counter, setCounter] = React.useState(0)
+    const [profileImg, setProfileImg] = React.useState(`http://localhost:8080/users/${id}/profileImage/-1`)
 
     const updateImage = (e) => {
         e.preventDefault()
@@ -67,15 +68,17 @@ const ProfilePicture = () => {
         }
         axios.post(url, formData, config)
             .then((response) => {
-                console.log(response.data);
+                console.log(response.data)
+                setProfileImg(`http://localhost:8080/users/${id}/profileImage/${counter}`)
+                setCounter(counter + 1)
             })
     }
 
-    const getNewImage = () => {
-
-    }
     return (
-        <Container>
+        <Container img={profileImg} style={{ backgroundImage: `url(${profileImg})` }}>
+            {
+                localStorage.getItem('loggedIn') === null ? <Navigate replace to="/" /> : null
+            }
             <EditProfileImg>
                 <i
                     className="fa fa-file-image-o"
@@ -87,7 +90,6 @@ const ProfilePicture = () => {
                 <Input
                     onChange={(e) => {
                         updateImage(e)
-                        getNewImage()
                     }}
                     type="file"
                 />
