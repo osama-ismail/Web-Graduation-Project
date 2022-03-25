@@ -67,7 +67,7 @@ const UserList = ({ name, bio }) => {
             <NavLink id="user-list-items" to="/user-profile/edit-profile/:id">View Profile</NavLink>
             <NavLink id="user-list-items" to="/using-map">Go to iDrive map</NavLink>
             <NavLink id="user-list-items" to="/user-profile/cart/:id">My Cart</NavLink>
-            <NavLink id="user-list-items" to="/">Sign Out</NavLink>
+            <NavLink id="user-list-items" to="/" onClick={() => localStorage.removeItem('loggedIn')}>Sign Out</NavLink>
         </Container>
     );
 };

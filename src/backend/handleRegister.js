@@ -2,7 +2,20 @@ import axios from "axios";
 
 export const submitLocation = (e, obj) => {
     e.preventDefault();
-    // Send the 'obj' to url using axios
+    let userid = localStorage.getItem('loggedIn');
+    alert('id = ' + userid)
+    // axios.post(
+    //     `http://localhost:8080/users/${userid}/setLocation`,
+    //     JSON.stringify(obj),
+    //     {
+    //         headers: {
+    //             "Content-type": "application/json; charset=UTF-8",
+    //             "Accept": "application/json"
+    //         }
+    //     }
+    // ).then(resp => {
+    //     window.location.replace(`http://localhost:3000/user-profile/edit-profile/${userid}`)
+    // })
 }
 
 export const handleRegister = (e, { name, email, password, phoneNumber, accountType }) => {
@@ -13,20 +26,36 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
 
     e.preventDefault()
     const user = [name, email, phoneNumber, password]
-    console.log(user)
-    axios.post(
-        "http://localhost:8080//users/signup",
-
-        JSON.stringify(user),
-        {
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                "Accept": "application/json"
+    if (accountType === 'User Account')
+        axios.post(
+            `http://localhost:8080/users/signup`,
+            JSON.stringify(user),
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Accept": "application/json"
+                }
             }
-        }
-    ).then((response) => {
-        console.log(response.data)
-    })
+        ).then((response) => {
+            console.log(response.data)
+        })
+    else
+        axios.post(
+            `http://localhost:8080/garages/signup`,
+            JSON.stringify(user),
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Accept": "application/json"
+                }
+            }
+        ).then((response) => {
+            console.log(response.data)
+            let userId = response.data
+            if (userId != -1) {
+                localStorage.setItem('loggedIn', userId)
+            }
+        })
 
     // fetch("http://localhost:8080//users/signup", {
     //     method: "POST",

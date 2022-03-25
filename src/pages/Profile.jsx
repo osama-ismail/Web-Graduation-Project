@@ -7,6 +7,8 @@ import ProfilePicture from '../components/Profile Page/profile-picture/ProfilePi
 import Footer from '../components/Global Components/footer/Footer';
 import { MediumScreen, Tablet } from '../components/responsive/Responsive';
 import CartTable from '../components/Profile Page/cart-table/CartTable';
+import axios from 'axios';
+import { Navigate, useParams } from 'react-router-dom';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -59,23 +61,40 @@ const Email = styled.span`
 
 const Profile = (props) => {
 
-    const [id, setId] = React.useState(props.default)
+    const { id } = useParams()
+
+    const [Id, setId] = React.useState(props.default)
+    const [email, setEmail] = React.useState('')
+    const [name, setName] = React.useState('')
+
+    const getData = async () => {
+        const { data } = await axios.get(`http://localhost:8080/users/${id}`);
+        setEmail(data.email)
+        setName(data.username)
+    };
+
+    React.useEffect(() => {
+        getData();
+    }, []);
+
+    const homePage = `/garage-login/${localStorage.getItem('loggedIn')}`
 
     return (
         <Container>
+            {
+                id === localStorage.getItem('loggedIn') ? null : <Navigate replace to={homePage} />
+            }
             <CoverImg />
             <Box>
                 <ProfilePicture />
                 <Section>
-                    <ProfileName>
-                        Profile Name
-                    </ProfileName>
-                    <Email>myemail@yahoo.com</Email>
-                    <Bar id={id} setId={setId} />
+                    <ProfileName>{name}</ProfileName>
+                    <Email>{email}</Email>
+                    <Bar id={Id} setId={setId} />
                 </Section>
             </Box>
-            {id === "edit" ? <ProfileForm /> : null}
-            {id === "cart" ? <CartTable /> : null}
+            {Id === "edit" ? <ProfileForm /> : null}
+            {Id === "cart" ? <CartTable /> : null}
             <Footer />
         </Container>
     )

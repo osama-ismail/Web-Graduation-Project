@@ -29,7 +29,7 @@ const SignIn = (props) => {
     const [password, setPassword] = useState('')
 
     const handleClick = (e) => {
-        handleLogin(e, { email, password });
+        handleLogin(e, { email, password })
     }
 
     return (

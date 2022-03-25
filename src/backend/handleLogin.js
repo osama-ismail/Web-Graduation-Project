@@ -20,5 +20,10 @@ export const handleLogin = (e, { email, password }) => {
         }
     ).then((response) => {
         console.log(response.data)
+        let userId = response.data
+        if (userId != -1) {
+            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${userId}`)
+            localStorage.setItem('loggedIn', userId)
+        }
     })
 }
