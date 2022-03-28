@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CartProduct from '../car-product/CartProduct'
+import { MediumScreen } from '../../responsive/Responsive'
 
 const Container = styled.div`
     color: white;
@@ -13,6 +14,8 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0 1rem;
+
+    ${MediumScreen({ transform: "translateY(1rem)" })}
 `
 
 const MaskTop = styled.div`

@@ -85,12 +85,8 @@ const ProfileForm = () => {
         <Container>
             <Section>
                 <Div>
-                    <Label htmlFor="first-name">First Name</Label>
-                    <Input type="text" id="first-name" placeholder='First Name' />
-                </Div>
-                <Div>
-                    <Label htmlFor="last-name">Last Name</Label>
-                    <Input type="text" id="last-name" placeholder='Last Name' />
+                    <Label htmlFor="user-name">User Name</Label>
+                    <Input type="text" id="user-name" placeholder='User Name' />
                 </Div>
             </Section>
             <Section>

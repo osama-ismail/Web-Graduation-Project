@@ -13,7 +13,7 @@ const Container = styled.ul`
 const Bar = ({ id, setId }) => {
     return (
         <Container>
-            <NavLink to="/user-profile/edit-profile/:id"
+            <NavLink to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}
                 className='bar-item'
                 id="edit"
                 style={id === "edit" ? {
@@ -21,7 +21,7 @@ const Bar = ({ id, setId }) => {
                     padding: "8px 6px"
                 } : null}
                 onClick={(e) => setId(e.target.id)}>Edit Profile</NavLink>
-            <NavLink to="/user-profile/cart/:id"
+            <NavLink to={`/user-profile/cart/${localStorage.getItem('loggedIn')}`}
                 className='bar-item'
                 id="cart"
                 style={id === "cart" ? {
@@ -29,7 +29,7 @@ const Bar = ({ id, setId }) => {
                     padding: "8px 6px"
                 } : null}
                 onClick={(e) => setId(e.target.id)}>Cart</NavLink>
-            <NavLink to="/user-profile/services/:id"
+            <NavLink to={`/user-profile/services/${localStorage.getItem('loggedIn')}`}
                 className='bar-item'
                 id="services"
                 style={id === "services" ? {
