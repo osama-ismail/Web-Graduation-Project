@@ -324,7 +324,7 @@ export async function calculateRoute() {
 
     // Execute the routing API
 
-    tt.services.calculateRoute(routeOptions).go()
+    tt.services.calculateRoute(routeOptions)
         .then(function (routeData) {
             console.log(routeData);
             var geo = routeData.toGeoJson();
@@ -346,7 +346,7 @@ export async function calculateRoute() {
         locations,
         instructionsType: 'text',
         key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
-    }).go()
+    })
     const routesDirections = routes.map(route => {
         const { instructions } = route.guidance
         return instructions.map(i => {
@@ -527,20 +527,20 @@ export default class App extends Component {
         });
 
         map.on('click', (event) => {
-            // this.addMarkerOnClick(event, {
-            //     color: 'rgb(190, 18, 47)',
-            //     width: '40',
-            //     height: '50'
-            // });
-            const position = event.lngLat;
-            tt.services.reverseGeocode({
-                key: apiKey,
-                position: position
-            })
-                .then(function (results) {
-                    drawPassengerMarkerOnMap(results);
-                    updateTaxiBatchLocations(passengerMarker.getLngLat().toArray());
-                });
+            this.addMarkerOnClick(event, {
+                color: 'rgb(190, 18, 47)',
+                width: '40',
+                height: '50'
+            });
+            // const position = event.lngLat;
+            // tt.services.reverseGeocode({
+            //     key: apiKey,
+            //     position: position
+            // })
+            //     .then(function (results) {
+            //         drawPassengerMarkerOnMap(results);
+            //         updateTaxiBatchLocations(passengerMarker.getLngLat().toArray());
+            //     });
         });
 
         modal.addEventListener('click', function () {
