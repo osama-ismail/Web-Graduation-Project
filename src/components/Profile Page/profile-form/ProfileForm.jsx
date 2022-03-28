@@ -24,20 +24,13 @@ const Container = styled.div`
 
 const Section = styled.section`
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     margin-bottom: 1rem;
-
-    ${MediumScreen({ flexDirection: "column" })}
 
     &:last-child {
         margin-bottom: 0;
     }
-`
-
-const Div = styled.section`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 
     ${MediumScreen({ marginBottom: "1rem", alignItems: "stretch" })}
 `
@@ -84,20 +77,16 @@ const ProfileForm = () => {
     return (
         <Container>
             <Section>
-                <Div>
-                    <Label htmlFor="user-name">User Name</Label>
-                    <Input type="text" id="user-name" placeholder='User Name' />
-                </Div>
+                <Label htmlFor="user-name">User Name</Label>
+                <Input type="text" id="user-name" placeholder='User Name' />
             </Section>
             <Section>
-                <Div>
-                    <Label htmlFor="password">New Password</Label>
-                    <Input type="text" id="password" placeholder='New Password' />
-                </Div>
-                <Div>
-                    <Label htmlFor="confirm-password">Confirm Password</Label>
-                    <Input type="text" id="confirm-password" placeholder='Confirm Password' />
-                </Div>
+                <Label htmlFor="password">New Password</Label>
+                <Input type="text" id="password" placeholder='New Password' />
+            </Section>
+            <Section>
+                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Input type="text" id="confirm-password" placeholder='Confirm Password' />
             </Section>
             <Buttons>
                 <Button>Delete Accout</Button>

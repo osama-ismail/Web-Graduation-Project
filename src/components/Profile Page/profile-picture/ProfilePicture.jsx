@@ -8,8 +8,6 @@ import { Navigate } from "react-router-dom";
 const EditProfileImg = styled.button`
     background-color: rgb(190, 18, 47);
     border: none;
-    padding: 0.5rem;
-    cursor: pointer;
     display: flex;
     align-items: center;
     transition: 300ms;
@@ -44,10 +42,28 @@ const Container = styled.div`
     }
 `
 
-const Input = styled.input`
+const ParentDiv = styled.div`
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+`
+
+const ButtonUpload = styled.button`
+    font-size: 120%;
     color: white;
-    font-size: 130 %;
+    background-color: rgb(190, 18, 48);
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+`
+
+const FileInput = styled.input`
+    left: 0;
+    top: 0;
+    font-size: 130%;
     margin-left: 10px;
+    position: absolute;
+    opacity: 0;
 `
 
 const ProfilePicture = () => {
@@ -80,19 +96,10 @@ const ProfilePicture = () => {
                 localStorage.getItem('loggedIn') === null ? <Navigate replace to="/" /> : null
             }
             <EditProfileImg>
-                <i
-                    className="fa fa-file-image-o"
-                    aria-hidden="true"
-                    style={{
-                        color: "white"
-                    }}
-                ></i>
-                <Input
-                    onChange={(e) => {
-                        updateImage(e)
-                    }}
-                    type="file"
-                />
+                <ParentDiv>
+                    <ButtonUpload>Choose Image</ButtonUpload>
+                    <FileInput onChange={(e) => { updateImage(e) }} type="file" />
+                </ParentDiv>
             </EditProfileImg>
         </Container>
     )
