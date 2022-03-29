@@ -41,7 +41,7 @@ let bestRouteIndex;
 
 let routeLabelsDiv;
 
-const routeWeight = 6;
+const routeWeight = 5;
 const routeBackgroundWeight = 12;
 const fastestRouteColor = '#65A7A9';
 const grayedOutDivColor = '#979797';
@@ -54,7 +54,7 @@ function setDefaultTaxiConfig() {
         createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
         createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
         createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
-        createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4)
+        createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4),
     ];
 }
 
@@ -188,7 +188,7 @@ function drawAllRoutes() {
             { locations: taxiPassengerBatchCoordinates[0] },
             { locations: taxiPassengerBatchCoordinates[1] },
             { locations: taxiPassengerBatchCoordinates[2] },
-            { locations: taxiPassengerBatchCoordinates[3] }
+            { locations: taxiPassengerBatchCoordinates[3] },
         ]
     })
         .then(function (results) {
