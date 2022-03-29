@@ -33,7 +33,7 @@ let passengerInitCoordinates = undefined;
 let passengerMarker;
 
 let taxiPassengerBatchCoordinates = [];
-let taxiConfig;
+let taxiConfig = [];
 const zoomLevel = 13;
 
 let routes = [];
@@ -50,19 +50,24 @@ let modal = null
 let modalContent = null
 
 function setDefaultTaxiConfig() {
-    taxiConfig = [
-        createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
-        createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
-        createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
-        createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4),
-    ];
+    // taxiConfig = [
+    //     createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
+    //     createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
+    //     createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
+    //     createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4),
+    // ];
+    let length = garagesPopups.length;
+    for (let i = 0; i < length; i = i + 1) {
+        taxiConfig[i] = createTaxi('Garage #' + garagesPopups[i].id, '#006967', garagesPopups[i].position, 'none')
+    }
 }
 
 function createTaxi(name, color, coordinates, iconFilePath, iconWidth = 55, iconHeight = 55) {
     return {
         name: name,
         color: color,
-        icon: "<img src=" + `${iconFilePath}` + " style='width: " + iconWidth + "px; height: " + iconHeight + "px;'>",
+        // icon: "<img src=" + `${iconFilePath}` + " style='width: " + iconWidth + "px; height: " + iconHeight + "px;'>",
+        icon: null,
         coordinates: coordinates
     };
 }
@@ -131,7 +136,7 @@ function modifyFastestRouteColor(travelTimeInSecondsArray) {
 }
 
 function displayModal() {
-    modalContent.innerText = 'Dispatch car number ' + String(bestRouteIndex + 1);
+    modalContent.innerText = 'Dispatch garage number ' + String(bestRouteIndex + 1);
     modal.style.display = 'block';
 }
 
@@ -181,15 +186,20 @@ function buildStyle(id, data, color, width) {
 }
 
 function drawAllRoutes() {
+    let items = [];
+    for (let i = 0; i < taxiConfig.length; i = i + 1) {
+        items.push({ locations: taxiPassengerBatchCoordinates[i] })
+    }
     tt.services.calculateRoute({
         batchMode: 'sync',
         key: apiKey,
-        batchItems: [
-            { locations: taxiPassengerBatchCoordinates[0] },
-            { locations: taxiPassengerBatchCoordinates[1] },
-            { locations: taxiPassengerBatchCoordinates[2] },
-            { locations: taxiPassengerBatchCoordinates[3] },
-        ]
+        batchItems: items,
+        // batchItems: [
+        //     { locations: taxiPassengerBatchCoordinates[0] },
+        //     { locations: taxiPassengerBatchCoordinates[1] },
+        //     { locations: taxiPassengerBatchCoordinates[2] },
+        //     { locations: taxiPassengerBatchCoordinates[3] },
+        // ]
     })
         .then(function (results) {
             results.batchItems.forEach(function (singleRoute, index) {
