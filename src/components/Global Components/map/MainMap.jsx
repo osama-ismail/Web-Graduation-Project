@@ -28,8 +28,7 @@ var locations = ""
 // From Taxi app
 const apiKey = 'q2yukmABGuRvQD9NhkGAABCOYtIMoHFD';
 
-// const passengerInitCoordinates = [4.876935, 52.360306];
-let passengerInitCoordinates = [4.876935, 52.360306];
+let passengerInitCoordinates = undefined;
 
 let passengerMarker;
 
@@ -42,7 +41,7 @@ let bestRouteIndex;
 
 let routeLabelsDiv;
 
-const routeWeight = 9;
+const routeWeight = 6;
 const routeBackgroundWeight = 12;
 const fastestRouteColor = '#65A7A9';
 const grayedOutDivColor = '#979797';
