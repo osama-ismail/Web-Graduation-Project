@@ -16,7 +16,7 @@ const Container = styled.div`
     width: ${props => props.width};
     border-radius: ${props => props.borderRadius};
 
-    ${MediumScreen({ width: "80%" })}
+    ${MediumScreen({ width: "100%" })}
 `
 
 let tt = null;
@@ -28,7 +28,8 @@ var locations = ""
 // From Taxi app
 const apiKey = 'q2yukmABGuRvQD9NhkGAABCOYtIMoHFD';
 
-const passengerInitCoordinates = [4.876935, 52.360306];
+// const passengerInitCoordinates = [4.876935, 52.360306];
+let passengerInitCoordinates = [4.876935, 52.360306];
 
 let passengerMarker;
 
@@ -282,7 +283,7 @@ function drawPassengerMarkerOnMap(geoResponse) {
 
 function createPassengerMarker(markerCoordinates, popup) {
     const passengerMarkerElement = document.createElement('div');
-    passengerMarkerElement.innerHTML = `<img src=${manWaving} style='width: 30px; height: 30px';>`;
+    passengerMarkerElement.innerHTML = `<img src=${manWaving} style='width: 40px; height: 40px';>`;
     return new tt.Marker({ element: passengerMarkerElement }).setLngLat(markerCoordinates).setPopup(popup).addTo(map);
 }
 
@@ -484,13 +485,6 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            // this.map.flyTo({
-            //     center: {
-            //         lng: 35.21633,
-            //         lat: 31.76904,
-            //     },
-            //     zoom: 10, // you can also specify zoom level
-            // });
             var longitude = undefined, latitude = undefined;
             navigator.geolocation.getCurrentPosition(position => {
                 longitude = position.coords.longitude;
@@ -502,6 +496,19 @@ export default class App extends Component {
                     },
                     zoom: 13,
                 })
+                passengerInitCoordinates = [longitude, latitude]
+                setDefaultTaxiConfig();
+                updateTaxiBatchLocations(passengerInitCoordinates);
+                tt.setProductInfo('Taxi dispatcher example application', '1.00');
+
+                passengerMarker = createPassengerMarker(passengerInitCoordinates,
+                    new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
+                passengerMarker.togglePopup();
+                taxiConfig.forEach(function (taxi) {
+                    const carMarkerElement = document.createElement('div');
+                    carMarkerElement.innerHTML = taxi.icon;
+                    new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
+                });
             })
             map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
@@ -512,35 +519,12 @@ export default class App extends Component {
 
         routeLabelsDiv = document.getElementById('route-labels');
 
-        setDefaultTaxiConfig();
-        updateTaxiBatchLocations(passengerInitCoordinates);
-        tt.setProductInfo('Taxi dispatcher example application', '1.00');
-
-        map.addControl(new tt.NavigationControl(), 'top-left');
-        passengerMarker = createPassengerMarker(passengerInitCoordinates,
-            new tt.Popup({ offset: 35 }).setHTML("Click anywhere on the map to change passenger location."));
-        passengerMarker.togglePopup();
-        taxiConfig.forEach(function (taxi) {
-            const carMarkerElement = document.createElement('div');
-            carMarkerElement.innerHTML = taxi.icon;
-            new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
-        });
-
         map.on('click', (event) => {
             this.addMarkerOnClick(event, {
                 color: 'rgb(190, 18, 47)',
                 width: '40',
                 height: '50'
             });
-            // const position = event.lngLat;
-            // tt.services.reverseGeocode({
-            //     key: apiKey,
-            //     position: position
-            // })
-            //     .then(function (results) {
-            //         drawPassengerMarkerOnMap(results);
-            //         updateTaxiBatchLocations(passengerMarker.getLngLat().toArray());
-            //     });
         });
 
         modal.addEventListener('click', function () {
