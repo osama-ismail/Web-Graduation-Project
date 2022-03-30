@@ -1,7 +1,7 @@
 export const garagesPopups = [
     {
         id: 1,
-        position: [35.09, 31.84],
+        position: [35.09, 31.44],
         img: "1.png",
         name: "Garage for maintenance"
     },

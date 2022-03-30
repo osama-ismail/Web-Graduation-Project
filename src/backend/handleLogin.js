@@ -7,7 +7,8 @@ export const handleLogin = (e, { email, password }) => {
     }
     e.preventDefault()
     const user = [email, password]
-    console.log(user)
+    let id = undefined
+    // console.log(user)
     axios.post(
         "http://localhost:8080//users/login",
 
@@ -20,10 +21,30 @@ export const handleLogin = (e, { email, password }) => {
         }
     ).then((response) => {
         console.log(response.data)
-        let userId = response.data
-        if (userId != -1) {
-            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${userId}`)
-            localStorage.setItem('loggedIn', userId)
+        id = response.data
+        if (id != -1) {
+            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
+            localStorage.setItem('loggedIn', id)
+        }
+        if (id === -1) {
+            axios.post(
+                "http://localhost:8080//garages/login",
+
+                JSON.stringify(user),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then((response) => {
+                console.log(response.data)
+                id = response.data
+                if (id != -1) {
+                    window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
+                    localStorage.setItem('loggedIn', id)
+                }
+            })
         }
     })
 }

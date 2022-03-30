@@ -68,9 +68,15 @@ const Profile = (props) => {
     const [name, setName] = React.useState('')
 
     const getData = async () => {
-        const { data } = await axios.get(`http://localhost:8080/users/${id}`);
-        setEmail(data.email)
-        setName(data.username)
+        if (localStorage.getItem('accountType' === 'User')) {
+            const { data } = await axios.get(`http://localhost:8080/users/${id}`)
+            setEmail(data.email)
+            setName(data.username)
+        } else {
+            const { data } = await axios.get(`http://localhost:8080/garages/${id}`)
+            setEmail(data.garageEmail)
+            setName(data.garageName)
+        }
     };
 
     React.useEffect(() => {

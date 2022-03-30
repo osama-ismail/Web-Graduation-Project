@@ -86,8 +86,8 @@ const SignUp = (props) => {
                     id="select-account-type"
                     onChange={(e) => setAccountType(e.target.value)}
                 >
-                    <option>Garage Account</option>
                     <option>User Account</option>
+                    <option>Garage Account</option>
                 </select>
             </div>
             <button className="toggle" onClick={props.handleClick}>

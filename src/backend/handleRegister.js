@@ -2,20 +2,19 @@ import axios from "axios";
 
 export const submitLocation = (e, obj) => {
     e.preventDefault();
-    let userid = localStorage.getItem('loggedIn');
-    alert('id = ' + userid)
-    // axios.post(
-    //     `http://localhost:8080/users/${userid}/setLocation`,
-    //     JSON.stringify(obj),
-    //     {
-    //         headers: {
-    //             "Content-type": "application/json; charset=UTF-8",
-    //             "Accept": "application/json"
-    //         }
-    //     }
-    // ).then(resp => {
-    //     window.location.replace(`http://localhost:3000/user-profile/edit-profile/${userid}`)
-    // })
+    let garageId = localStorage.getItem('loggedIn');
+    axios.post(
+        `http://localhost:8080/garages/${garageId}/setLocation`,
+        JSON.stringify({ "longitude": obj.lng, "latitude": obj.lat }),
+        {
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"
+            }
+        }
+    ).then(resp => {
+        window.location.replace(`http://localhost:3000/user-profile/edit-profile/${garageId}`)
+    })
 }
 
 export const handleRegister = (e, { name, email, password, phoneNumber, accountType }) => {
@@ -38,6 +37,7 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
             }
         ).then((response) => {
             console.log(response.data)
+            localStorage.setItem('accountType', 'User')
         })
     else
         axios.post(
@@ -51,9 +51,10 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
             }
         ).then((response) => {
             console.log(response.data)
-            let userId = response.data
-            if (userId != -1) {
-                localStorage.setItem('loggedIn', userId)
+            let garageId = response.data
+            if (garageId != -1) {
+                localStorage.setItem('loggedIn', garageId)
+                localStorage.setItem('accountType', 'Garage')
             }
         })
 

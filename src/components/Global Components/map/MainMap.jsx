@@ -16,7 +16,7 @@ const Container = styled.div`
     width: ${props => props.width};
     border-radius: ${props => props.borderRadius};
 
-    ${MediumScreen({ width: "80%" })}
+    ${MediumScreen({ width: "100%" })}
 `
 
 let tt = null;
@@ -28,12 +28,12 @@ var locations = ""
 // From Taxi app
 const apiKey = 'q2yukmABGuRvQD9NhkGAABCOYtIMoHFD';
 
-const passengerInitCoordinates = [4.876935, 52.360306];
+let passengerInitCoordinates = undefined;
 
 let passengerMarker;
 
 let taxiPassengerBatchCoordinates = [];
-let taxiConfig;
+let taxiConfig = [];
 const zoomLevel = 13;
 
 let routes = [];
@@ -41,7 +41,7 @@ let bestRouteIndex;
 
 let routeLabelsDiv;
 
-const routeWeight = 9;
+const routeWeight = 5;
 const routeBackgroundWeight = 12;
 const fastestRouteColor = '#65A7A9';
 const grayedOutDivColor = '#979797';
@@ -50,19 +50,24 @@ let modal = null
 let modalContent = null
 
 function setDefaultTaxiConfig() {
-    taxiConfig = [
-        createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
-        createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
-        createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
-        createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4)
-    ];
+    // taxiConfig = [
+    //     createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
+    //     createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
+    //     createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
+    //     createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4),
+    // ];
+    let length = garagesPopups.length;
+    for (let i = 0; i < length; i = i + 1) {
+        taxiConfig[i] = createTaxi('Garage #' + garagesPopups[i].id, '#006967', garagesPopups[i].position, 'none')
+    }
 }
 
 function createTaxi(name, color, coordinates, iconFilePath, iconWidth = 55, iconHeight = 55) {
     return {
         name: name,
         color: color,
-        icon: "<img src=" + `${iconFilePath}` + " style='width: " + iconWidth + "px; height: " + iconHeight + "px;'>",
+        // icon: "<img src=" + `${iconFilePath}` + " style='width: " + iconWidth + "px; height: " + iconHeight + "px;'>",
+        icon: null,
         coordinates: coordinates
     };
 }
@@ -131,7 +136,7 @@ function modifyFastestRouteColor(travelTimeInSecondsArray) {
 }
 
 function displayModal() {
-    modalContent.innerText = 'Dispatch car number ' + String(bestRouteIndex + 1);
+    modalContent.innerText = 'Dispatch garage number ' + String(bestRouteIndex + 1);
     modal.style.display = 'block';
 }
 
@@ -181,15 +186,20 @@ function buildStyle(id, data, color, width) {
 }
 
 function drawAllRoutes() {
+    let items = [];
+    for (let i = 0; i < taxiConfig.length; i = i + 1) {
+        items.push({ locations: taxiPassengerBatchCoordinates[i] })
+    }
     tt.services.calculateRoute({
         batchMode: 'sync',
         key: apiKey,
-        batchItems: [
-            { locations: taxiPassengerBatchCoordinates[0] },
-            { locations: taxiPassengerBatchCoordinates[1] },
-            { locations: taxiPassengerBatchCoordinates[2] },
-            { locations: taxiPassengerBatchCoordinates[3] }
-        ]
+        batchItems: items,
+        // batchItems: [
+        //     { locations: taxiPassengerBatchCoordinates[0] },
+        //     { locations: taxiPassengerBatchCoordinates[1] },
+        //     { locations: taxiPassengerBatchCoordinates[2] },
+        //     { locations: taxiPassengerBatchCoordinates[3] },
+        // ]
     })
         .then(function (results) {
             results.batchItems.forEach(function (singleRoute, index) {
@@ -282,7 +292,7 @@ function drawPassengerMarkerOnMap(geoResponse) {
 
 function createPassengerMarker(markerCoordinates, popup) {
     const passengerMarkerElement = document.createElement('div');
-    passengerMarkerElement.innerHTML = `<img src=${manWaving} style='width: 30px; height: 30px';>`;
+    passengerMarkerElement.innerHTML = `<img src=${manWaving} style='width: 40px; height: 40px';>`;
     return new tt.Marker({ element: passengerMarkerElement }).setLngLat(markerCoordinates).setPopup(popup).addTo(map);
 }
 
@@ -324,7 +334,7 @@ export async function calculateRoute() {
 
     // Execute the routing API
 
-    tt.services.calculateRoute(routeOptions).go()
+    tt.services.calculateRoute(routeOptions)
         .then(function (routeData) {
             console.log(routeData);
             var geo = routeData.toGeoJson();
@@ -346,7 +356,7 @@ export async function calculateRoute() {
         locations,
         instructionsType: 'text',
         key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
-    }).go()
+    })
     const routesDirections = routes.map(route => {
         const { instructions } = route.guidance
         return instructions.map(i => {
@@ -484,13 +494,6 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            // this.map.flyTo({
-            //     center: {
-            //         lng: 35.21633,
-            //         lat: 31.76904,
-            //     },
-            //     zoom: 10, // you can also specify zoom level
-            // });
             var longitude = undefined, latitude = undefined;
             navigator.geolocation.getCurrentPosition(position => {
                 longitude = position.coords.longitude;
@@ -502,6 +505,19 @@ export default class App extends Component {
                     },
                     zoom: 13,
                 })
+                passengerInitCoordinates = [longitude, latitude]
+                setDefaultTaxiConfig();
+                updateTaxiBatchLocations(passengerInitCoordinates);
+                tt.setProductInfo('Taxi dispatcher example application', '1.00');
+
+                passengerMarker = createPassengerMarker(passengerInitCoordinates,
+                    new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
+                passengerMarker.togglePopup();
+                taxiConfig.forEach(function (taxi) {
+                    const carMarkerElement = document.createElement('div');
+                    carMarkerElement.innerHTML = taxi.icon;
+                    new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
+                });
             })
             map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
@@ -512,35 +528,12 @@ export default class App extends Component {
 
         routeLabelsDiv = document.getElementById('route-labels');
 
-        setDefaultTaxiConfig();
-        updateTaxiBatchLocations(passengerInitCoordinates);
-        tt.setProductInfo('Taxi dispatcher example application', '1.00');
-
-        map.addControl(new tt.NavigationControl(), 'top-left');
-        passengerMarker = createPassengerMarker(passengerInitCoordinates,
-            new tt.Popup({ offset: 35 }).setHTML("Click anywhere on the map to change passenger location."));
-        passengerMarker.togglePopup();
-        taxiConfig.forEach(function (taxi) {
-            const carMarkerElement = document.createElement('div');
-            carMarkerElement.innerHTML = taxi.icon;
-            new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
-        });
-
         map.on('click', (event) => {
-            // this.addMarkerOnClick(event, {
-            //     color: 'rgb(190, 18, 47)',
-            //     width: '40',
-            //     height: '50'
-            // });
-            const position = event.lngLat;
-            tt.services.reverseGeocode({
-                key: apiKey,
-                position: position
-            })
-                .then(function (results) {
-                    drawPassengerMarkerOnMap(results);
-                    updateTaxiBatchLocations(passengerMarker.getLngLat().toArray());
-                });
+            this.addMarkerOnClick(event, {
+                color: 'rgb(190, 18, 47)',
+                width: '40',
+                height: '50'
+            });
         });
 
         modal.addEventListener('click', function () {

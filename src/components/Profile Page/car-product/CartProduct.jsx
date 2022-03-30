@@ -1,15 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 import image from "../../../assets/images/products/va3.png"
+import { MediumScreen, Tablet } from '../../responsive/Responsive'
 
 const Container = styled.div`
     display: flex;
     border-bottom: 2px solid rgb(210, 210, 210, 0.6);
     width: 100%;
     margin-bottom: 0.4rem;
+
+    ${MediumScreen({ flexDirection: "column" })}
 `
 
 const Section = styled.section``
+
+const DetailsSection = styled.section`
+    width: 40vw;
+    border-left: 1px solid rgb(210, 210, 210, 0.5);
+
+    ${Tablet({ borderLeft: "none" })}
+`
 
 const ProductImg = styled.div`
     background-image: url(${image});
@@ -90,7 +100,7 @@ const CartProduct = () => {
             <Section>
                 <ProductImg />
             </Section>
-            <Section style={{ width: "40vw", borderLeft: '1px solid rgb(210, 210, 210, 0.5)' }}>
+            <DetailsSection>
                 <Details>
                     <Line style={{ top: "0" }}>
                         <Name>Product Name</Name>
@@ -104,7 +114,7 @@ const CartProduct = () => {
                         </Quantity>
                     </Line>
                 </Details>
-            </Section>
+            </DetailsSection>
         </Container>
     )
 }
