@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './UserList.css';
 
 const Container = styled.div`
-    position: fixed;
+    position: absolute;
     width: 300px;
     height: auto;
     background-color: rgb(17, 17, 17, 0.9);
@@ -57,15 +57,18 @@ const Name = styled.h2``
 
 const UserList = () => {
 
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName'))
+
     const signOutHandler = () => {
         localStorage.removeItem('loggedIn')
         localStorage.removeItem('accountType')
+        localStorage.removeItem('userName')
     }
 
     return (
         <Container>
             <Info>
-                <Name>{localStorage.getItem('user-name')}</Name>
+                <Name>{userName}</Name>
             </Info>
             <NavLink id="user-list-items" to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}>View Profile</NavLink>
             <NavLink id="user-list-items" to="/using-map">Go to iDrive map</NavLink>

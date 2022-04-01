@@ -71,14 +71,14 @@ const Profile = (props) => {
     const getData = async () => {
         if (localStorage.getItem('accountType') === 'User') {
             const { data } = await axios.get(`http://localhost:8080/users/${id}`)
+            localStorage.setItem('userName', data.username)
             setEmail(data.email)
             setName(data.username)
-            localStorage.setItem('user-name', data.username)
         } else if (localStorage.getItem('accountType') === 'Garage') {
             const { data } = await axios.get(`http://localhost:8080/garages/${id}`)
+            localStorage.setItem('userName', data.garageName)
             setEmail(data.garageEmail)
             setName(data.garageName)
-            localStorage.setItem('user-name', data.username)
         }
     };
 
@@ -86,7 +86,7 @@ const Profile = (props) => {
         getData();
     }, []);
 
-    const homePage = `/garage-login/${localStorage.getItem('loggedIn')}`
+    const homePage = `/main-login`
 
     return (
         <Container>
