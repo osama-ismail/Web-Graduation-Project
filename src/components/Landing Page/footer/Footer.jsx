@@ -2,7 +2,7 @@ import FooterSvg from "./FooterSvg";
 import styled from "styled-components";
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
-import logoImg from "../../../assets/images/logo.png";
+import logoImg from "../../../assets/images/iDrive.jpg";
 import { Tablet } from "../../responsive/Responsive";
 
 const Container = styled.div``
@@ -21,10 +21,10 @@ const Wrapper = styled.div`
     ${Tablet({ flexFlow: "column nowrap", alignItems: "center" })}
 `
 
-const Logo = styled.div`
-    background-image: url(${logoImg});
-    background-repeat: no-repeat;
-    width: 200px;
+const Logo = styled.img`
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
 
     ${Tablet({ height: "80px" })}
 `
@@ -87,7 +87,7 @@ const Footer = () => {
             <FooterSvg />
             <Ftr>
                 <Wrapper>
-                    <Logo />
+                    <Logo src={logoImg} />
                     <Info>
                         <Left>
                             <MailOutlineRoundedIcon />
@@ -95,7 +95,7 @@ const Footer = () => {
                         </Left>
                         <Right>
                             <Email href="mailto:project@website.com">
-                                project@website.com
+                                iDrive@gmail.com
                             </Email>
                             <Phone>
                                 123456789-00

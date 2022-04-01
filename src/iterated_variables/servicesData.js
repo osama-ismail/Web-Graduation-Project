@@ -2,17 +2,17 @@ const services = [
     {
         className: "fa fa-map-marker",
         title: "Using maps",
-        description: "Put here some Description about this service"
+        description: "Use the map to help you reach your destination and dispatch nearest suitable garage for your problem"
     },
     {
         className: "fa fa-wrench",
         title: "Car Repair",
-        description: "Put here some Description about this service"
+        description: "Choose an appropriate garage and contact them to get everything well"
     },
     {
         className: "fa fa-car",
-        title: "Car Washing",
-        description: "Put here some Description about this service"
+        title: "Many Services",
+        description: "Select the service you need and contact the garage to get it"
     },
 ]
 

@@ -38,7 +38,7 @@ const Services = () => {
                 <span style={{
                     color: "rgb(230, 18, 47)",
                     fontStyle: "italic"
-                }}>Tinker</span> Services
+                }}>iDrive</span> Services
             </TopHeader>
             <MainSeparator src={ServicesSeparator} />
             <Cards>
