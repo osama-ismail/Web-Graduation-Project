@@ -140,7 +140,7 @@ const Background = () => {
                 <Title1>Car Repair</Title1>
                 <Title2>And Maintenance Service</Title2>
                 <Paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore etctrro dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation
+                    Stay in touch with car experts, make your driving easier
                 </Paragraph>
                 <Link
                     to="FormBackgroundElement"
@@ -148,7 +148,7 @@ const Background = () => {
                     smooth={true}
                     duration={500}
                 >
-                    <GetStarted>Get Started!</GetStarted>
+                    <GetStarted>Get Started</GetStarted>
                 </Link>
             </TextWrapper>
         </div>

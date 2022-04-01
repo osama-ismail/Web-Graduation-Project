@@ -9,6 +9,7 @@ import { MediumScreen, Tablet } from '../components/responsive/Responsive';
 import CartTable from '../components/Profile Page/cart-table/CartTable';
 import axios from 'axios';
 import { Navigate, useParams } from 'react-router-dom';
+import ParentNavbar from '../components/Global Components/parentNavbar/ParentNavbar';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -68,14 +69,16 @@ const Profile = (props) => {
     const [name, setName] = React.useState('')
 
     const getData = async () => {
-        if (localStorage.getItem('accountType' === 'User')) {
+        if (localStorage.getItem('accountType') === 'User') {
             const { data } = await axios.get(`http://localhost:8080/users/${id}`)
             setEmail(data.email)
             setName(data.username)
-        } else {
+            localStorage.setItem('user-name', data.username)
+        } else if (localStorage.getItem('accountType') === 'Garage') {
             const { data } = await axios.get(`http://localhost:8080/garages/${id}`)
             setEmail(data.garageEmail)
             setName(data.garageName)
+            localStorage.setItem('user-name', data.username)
         }
     };
 
@@ -87,6 +90,7 @@ const Profile = (props) => {
 
     return (
         <Container>
+            <ParentNavbar />
             {
                 id === localStorage.getItem('loggedIn') ? null : <Navigate replace to={homePage} />
             }

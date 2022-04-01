@@ -25,6 +25,7 @@ export const handleLogin = (e, { email, password }) => {
         if (id != -1) {
             window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
             localStorage.setItem('loggedIn', id)
+            localStorage.setItem('accountType', 'User')
         }
         if (id === -1) {
             axios.post(
@@ -43,6 +44,7 @@ export const handleLogin = (e, { email, password }) => {
                 if (id != -1) {
                     window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
                     localStorage.setItem('loggedIn', id)
+                    localStorage.setItem('accountType', 'Garage')
                 }
             })
         }

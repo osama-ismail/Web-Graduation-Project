@@ -49,24 +49,10 @@ const About = () => {
             </ImageWrapper>
             <Article>
                 <SectionName>
-                    About <span style={{ color: "rgb(230, 18, 47)", fontStyle: "italic" }}>Tinker</span>
+                    About <span style={{ color: "rgb(230, 18, 47)", fontStyle: "italic" }}>iDrive</span>
                 </SectionName>
                 <Paragraph>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi repellat, laudantium similique
-                    quibusdam aliquid error numquam deleniti quidem
-                    ullam obcaecati eos, quos fuga perspiciatis esse excepturi est sapiente
-                    veritatis dolor?<br />
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi repellat, laudantium similique
-                    quibusdam aliquid error numquam deleniti quidem
-                    ullam obcaecati eos, quos fuga perspiciatis esse excepturi est sapiente
-                    veritatis dolor?<br />
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Modi repellat, laudantium similique
-                    quibusdam aliquid error numquam deleniti quidem
-                    ullam obcaecati eos, quos fuga perspiciatis esse excepturi est sapiente
-                    veritatis dolor?<br />
+                    A website which groups all garages and facilitates contacting with nearest and appropriate car experts to solve your problem
                 </Paragraph>
             </Article>
         </Container>

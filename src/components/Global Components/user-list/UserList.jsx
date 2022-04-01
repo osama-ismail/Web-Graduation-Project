@@ -29,7 +29,7 @@ const Container = styled.div`
             height: 0;
             opacity: 0;
         } 100% {
-            height: 200px;
+            height: 180px;
             opacity: 1;
         }
     }
@@ -55,19 +55,22 @@ const Info = styled.div`
 `
 const Name = styled.h2``
 
-const Bio = styled.span``
+const UserList = () => {
 
-const UserList = ({ name, bio }) => {
+    const signOutHandler = () => {
+        localStorage.removeItem('loggedIn')
+        localStorage.removeItem('accountType')
+    }
+
     return (
         <Container>
             <Info>
-                <Name>{name}</Name>
-                <Bio>{bio}</Bio>
+                <Name>{localStorage.getItem('user-name')}</Name>
             </Info>
-            <NavLink id="user-list-items" to="/user-profile/edit-profile/:id">View Profile</NavLink>
+            <NavLink id="user-list-items" to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}>View Profile</NavLink>
             <NavLink id="user-list-items" to="/using-map">Go to iDrive map</NavLink>
-            <NavLink id="user-list-items" to="/user-profile/cart/:id">My Cart</NavLink>
-            <NavLink id="user-list-items" to="/" onClick={() => localStorage.removeItem('loggedIn')}>Sign Out</NavLink>
+            <NavLink id="user-list-items" to={`/user-profile/cart/${localStorage.getItem('loggedIn')}`}>My Cart</NavLink>
+            <NavLink id="user-list-items" to="/" onClick={signOutHandler}>Sign Out</NavLink>
         </Container>
     );
 };

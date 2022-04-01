@@ -1,8 +1,15 @@
 import React from "react";
 import "./MainNavbar.css";
-import Logo from "../../../assets/images/logo.png";
+import Logo from "../../../assets/images/iDrive.jpg";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
+import styled from "styled-components";
+
+const LogoImage = styled.img`
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+`
 
 const Navbar = (props) => {
     const [showScrolledNav, setShowScrolledNav] = React.useState(false);
@@ -19,7 +26,7 @@ const Navbar = (props) => {
             <main className="wrapper">
                 <section id="left">
                     <NavLink to="/">
-                        <img src={Logo} className="logo" alt="logo" />
+                        <LogoImage src={Logo} className="logo" />
                     </NavLink>
                 </section>
                 <section id="right">

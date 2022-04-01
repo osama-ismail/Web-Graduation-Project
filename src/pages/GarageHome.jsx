@@ -1,18 +1,16 @@
-import React from 'react';
-import NotificationList from '../components/GarageHome Page/notification-list/NotificationList';
-import UserList from "../components/GarageHome Page/user-list/UserList";
+import React, { useState } from 'react';
 import styled from "styled-components";
 import GarageService from '../components/GarageHome Page/garage-service/GarageService';
 import Footer from '../components/Global Components/footer/Footer';
 import { slider } from "../iterated_variables/slider";
 import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
-import { useState } from 'react';
 import { Mobile, Tablet } from '../components/responsive/Responsive';
 import Team from '../components/GarageHome Page/team/Team';
 import NavigationBar from '../components/GarageHome Page/navigation_bar/NavigationBar';
 import BackToTop from '../components/Global Components/backToTop/BackToTop';
 import Catalog from '../components/Global Components/catalog/Catalog';
+import ParentNavbar from '../components/Global Components/parentNavbar/ParentNavbar';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -147,22 +145,7 @@ const AdvantageDetail = styled.p`
 `
 
 const LoggedIn = () => {
-    const [showUserList, setShowUserList] = React.useState(false)
-    const [showNotificationList, setShowNotificationList] = React.useState(false)
-    const [showCatalog, setShowCatalog] = React.useState(false)
     const [sliderIndex, setSliderIndex] = useState(0);
-
-    const handleUserClick = () => {
-        setShowUserList(!showUserList)
-    }
-
-    const hanleNotificationClick = () => {
-        setShowNotificationList(!showNotificationList)
-    }
-
-    const handleCatalog = () => {
-        setShowCatalog(!showCatalog)
-    }
 
     const incrementSliderIndex = () => {
         setSliderIndex((sliderIndex + 1) % 3)
@@ -177,23 +160,7 @@ const LoggedIn = () => {
 
     return (
         <Container>
-            {
-                showUserList ?
-                    <UserList
-                        name={"Yazan Habash"}
-                        bio={"Computer Engineer and Musician"}
-                    /> : null
-            }
-            {
-                showNotificationList ?
-                    <NotificationList /> : null
-            }
-            <NavigationBar
-                handleUserBox={handleUserClick}
-                handleNotificationBox={hanleNotificationClick}
-                handleCatalog={handleCatalog}
-            />
-            {showCatalog ? <Catalog /> : null}
+            <ParentNavbar />
             <BackToTop />
             <BackgroundImg imgIndex={sliderIndex}>
                 <BackgroundText>

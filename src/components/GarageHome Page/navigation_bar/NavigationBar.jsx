@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/iDrive.jpg";
 import "./styles.css";
-import NotificationBox from "../notification-box/NotificationBox";
-import UserBox from "../user-box/UserBox";
+import NotificationBox from "../../Global Components/notification-box/NotificationBox";
+import UserBox from "../../Global Components/user-box/UserBox";
 import { MediumScreen } from '../../responsive/Responsive';
-import { Link } from "react-scroll";
+import SearchBar from '../../Global Components/search-bar/SearchBar';
 
 const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    padding: 1em;
+    padding: 1em 2rem;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -55,7 +55,11 @@ const Center = styled.div`
 
 const Left = styled.div``
 
-const Logo = styled.img``
+const Logo = styled.img`
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+`
 
 const CatalogSpan = styled.span`
     text-transform: uppercase;
@@ -83,45 +87,6 @@ const Catalog = styled.div`
     }
 `
 
-const Input = styled.input`
-    border: none;
-    outline: none;
-    padding: 7px 0;
-    background: none;
-    color: white;
-    font-size: 16px;
-    transition: 400ms;
-    width: 0;
-`
-
-const SearchWrapper = styled.div`
-    background-color: #636e72;
-    padding: 3px;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 1em;
-
-    &:hover > .search-txt {
-        width: 130px;
-        padding: 0 7px;
-    }
-`
-
-const SearchButton = styled.a`
-    color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #2d3436;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-size: 16px;
-`
-
 const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) => {
     const [showBackground, setBackground] = React.useState(false)
 
@@ -147,27 +112,12 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) 
                     <i class="fa fa-bars" aria-hidden="true"></i>
                     <CatalogSpan>Catalog</CatalogSpan>
                 </Catalog>
-                <NavLink to="/garage-login/1" className="navlinks">HOME</NavLink>
-                <Link
-                    to="garage-services"
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    className="navlinks"
-                >
-                    Services
-                </Link>
+                <NavLink to="/main-login" className="navlinks">HOME</NavLink>
                 <NavLink to="/shop" className="navlinks">Shop</NavLink>
-                <NavLink to="#" className="navlinks">Blog</NavLink>
-                <NavLink to="/contacts" className="navlinks">Contacts</NavLink>
-                <NavLink to="/login/:userid/booking" className="booking">Booking</NavLink>
-                <SearchWrapper>
-                    <Input className="search-txt" type="text" placeholder="Type to search" />
-                    <SearchButton href="">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </SearchButton>
-                </SearchWrapper>
+                <NavLink to="/login/:garageId/booking" className="booking">
+                    Booking
+                </NavLink>
+                <SearchBar />
             </Center>
             <Right>
                 <NotificationBox handleNotificationBox={handleNotificationBox} />
