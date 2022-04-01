@@ -70,11 +70,11 @@ const ProfilePicture = () => {
     const { id } = useParams()
 
     const [counter, setCounter] = React.useState(0)
-    const [profileImg, setProfileImg] = React.useState(`http://localhost:8080/users/${id}/profileImage/-1`)
+    const [profileImg, setProfileImg] = React.useState(`http://localhost:8080/${localStorage.getItem('accountType') === 'Garage' ? 'garages' : 'users'}/${id}/profileImage/-1`)
 
     const updateImage = (e) => {
         e.preventDefault()
-        const url = `http://localhost:8080//users/${id}/profile/uploadProfileImage/`;
+        const url = `http://localhost:8080//${localStorage.getItem('accountType') === 'Garage' ? 'garages' : 'users'}/${id}/profile/uploadProfileImage/`;
         const formData = new FormData();
         formData.append('file', e.target.files[0]);
         const config = {
@@ -85,7 +85,7 @@ const ProfilePicture = () => {
         axios.post(url, formData, config)
             .then((response) => {
                 console.log(response.data)
-                setProfileImg(`http://localhost:8080/users/${id}/profileImage/${counter}`)
+                setProfileImg(`http://localhost:8080/${localStorage.getItem('accountType') === 'Garage' ? 'garages' : 'users'}/${id}/profileImage/${counter}`)
                 setCounter(counter + 1)
             })
     }
