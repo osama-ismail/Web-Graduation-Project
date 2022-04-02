@@ -1,7 +1,7 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
-import { setLocation } from '../../Landing Page/mapForm/MapForm';
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -15,9 +15,9 @@ let tt = null;
 let map = null;
 
 export default class App extends Component {
-    addMarker(obj) {
+    addMarker(obj, [lng, lat]) {
         new this.tt.Marker(obj)
-            .setLngLat([35.21371, 31.768319])
+            .setLngLat([lng, lat])
             .addTo(this.map)     // Don't forget to specify a map to be display
     }
 
@@ -41,19 +41,20 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            this.map.flyTo({
-                center: {
-                    lng: 35.21633,
-                    lat: 31.76904,
-                },
-                zoom: 10, // you can also specify zoom level
+            axios.get(`http://localhost:8080/garages/${this.props.userId}/location`).then(response => {
+                this.map.flyTo({
+                    center: {
+                        lng: response.data[0],
+                        lat: response.data[1],
+                    },
+                    zoom: 10, // you can also specify zoom level
+                })
+                this.addMarker({
+                    color: 'rgb(190, 18, 47)',
+                    width: '40',
+                    height: '50'
+                }, [response.data[0], response.data[1]])
             })
-        })
-
-        this.addMarker({
-            color: 'rgb(190, 18, 47)',
-            width: '40',
-            height: '50'
         })
     }
 

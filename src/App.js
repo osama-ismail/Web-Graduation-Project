@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/using-map" element={<UsingMap />} />
         <Route path="/main-login" element={<GarageHome />} />
-        <Route path="/:name" element={<General />} />
+        <Route path="/:name/:id" element={<General />} />
         <Route path="/user-profile/edit-profile/:id" element={<Profile default={'edit'} />} />
         <Route path="/user-profile/cart/:id" element={<Profile default={'cart'} />} />
         <Route path="/user-profile/services/:id" element={<Profile default={'services'} />} />

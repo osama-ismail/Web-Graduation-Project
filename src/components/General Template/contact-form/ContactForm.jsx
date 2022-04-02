@@ -63,10 +63,10 @@ const TextArea = styled.textarea`
     ${Tablet({ height: "4rem" })}
 `
 
-const ContactFom = () => {
+const ContactFom = ({ userId }) => {
     return (
         <Container>
-            <MapContacts width="600px" height="350px" />
+            <MapContacts userId={userId} width="600px" height="350px" />
             <Form>
                 <Box>
                     <Input className='input1' type="text" placeholder='Name *' />

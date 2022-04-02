@@ -36,8 +36,9 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
                 }
             }
         ).then((response) => {
-            console.log(response.data)
+            console.log('rrr' + response.data)
             localStorage.setItem('accountType', 'User')
+            // window.location.replace(`http://localhost:3000/user-profile/edit-profile/${response.data}`)
         })
     else
         axios.post(
