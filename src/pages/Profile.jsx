@@ -103,7 +103,7 @@ const Profile = (props) => {
                     <Bar id={Id} setId={setId} />
                 </Section>
             </Box>
-            {Id === "edit" ? <ProfileForm /> : null}
+            {Id === "edit" ? <ProfileForm name={name} /> : null}
             {Id === "cart" ? <CartTable /> : null}
             <Footer />
         </Container>

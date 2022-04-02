@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import { contacts } from '../../../iterated_variables/contacts';
 import { Tablet } from '../../responsive/Responsive';
 
 const Contaier = styled.div`
@@ -61,25 +60,44 @@ const Details = styled.p`
     white-space: pre-line;
 `
 
-const Contacts = () => {
+const Contacts = ({ garage }) => {
+
+    const homePage = `/main-login`
+
     return (
         <Contaier>
             <ContactsInfo>
-                {
-                    contacts.map(contact => {
-                        return (
-                            <Info>
-                                <Logo>
-                                    <i className={contact.logo} aria-hidden="true"></i>
-                                </Logo>
-                                <Box>
-                                    <Type>{contact.type}</Type>
-                                    <Details>{contact.details}</Details>
-                                </Box>
-                            </Info>
-                        );
-                    })
-                }
+                <Info>
+                    <Logo>
+                        <i className="fa fa-building" aria-hidden="true"></i>
+                    </Logo>
+                    <Box>
+                        <Type>Status</Type>
+                        <Details>{garage.availability ? "Open" : "Closed"}</Details>
+                    </Box>
+                </Info>
+                <Info>
+                    <Logo>
+                        <i className="fa fa-phone" aria-hidden="true"></i>
+                    </Logo>
+                    <Box>
+                        <Type>Phone</Type>
+                        <Details>{garage.garagePhoneNumber}</Details>
+                    </Box>
+                </Info>
+                <Info>
+                    <Logo>
+                        <i className="fa fa-clock-o" aria-hidden="true"></i>
+                    </Logo>
+                    <Box>
+                        <Type>Work Time</Type>
+                        <Details>
+                            {garage.garageStartTime}
+                            <br />
+                            {garage.garageEndTime}
+                        </Details>
+                    </Box>
+                </Info>
             </ContactsInfo>
         </Contaier>
     )

@@ -28,7 +28,7 @@ const SignUp = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [accountType, setAccountType] = useState('')
+    const [accountType, setAccountType] = useState('User Account')
 
     const handleClick = (e) => {
         handleRegister(e, { name, email, password, phoneNumber, accountType });

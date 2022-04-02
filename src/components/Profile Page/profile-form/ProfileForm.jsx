@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import styled from 'styled-components'
 import { MediumScreen } from '../../responsive/Responsive'
@@ -73,23 +74,65 @@ const Button = styled.button`
     }
 `
 
-const ProfileForm = () => {
+const ProfileForm = ({ name }) => {
+
+    const [password, setPassword] = React.useState('')
+    const [confirmPass, setConfirmPass] = React.useState('')
+    const [deleteStatus, setDeleteStatus] = React.useState(false)
+
+    const handleDelete = () => {
+        let accountType = localStorage.getItem('accountType')
+        let id = localStorage.getItem('loggedIn')
+        let gottenPass = undefined
+        axios.get(`http://localhost:8080/${accountType === "Garage" ? 'garages' : 'users'}/${id}`).then(response => {
+            console.log(response.data)
+            if (accountType === 'Garage')
+                gottenPass = response.data.garage_password;
+            else
+                gottenPass = response.data.user_password;
+            alert(gottenPass)
+            // if (password !== '') {
+            //     if (password === confirmPass) {
+            //         axios.get(`http://localhost:8080/${accountType === "Garage" ? 'garages' : 'users'}/${id}/${accountType === "Garage" ? 'deleteGarageAccount' : 'deleteAccount'}`)
+            //         localStorage.removeItem('loggedIn')
+            //         localStorage.removeItem('accountType')
+            //         localStorage.removeItem('userName')
+            //         window.location.replace(`http://localhost:3000`)
+            //     }
+            // } else {
+            //     setDeleteStatus(true)
+            // }
+        })
+    }
+
     return (
         <Container>
             <Section>
                 <Label htmlFor="user-name">User Name</Label>
-                <Input type="text" id="user-name" placeholder='User Name' />
+                <Input type="text" id="user-name" placeholder='User Name' value={name} />
             </Section>
             <Section>
                 <Label htmlFor="password">New Password</Label>
-                <Input type="text" id="password" placeholder='New Password' />
+                <Input type="password" id="password" placeholder='New Password'
+                    onChange={(e) => setPassword(e.target.value)} />
             </Section>
             <Section>
                 <Label htmlFor="confirm-password">Confirm Password</Label>
-                <Input type="text" id="confirm-password" placeholder='Confirm Password' />
+                <Input type="password" id="confirm-password" placeholder='Confirm Password'
+                    onChange={(e) => setConfirmPass(e.target.value)} />
             </Section>
+            {
+                password === confirmPass ? null : <Section>
+                    <Label style={{ color: "rgb(190, 18, 48)" }}>The password does not match</Label>
+                </Section>
+            }
+            {
+                deleteStatus ? <Section>
+                    <Label style={{ color: "rgb(190, 18, 48)" }}>Type your password to continue</Label>
+                </Section> : null
+            }
             <Buttons>
-                <Button>Delete Accout</Button>
+                <Button onClick={handleDelete}>Delete Accout</Button>
                 <Button>Save Changes</Button>
             </Buttons>
         </Container>
