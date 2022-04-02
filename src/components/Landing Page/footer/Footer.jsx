@@ -94,8 +94,8 @@ const Footer = () => {
                             <LocalPhoneRoundedIcon />
                         </Left>
                         <Right>
-                            <Email href="mailto:project@website.com">
-                                iDrive@gmail.com
+                            <Email href="mailto:idrive252114@gmail.com">
+                                idrive252114@gmail.com
                             </Email>
                             <Phone>
                                 123456789-00
