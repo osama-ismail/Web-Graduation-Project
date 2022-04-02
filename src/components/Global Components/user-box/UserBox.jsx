@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import img from "../../../assets/images/user.png";
 
 const Container = styled.button`
     cursor: pointer;
@@ -14,11 +13,10 @@ const Container = styled.button`
 `
 
 const UserImg = styled.div`
-    background-image: url(${img});
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 `
 
@@ -29,6 +27,7 @@ const UserSpan = styled.span`
 
 const UserBox = ({ handleUserBox }) => {
     const [spanColor, setSpanColor] = useState("white")
+    const [profileImg, setProfileImg] = React.useState(`http://localhost:8080/${localStorage.getItem('accountType') === 'Garage' ? 'garages' : 'users'}/${localStorage.getItem('loggedIn')}/profileImage/-1`)
 
     const handleClick = () => {
         if (spanColor === "rgb(240, 18, 47)") {
@@ -42,7 +41,7 @@ const UserBox = ({ handleUserBox }) => {
 
     return (
         <Container onClick={handleClick}>
-            <UserImg />
+            <UserImg style={{ backgroundImage: `url(${profileImg})` }} />
             <UserSpan style={{ color: spanColor }}>Me</UserSpan>
         </Container >
     );

@@ -29,7 +29,7 @@ const Container = styled.div`
             height: 0;
             opacity: 0;
         } 100% {
-            height: 180px;
+            height: 145px;
             opacity: 1;
         }
     }
@@ -72,7 +72,6 @@ const UserList = () => {
             </Info>
             <NavLink id="user-list-items" to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}>View Profile</NavLink>
             <NavLink id="user-list-items" to="/using-map">Go to iDrive map</NavLink>
-            <NavLink id="user-list-items" to={`/user-profile/cart/${localStorage.getItem('loggedIn')}`}>My Cart</NavLink>
             <NavLink id="user-list-items" to="/" onClick={signOutHandler}>Sign Out</NavLink>
         </Container>
     );
