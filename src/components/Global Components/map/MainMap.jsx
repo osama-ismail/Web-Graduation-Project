@@ -6,10 +6,6 @@ import axios from 'axios';
 
 import "./styles.css";
 import manWaving from "./img/man-waving-arm_32.png";
-import cab1 from "./img/cab1.png"
-import cab2 from "./img/cab2.png"
-import cab3 from "./img/cab3.png"
-import cab4 from "./img/cab4.png"
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -494,31 +490,29 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            var longitude = undefined, latitude = undefined;
-            navigator.geolocation.getCurrentPosition(position => {
-                longitude = position.coords.longitude;
-                latitude = position.coords.latitude;
-                this.map.flyTo({
-                    center: {
-                        lng: longitude,
-                        lat: latitude
-                    },
-                    zoom: 13,
-                })
-                passengerInitCoordinates = [longitude, latitude]
-                setDefaultTaxiConfig();
-                updateTaxiBatchLocations(passengerInitCoordinates);
-                tt.setProductInfo('Taxi dispatcher example application', '1.00');
+            var longitude = parseFloat(new URL(window.location).pathname.split('/')[2])
+            var latitude = parseFloat(new URL(window.location).pathname.split('/')[3])
 
-                passengerMarker = createPassengerMarker(passengerInitCoordinates,
-                    new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
-                passengerMarker.togglePopup();
-                taxiConfig.forEach(function (taxi) {
-                    const carMarkerElement = document.createElement('div');
-                    carMarkerElement.innerHTML = taxi.icon;
-                    new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
-                });
+            this.map.flyTo({
+                center: {
+                    lng: longitude,
+                    lat: latitude
+                },
+                zoom: 13,
             })
+            passengerInitCoordinates = [longitude, latitude]
+            setDefaultTaxiConfig();
+            updateTaxiBatchLocations(passengerInitCoordinates);
+            tt.setProductInfo('Taxi dispatcher example application', '1.00');
+
+            passengerMarker = createPassengerMarker(passengerInitCoordinates,
+                new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
+            passengerMarker.togglePopup();
+            taxiConfig.forEach(function (taxi) {
+                const carMarkerElement = document.createElement('div');
+                carMarkerElement.innerHTML = taxi.icon;
+                new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
+            });
             map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
         });
@@ -527,6 +521,7 @@ export default class App extends Component {
         modalContent = document.getElementById('modal-content');
 
         routeLabelsDiv = document.getElementById('route-labels');
+
 
         map.on('click', (event) => {
             this.addMarkerOnClick(event, {
