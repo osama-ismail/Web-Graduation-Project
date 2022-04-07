@@ -434,7 +434,7 @@ export default class App extends Component {
         });
 
         for (i = 0; i < garagesPopups.length; ++i) {
-            var popup = new tt.Popup({ offset: popupOffsets }).setHTML('<div><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="/garage-login/' + `${garagesPopups[i].id}` + '"><h2>' + `${garagesPopups[i].name}` + '</h2><br /><img width="90%" height="90%" src="' + `${require("../../../assets/images/garages-images/" + imagesNames[i])}"` + 'alt="image" /></a></div>');
+            var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div id="${garagesPopups[i].id}" onclick="window.ReactNativeWebView.postMessage(this.id)"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h2>` + `${garagesPopups[i].name}` + '</h2><br /><img width="90%" height="90%" src="' + `${require("../../../assets/images/garages-images/" + imagesNames[i])}"` + 'alt="image" /></a></div>');
             markersPositions[i].setPopup(popup).togglePopup();
         }
     }
