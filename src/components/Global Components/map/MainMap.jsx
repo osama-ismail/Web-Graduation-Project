@@ -343,7 +343,7 @@ export async function calculateRoute() {
                 },
                 'paint': {
                     'line-color': 'red',
-                    'line-width': 5
+                    'line-width': 7
                 }
             })
         })

@@ -27,7 +27,6 @@ const apiKey = 'q2yukmABGuRvQD9NhkGAABCOYtIMoHFD';
 let passengerInitCoordinates = undefined;
 
 let passengerMarker;
-let garageMarkger;
 
 let taxiPassengerBatchCoordinates = [];
 let taxiConfig = [];
@@ -80,6 +79,7 @@ export function calculateRoute() {
         travelMode: 'car'
     }
     let i = 0;
+
     for (i = 0; i < markers.length; ++i) {
         routeOptions.locations.push(markers[i].getLngLat());
     }
@@ -99,7 +99,7 @@ export function calculateRoute() {
                 },
                 'paint': {
                     'line-color': 'red',
-                    'line-width': 5
+                    'line-width': 7
                 }
             })
         })
@@ -126,9 +126,10 @@ export default class App extends Component {
     // }
 
     addMarker(obj, [lng, lat]) {
-        new this.tt.Marker(obj)
+        var marker = new this.tt.Marker(obj)
             .setLngLat([lng, lat])
             .addTo(this.map)     // Don't forget to specify a map to be display
+        return marker
     }
 
     componentDidMount() {
@@ -187,13 +188,11 @@ export default class App extends Component {
             var garagelongitude = parseFloat(new URL(window.location).pathname.split('/')[4])
             var garagelatitude = parseFloat(new URL(window.location).pathname.split('/')[5])
 
-            garageMarkger = this.addMarker({
+            const garageMarker = this.addMarker({
                 color: 'rgb(190, 18, 47)',
                 width: '40',
                 height: '50'
             }, [garagelongitude, garagelatitude])
-
-            markers.push(garageMarkger)
 
             this.map.flyTo({
                 center: {
@@ -209,6 +208,7 @@ export default class App extends Component {
             passengerMarker = createPassengerMarker(passengerInitCoordinates,
                 new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
             markers.push(passengerMarker);
+            markers.push(garageMarker)
             passengerMarker.togglePopup();
             map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));

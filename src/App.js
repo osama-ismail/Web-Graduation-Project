@@ -6,7 +6,7 @@ import GarageHome from "./pages/GarageHome";
 import General from "./pages/General";
 import Profile from "./pages/Profile";
 import UsingMapReactNative from "./pages/UsingMapReactNative";
-import ReactNativeMap from "./components/Global Components/map/ReactNativeMap"
+import ReactNativeMap from "./pages/ReactNativeMap"
 
 const App = () => {
   return (
