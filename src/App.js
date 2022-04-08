@@ -5,7 +5,8 @@ import UsingMap from "./pages/UsingMap";
 import GarageHome from "./pages/GarageHome";
 import General from "./pages/General";
 import Profile from "./pages/Profile";
-
+import UsingMapReactNative from "./pages/UsingMapReactNative";
+import ReactNativeMap from "./pages/ReactNativeMap"
 
 const App = () => {
   return (
@@ -13,6 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/using-map" element={<UsingMap />} />
+        <Route path="/using-map/:lng/:lat" element={<UsingMapReactNative />} />
+        <Route path="/using-map/:userlng/:userlat/:garagelng/:garagelat" element={<ReactNativeMap />} />
         <Route path="/main-login" element={<GarageHome />} />
         <Route path="/:name/:id" element={<General />} />
         <Route path="/user-profile/edit-profile/:id" element={<Profile default={'edit'} />} />
