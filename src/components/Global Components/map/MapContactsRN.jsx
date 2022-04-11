@@ -8,7 +8,7 @@ const Container = styled.div`
     width: ${props => props.width};
     border-radius: ${props => props.borderRadius};
 
-    ${MediumScreen({ width: "80%" })}
+    ${MediumScreen({ width: "100%" })}
 `
 
 let tt = null;
