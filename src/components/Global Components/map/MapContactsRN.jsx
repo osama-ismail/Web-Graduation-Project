@@ -41,21 +41,21 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            var garageID = parseFloat(new URL(window.location).pathname.split('/')[2])
-            axios.get(`http://localhost:8080/garages/${garageID}/location`).then(response => {
-                this.map.flyTo({
-                    center: {
-                        lng: response.data[0],
-                        lat: response.data[1],
-                    },
-                    zoom: 10, // you can also specify zoom level
-                })
-                this.addMarker({
-                    color: 'rgb(190, 18, 47)',
-                    width: '40',
-                    height: '50'
-                }, [response.data[0], response.data[1]])
+            var lng = parseFloat(new URL(window.location).pathname.split('/')[2])
+            var lat = parseFloat(new URL(window.location).pathname.split('/')[3])
+            alert(lng + " " + lat)
+            this.map.flyTo({
+                center: {
+                    lng: lng,
+                    lat: lat,
+                },
+                zoom: 10, // you can also specify zoom level
             })
+            this.addMarker({
+                color: 'rgb(190, 18, 47)',
+                width: '40',
+                height: '50'
+            }, [lng, lat])
         })
     }
 

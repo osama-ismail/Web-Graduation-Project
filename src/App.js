@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/using-map" element={<UsingMap />} />
         <Route path="/using-map/:lng/:lat" element={<UsingMapReactNative />} />
         <Route path="/using-map/:userlng/:userlat/:garagelng/:garagelat" element={<ReactNativeMap />} />
-        <Route path="/using-map/:garageID" element={<MapForContactRN />} />
+        <Route path="/contactMap/:lng/:lat" element={<MapForContactRN />} />
         <Route path="/main-login" element={<GarageHome />} />
         <Route path="/:name/:id" element={<General />} />
         <Route path="/user-profile/edit-profile/:id" element={<Profile default={'edit'} />} />
