@@ -1,7 +1,7 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
-import { setLocation } from '../../Landing Page/mapForm/MapForm';
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -13,19 +13,12 @@ const Container = styled.div`
 
 let tt = null;
 let map = null;
-let marker = null;
 
 export default class App extends Component {
-    addMarker(e, obj) {
-        if (marker != null)
-            marker.remove();
-        marker = new this.tt.Marker(obj)
-            .setLngLat(e.lngLat)
+    addMarker(obj, [lng, lat]) {
+        new this.tt.Marker(obj)
+            .setLngLat([lng, lat])
             .addTo(this.map)     // Don't forget to specify a map to be display
-        // console.log(e.lngLat)
-        // console.log(e.lngLat.lng + " " + e.lngLat.lat)
-        setLocation(e.lngLat);
-        window.ReactNativeWebView.postMessage(`${e.lngLat.lng},${e.lngLat.lat}`)
     }
 
     componentDidMount() {
@@ -48,21 +41,20 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
+            var lng = parseFloat(new URL(window.location).pathname.split('/')[2])
+            var lat = parseFloat(new URL(window.location).pathname.split('/')[3])
             this.map.flyTo({
                 center: {
-                    lng: 35.21633,
-                    lat: 31.76904,
+                    lng: lng,
+                    lat: lat,
                 },
                 zoom: 10, // you can also specify zoom level
             })
-        })
-
-        map.on('click', (event) => {
-            this.addMarker(event, {
+            this.addMarker({
                 color: 'rgb(190, 18, 47)',
                 width: '40',
                 height: '50'
-            });
+            }, [lng, lat])
         })
     }
 
