@@ -8,7 +8,7 @@ const Container = styled.div`
     width: ${props => props.width};
     border-radius: ${props => props.borderRadius};
 
-    ${MediumScreen({ width: "80%" })}
+    ${MediumScreen({ width: "100%" })}
 `
 
 let tt = null;
@@ -25,6 +25,7 @@ export default class App extends Component {
         // console.log(e.lngLat)
         // console.log(e.lngLat.lng + " " + e.lngLat.lat)
         setLocation(e.lngLat);
+        window.ReactNativeWebView.postMessage(`${e.lngLat.lng},${e.lngLat.lat}`)
     }
 
     componentDidMount() {

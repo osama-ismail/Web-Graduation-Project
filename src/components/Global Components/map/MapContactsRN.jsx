@@ -43,7 +43,6 @@ export default class App extends Component {
         map.on('load', () => {
             var lng = parseFloat(new URL(window.location).pathname.split('/')[2])
             var lat = parseFloat(new URL(window.location).pathname.split('/')[3])
-            alert(lng + " " + lat)
             this.map.flyTo({
                 center: {
                     lng: lng,
