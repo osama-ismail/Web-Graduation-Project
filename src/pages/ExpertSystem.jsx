@@ -39,6 +39,10 @@ const ExpertSystem = () => {
     const [choicesText, setChoicesText] = useState([])
     const [question, setQuestion] = useState('')
     const [sequence, setSequnce] = useState(0)
+    const [questionId, setQuestionId] = useState(-1)
+    const [chosenQuestionId, setChosenQuestionId] = useState(-1)
+    const [nextId, setNextId] = useState(0)
+    const [assertions, setAssertions] = useState([])
 
     const [decisionTree, setDecisionTree] = useState([])
 
@@ -175,17 +179,39 @@ const ExpertSystem = () => {
 
     const saveQuestion = () => {
         // Call API save question, question gets its ID by default, Sequence
-        let copyTree = [...decisionTree, {
-            id: sequence,
-            questionText: question,
-            choices: [...choicesText]
-        }]
-        setSequnce(sequence + 1)
+        let copyTree = [...decisionTree]
+        let exist = copyTree.some(question => {
+            return questionId == question.id
+        })
+        if (exist) {
+            copyTree[questionId].questionText = question
+            copyTree[questionId].choices = [...choicesText]
+        } else {
+            copyTree.push({
+                id: sequence,
+                questionText: question,
+                choices: [...choicesText]
+            })
+            setSequnce(sequence + 1)
+        }
         setDecisionTree(copyTree)
         setChoiceNum(0)
         setChildren([])
         setChoicesText([])
         setQuestion('')
+        setQuestionId(-1)
+    }
+
+    const handleEdit = (id) => {
+        let question = decisionTree[id]
+        setQuestionId(id)
+        setChoiceNum(question.choices.length)
+        setChoicesText(question.choices)
+        setQuestion(question.questionText)
+    }
+
+    const handleChoose = (id) => {
+        setChosenQuestionId(id)
     }
 
     useEffect(() => {
@@ -273,6 +299,7 @@ const ExpertSystem = () => {
 
             {/* Build decision tree */}
             <Division style={{ marginTop: "4rem" }}>
+                <p>You have chosen question has id = {chosenQuestionId}</p>
                 <Input
                     placeholder='Question text'
                     onChange={(e) => setQuestion(e.target.value)}
@@ -295,12 +322,18 @@ const ExpertSystem = () => {
                 }
             </Division>
 
+            <Division style={{ backgroundColor: '#ddd', marginTop: '2rem' }}>
+
+            </Division>
+
             {/* Display All Questions */}
-            <Division style={{ border: '3px solid red', marginTop: '2rem' }}>
+            <Division style={{ marginTop: '2rem' }}>
                 {
                     decisionTree.map(question => {
                         return (
-                            <div>
+                            <div style={{ border: '2px solid orange' }}>
+                                <Btn onClick={() => handleEdit(question.id)}>Edit</Btn>
+                                <Btn onClick={() => handleChoose(question.id)}>Choose</Btn>
                                 <p>id: {question.id}</p>
                                 <p>text: {question.questionText}</p>
                                 <p>
@@ -320,6 +353,31 @@ const ExpertSystem = () => {
                     })
                 }
             </Division>
+
+            {/* User Interface */}
+            {decisionTree.length != 0 && nextId > -1 ? (
+                <Division style={{ border: '2px solid green', marginTop: '1rem' }}>
+                    <p>{decisionTree[nextId].questionText}</p>
+                    {
+                        decisionTree[nextId].choices.map(choice => {
+                            return (
+                                <Btn onClick={() => {
+                                    setNextId(choice.nextQuestion)
+                                    let assertionsCopy = [...assertions]
+                                    assertionsCopy.push({
+                                        attribute: decisionTree[nextId].questionText,
+                                        value: choice.choiceText
+                                    })
+                                    console.log(assertionsCopy)
+                                    setAssertions(assertionsCopy)
+                                }}>
+                                    {choice.choiceText}
+                                </Btn>
+                            )
+                        })
+                    }
+                </Division>
+            ) : null}
         </Container>
     )
 }
