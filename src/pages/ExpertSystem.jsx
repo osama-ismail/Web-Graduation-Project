@@ -4,6 +4,7 @@ import { forwardChain } from '../backend/ForwardChain'
 
 const Container = styled.div`
     background-color: gray;
+    padding-left: 3rem;
 `
 
 const AllConditions = styled.div``
@@ -11,6 +12,8 @@ const AllConditions = styled.div``
 const Condition = styled.h1``
 
 const Division = styled.section``
+
+const Choice = styled.section``
 
 const Input = styled.input``
 
@@ -31,6 +34,13 @@ const ExpertSystem = () => {
 
     const [counter, setCounter] = useState(0)
     const [conditions, setConditions] = useState([])
+    const [choiceNum, setChoiceNum] = useState(0)
+    const [children, setChildren] = useState([])
+    const [choicesText, setChoicesText] = useState([])
+    const [question, setQuestion] = useState('')
+    const [sequence, setSequnce] = useState(0)
+
+    const [decisionTree, setDecisionTree] = useState([])
 
     const [KB, setKB] = useState([{
         premises: [{
@@ -154,9 +164,67 @@ const ExpertSystem = () => {
         console.log(response)
     }
 
+    const addNewChoice = () => {
+        setChoiceNum(choiceNum + 1)
+        let copy = [...choicesText, {
+            choiceText: '',
+            nextQuestion: -1
+        }]
+        setChoicesText(copy)
+    }
+
+    const saveQuestion = () => {
+        // Call API save question, question gets its ID by default, Sequence
+        let copyTree = [...decisionTree, {
+            id: sequence,
+            questionText: question,
+            choices: [...choicesText]
+        }]
+        setSequnce(sequence + 1)
+        setDecisionTree(copyTree)
+        setChoiceNum(0)
+        setChildren([])
+        setChoicesText([])
+        setQuestion('')
+    }
+
     useEffect(() => {
         // console.log(JSON.stringify(KB))
-    }, [KB])
+        let copy = []
+        for (let i = 0; i < choiceNum; i += 1) {
+            copy.push(
+                <Choice>
+                    <Input
+                        placeholder='Write Choice'
+                        id={i}
+                        value={choicesText[i].choiceText}
+                        onChange={(e) => {
+                            let copyArray = [...choicesText]
+                            copyArray[e.target.id] = {
+                                choiceText: e.target.value,
+                                nextQuestion: copyArray[e.target.id].nextQuestion
+                            }
+                            setChoicesText(copyArray)
+                        }}
+                    />
+                    <Input
+                        placeholder='Next Question'
+                        id={i}
+                        value={choicesText[i].nextQuestion}
+                        onChange={e => {
+                            let copyArray = [...choicesText]
+                            copyArray[e.target.id] = {
+                                choiceText: copyArray[e.target.id].choiceText,
+                                nextQuestion: e.target.value
+                            }
+                            setChoicesText(copyArray)
+                        }}
+                    />
+                </Choice>
+            )
+        }
+        setChildren(copy)
+    }, [KB, choicesText, choiceNum])
 
     return (
         <Container>
@@ -202,6 +270,56 @@ const ExpertSystem = () => {
             </Division>
             <p>Counter = {counter}</p>
             <Btn onClick={matching}>Run Algorithm</Btn>
+
+            {/* Build decision tree */}
+            <Division style={{ marginTop: "4rem" }}>
+                <Input
+                    placeholder='Question text'
+                    onChange={(e) => setQuestion(e.target.value)}
+                    value={question}
+                />
+                {children}
+                <Btn onClick={addNewChoice}>Add choice</Btn>
+                <Btn onClick={saveQuestion}>Save Question</Btn>
+            </Division>
+
+            <Division>
+                {
+                    choicesText.map(choice => {
+                        return (
+                            <div>
+                                {choice.choiceText} : {choice.nextQuestion}
+                            </div>
+                        )
+                    })
+                }
+            </Division>
+
+            {/* Display All Questions */}
+            <Division style={{ border: '3px solid red', marginTop: '2rem' }}>
+                {
+                    decisionTree.map(question => {
+                        return (
+                            <div>
+                                <p>id: {question.id}</p>
+                                <p>text: {question.questionText}</p>
+                                <p>
+                                    choices: {
+                                        question.choices.map(choice => {
+                                            return (
+                                                <div>
+                                                    <p>choiceText: {choice.choiceText}</p>
+                                                    <p>next Q: {choice.nextQuestion}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </p>
+                            </div>
+                        )
+                    })
+                }
+            </Division>
         </Container>
     )
 }
