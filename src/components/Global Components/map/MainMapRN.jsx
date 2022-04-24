@@ -450,7 +450,7 @@ export default class App extends Component {
         garagesPopups.map(garagePopup => {
             random = Math.floor(Math.random() * 99999999)
             var position = [garagePopup.garageLocation.longitude, garagePopup.garageLocation.latitude]
-            imagesNames.push(`http://localhost:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
+            imagesNames.push(`http://10.0.0.5:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
             markersPositions.push(
                 new this.tt.Marker()
                     .setLngLat(position)
@@ -458,14 +458,14 @@ export default class App extends Component {
         });
 
         for (i = 0; i < garagesPopups.length; ++i) {
-            var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div style="width: 150px" id="${garagesPopups[i].garageID}"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h1 style="font-weight: 900">` + `${garagesPopups[i].garageName}` + `</h1><br /><img width="100%" height="100%" src="${imagesNames[i]}" alt="image" /></a></div>`);
+            var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div style="width: 150px" id="${garagesPopups[i].garageID}" onclick="window.ReactNativeWebView.postMessage(this.id)"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h1 style="font-weight: 900">` + `${garagesPopups[i].garageName}` + `</h1><br /><img width="100%" height="100%" src="${imagesNames[i]}" alt="image" /></a></div>`);
             markersPositions[i].setPopup(popup).togglePopup();
         }
     }
 
     componentDidMount() {
         // Call the API to get garages
-        axios.get('http://localhost:8080/garages').then(response => {
+        axios.get('http://10.0.0.5:8080/garages').then(response => {
             garagesPopups = response.data
             // snip
             tt = window.tt
@@ -517,33 +517,31 @@ export default class App extends Component {
 
             const self = this
             map.on('load', () => {
-                navigator.geolocation.getCurrentPosition(position => {
-                    var longitude = position.coords.longitude
-                    var latitude = position.coords.latitude
-                    this.map.flyTo({
-                        center: {
-                            lng: longitude,
-                            lat: latitude
-                        },
-                        zoom: 13,
-                    })
+                var longitude = parseFloat(new URL(window.location).pathname.split('/')[2])
+                var latitude = parseFloat(new URL(window.location).pathname.split('/')[3])
 
-                    passengerInitCoordinates = [longitude, latitude]
-                    setDefaultTaxiConfig();
-                    updateTaxiBatchLocations(passengerInitCoordinates);
-                    tt.setProductInfo('Garage dispatcher application', '1.00');
-
-                    passengerMarker = createPassengerMarker(passengerInitCoordinates,
-                        new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
-                    passengerMarker.togglePopup();
-                    taxiConfig.forEach(function (taxi) {
-                        const carMarkerElement = document.createElement('div');
-                        carMarkerElement.innerHTML = taxi.icon;
-                        new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
-                    });
-                    map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
-                    // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
+                this.map.flyTo({
+                    center: {
+                        lng: longitude,
+                        lat: latitude
+                    },
+                    zoom: 13,
                 })
+                passengerInitCoordinates = [longitude, latitude]
+                setDefaultTaxiConfig();
+                updateTaxiBatchLocations(passengerInitCoordinates);
+                tt.setProductInfo('Taxi dispatcher example application', '1.00');
+
+                passengerMarker = createPassengerMarker(passengerInitCoordinates,
+                    new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
+                passengerMarker.togglePopup();
+                taxiConfig.forEach(function (taxi) {
+                    const carMarkerElement = document.createElement('div');
+                    carMarkerElement.innerHTML = taxi.icon;
+                    new tt.Marker({ element: carMarkerElement, offset: [0, 27] }).setLngLat(taxi.coordinates).addTo(map);
+                });
+                map.addTier(new tt.TrafficIncidentTier(trafficIncidentsConfig));
+                // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
             });
 
             modal = document.getElementById('modal');
