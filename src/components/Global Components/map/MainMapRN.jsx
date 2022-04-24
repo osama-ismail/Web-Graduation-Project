@@ -450,7 +450,7 @@ export default class App extends Component {
         garagesPopups.map(garagePopup => {
             random = Math.floor(Math.random() * 99999999)
             var position = [garagePopup.garageLocation.longitude, garagePopup.garageLocation.latitude]
-            imagesNames.push(`http://10.0.0.5:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
+            imagesNames.push(`http://10.0.0.7:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
             markersPositions.push(
                 new this.tt.Marker()
                     .setLngLat(position)
@@ -465,7 +465,7 @@ export default class App extends Component {
 
     componentDidMount() {
         // Call the API to get garages
-        axios.get('http://10.0.0.5:8080/garages').then(response => {
+        axios.get('http://10.0.0.7:8080/garages').then(response => {
             garagesPopups = response.data
             // snip
             tt = window.tt
