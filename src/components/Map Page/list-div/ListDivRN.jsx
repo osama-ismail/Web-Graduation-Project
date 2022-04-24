@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { lookingFor } from '../../Global Components/map/MainMap';
+import { lookingFor } from '../../Global Components/map/MainMapRN';
 
 const Container = styled.div`
     margin-top: 0.5rem;

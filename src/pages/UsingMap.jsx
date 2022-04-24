@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MainMap from '../components/Global Components/map/MainMap';
 import LeftSide from '../components/Map Page/left-side/LeftSide';
-import { MediumScreen } from '../components/responsive/Responsive';
+import { MediumScreen, Mobile } from '../components/responsive/Responsive';
 
 const Container = styled.div`
     position: relative;
@@ -11,15 +11,18 @@ const Container = styled.div`
     background-color: #0f0f0f;
     padding: 5px;
 
-    ${MediumScreen({ flexDirection: "column-reverse" })}
+    ${MediumScreen({ flexDirection: "column-reverse", height: '110vh' })}
+    ${Mobile({ flexDirection: "column-reverse", height: '130vh' })}
 `
 
 const Right = styled.section`
     flex: 2;
     margin-left: 3px;
+
+    ${MediumScreen({ height: '100vh' })}
 `
 
-const Map = () => {
+const UsingMap = () => {
     return (
         <Container>
             <LeftSide />
@@ -30,4 +33,4 @@ const Map = () => {
     );
 };
 
-export default Map;
+export default UsingMap;

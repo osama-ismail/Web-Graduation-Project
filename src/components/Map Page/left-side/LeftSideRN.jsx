@@ -4,9 +4,9 @@ import SearchBar from '../../Global Components/search-bar/SearchBar';
 import {
     clearMarkers,
     calculateRoute
-} from '../../Global Components/map/MainMap';
-import ListDiv from '../list-div/ListDiv';
-import Directions from '../directions/Directions';
+} from '../../Global Components/map/MainMapRN';
+import ListDivRN from '../list-div/ListDivRN';
+import Directions from '../directions/DirectionsRN';
 import { MediumScreen } from '../../responsive/Responsive';
 
 const Container = styled.div`
@@ -61,7 +61,7 @@ const LeftSide = () => {
                 }
                 }>Create Route</Button>
             </Buttons>
-            <ListDiv />
+            <ListDivRN />
             <Directions directionsState={directionsState} />
         </Container>
     )

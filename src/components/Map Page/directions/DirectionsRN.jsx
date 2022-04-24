@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { directionsRoutes } from '../../Global Components/map/MainMap';
+import { directionsRoutes } from '../../Global Components/map/MainMapRN';
 
 const Container = styled.div`
     border: 2px solid rgb(210, 210, 210, 0.8);
