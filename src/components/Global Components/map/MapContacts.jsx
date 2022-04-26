@@ -29,7 +29,7 @@ export default class App extends Component {
             key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
             container: 'map',
             style: 'tomtom://vector/1/basic-main',
-            language: 'english'
+            language: 'ar'
         })
         map.addControl(new tt.FullscreenControl())
         map.addControl(new tt.NavigationControl())
