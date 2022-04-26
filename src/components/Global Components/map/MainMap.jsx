@@ -389,9 +389,37 @@ export const lookingFor = (place, radius) => {
     navigator.geolocation.getCurrentPosition(position => {
         lng = position.coords.longitude;
         lat = position.coords.latitude;
-        axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD").then((response) => {
-            // console.log(response.data)
-        })
+        axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD")
+            .then(response => {
+                console.log(response.data)
+                let results = response.data.results
+                for (let i = 0; i < results.length; i += 1) {
+                    let popup = new tt.Popup({
+                        offset: {
+                            top: [0, 0],
+                            bottom: [0, -30],
+                            'bottom-right': [0, -70],
+                            'bottom-left': [0, -70],
+                            left: [25, -35],
+                            right: [-25, -35]
+                        }
+                    }).setHTML(
+                        `<div>
+                            <h1 style="font-weight: 900">${results[i].poi.name}</h1>
+                        </div>`
+                    )
+
+                    let marker = new tt.Marker({
+                        color: 'orange',
+                        width: '40',
+                        height: '50',
+                    }).setLngLat(results[i].position).addTo(map)
+
+                    marker.setPopup(popup).togglePopup()
+
+                    markers.push(marker)
+                }
+            })
     })
 }
 
@@ -432,7 +460,7 @@ export default class App extends Component {
                 lng: e.lngLat.lng,
                 lat: e.lngLat.lat
             },
-            zoom: 14,   // you can also specify zoom level
+            zoom: 16,   // you can also specify zoom level
         });
         this.displayPopups(this.state.popupOffsets)
     }
