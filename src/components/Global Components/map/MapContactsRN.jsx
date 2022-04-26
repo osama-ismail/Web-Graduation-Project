@@ -29,7 +29,7 @@ export default class App extends Component {
             key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
             container: 'map',
             style: 'tomtom://vector/1/basic-main',
-            language: 'english'
+            language: 'ar'
         })
         map.addControl(new tt.FullscreenControl())
         map.addControl(new tt.NavigationControl())
@@ -48,7 +48,7 @@ export default class App extends Component {
                     lng: lng,
                     lat: lat,
                 },
-                zoom: 10, // you can also specify zoom level
+                zoom: 15, // you can also specify zoom level
             })
             this.addMarker({
                 color: 'rgb(190, 18, 47)',
