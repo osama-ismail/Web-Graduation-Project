@@ -149,7 +149,7 @@ const ProfileForm = () => {
                 />
             </Section>
             <Section>
-                <Label htmlFor="end-time">End Time: {garage ? garage.garageEndTime : ''}</Label>
+                <Label htmlFor="end-time">End Time:</Label>
                 <Input
                     type="text"
                     id="end-time"
