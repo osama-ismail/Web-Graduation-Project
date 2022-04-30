@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Navigate, useParams } from 'react-router-dom';
 import ParentNavbar from '../components/Global Components/parentNavbar/ParentNavbar';
 import GarageServices from '../components/Profile Page/services/GarageServices';
+import ExpertSystem from '../components/Profile Page/expert-system/ExpertSystem';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -105,6 +106,7 @@ const Profile = (props) => {
             </Box>
             {Id === "edit" ? <ProfileForm /> : null}
             {Id === "services" ? <GarageServices /> : null}
+            {Id === "expert-system" ? <ExpertSystem /> : null}
             <Footer />
         </Container>
     )

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { forwardChain } from '../backend/ForwardChain'
+import { forwardChain } from '../../../backend/ForwardChain'
+import axios from 'axios'
 
 const Container = styled.div`
     background-color: gray;
@@ -19,6 +20,11 @@ const Input = styled.input``
 
 const Btn = styled.button``
 
+const Rule = styled.div`
+    border: 1px solid red;
+    margin: 10px 0;
+`
+
 const ExpertSystem = () => {
 
     const conditionsArray = [
@@ -33,6 +39,7 @@ const ExpertSystem = () => {
     ]
 
     const [counter, setCounter] = useState(0)
+    const [selectedRuleId, setSelectedRuleId] = useState(-1)
     const [conditions, setConditions] = useState([])
     const [choiceNum, setChoiceNum] = useState(0)
     const [children, setChildren] = useState([])
@@ -46,51 +53,53 @@ const ExpertSystem = () => {
 
     const [decisionTree, setDecisionTree] = useState([])
 
-    const [KB, setKB] = useState([{
-        premises: [{
-            attribute: 'Car type',
-            value: 'BMW'
-        },
-        {
-            attribute: 'Oil light',
-            value: 'off'
-        },
-        {
-            attribute: 'Temperature',
-            value: 112
-        }],
-        conclusion: { attribute: 'Electrical', value: 'Battery is hot' }
-    },
-    {
-        premises: [{
-            attribute: 'Car type',
-            value: 'Fyat'
-        },
-        {
-            attribute: 'Oil light',
-            value: 'on'
-        },
-        {
-            attribute: 'Temperature',
-            value: 112
-        }],
-        conclusion: { attribute: 'Maintenace', value: 'Motor is defective' }
-    },
-    {
-        premises: [{
-            attribute: 'Maintenace',
-            value: 'Motor is defective'
-        }],
-        conclusion: { attribute: 'Reason', value: 'More power on motor could harm it' }
-    },
-    {
-        premises: [{
-            attribute: 'Reason',
-            value: 'More power on motor could harm it'
-        }],
-        conclusion: { attribute: 'Solution', value: 'Change the outer seat' }
-    }
-    ])
+    // const [KB, setKB] = useState([{
+    //     premises: [{
+    //         attribute: 'Car type',
+    //         value: 'BMW'
+    //     },
+    //     {
+    //         attribute: 'Oil light',
+    //         value: 'off'
+    //     },
+    //     {
+    //         attribute: 'Temperature',
+    //         value: 112
+    //     }],
+    //     conclusion: { attribute: 'Electrical', value: 'Battery is hot' }
+    // },
+    // {
+    //     premises: [{
+    //         attribute: 'Car type',
+    //         value: 'Fyat'
+    //     },
+    //     {
+    //         attribute: 'Oil light',
+    //         value: 'on'
+    //     },
+    //     {
+    //         attribute: 'Temperature',
+    //         value: 112
+    //     }],
+    //     conclusion: { attribute: 'Maintenace', value: 'Motor is defective' }
+    // },
+    // {
+    //     premises: [{
+    //         attribute: 'Maintenace',
+    //         value: 'Motor is defective'
+    //     }],
+    //     conclusion: { attribute: 'Reason', value: 'More power on motor could harm it' }
+    // },
+    // {
+    //     premises: [{
+    //         attribute: 'Reason',
+    //         value: 'More power on motor could harm it'
+    //     }],
+    //     conclusion: { attribute: 'Solution', value: 'Change the outer seat' }
+    // }
+    // ])
+
+    const [KB, setKB] = useState([])
 
     const [rule, setRule] = useState({
         premises: [...conditions],
@@ -127,6 +136,17 @@ const ExpertSystem = () => {
         setValue('')
     }
 
+    const editConclusion = () => {
+        let copy = [...KB]
+        for (let i = 0; i < copy.length; i += 1) {
+            if (copy[i].id === selectedRuleId) {
+                copy[i].conclusion.attribute = attribute
+                copy[i].conclusion.value = value
+            }
+        }
+        setKB(copy)
+    }
+
     const addConclusion = () => {
         setRule({
             premises: [...conditions],
@@ -136,12 +156,7 @@ const ExpertSystem = () => {
         setValue('')
     }
 
-    const save = () => {
-        // Call API
-        // let string = JSON.stringify(rule)
-        // console.log(string)
-        // console.log(JSON.parse(string))
-        setKB([...KB, rule])
+    const cancel = () => {
         setConditions([])
         setAttribute('')
         setValue('')
@@ -149,6 +164,62 @@ const ExpertSystem = () => {
             premises: [],
             conclusion: { attribute: '', value: '' }
         })
+        setSelectedRuleId(-1)
+    }
+
+    useEffect(() => {
+        console.log(KB)
+    }, [KB])
+
+    const save = () => {
+        // Call API
+        // let string = JSON.stringify(rule)
+        // console.log(string)
+        // console.log(JSON.parse(string))
+        setConditions([])
+        setAttribute('')
+        setValue('')
+        setRule({
+            premises: [],
+            conclusion: { attribute: '', value: '' }
+        })
+
+        if (selectedRuleId < 0) {
+            setKB([...KB, rule])
+            axios.post(
+                `http://localhost:8080/addRule/`,
+                JSON.stringify(rule),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then(response => alert('New Rule Added'))
+        } else {
+            let copy = [...KB]
+            for (let i = 0; i < copy.length; i += 1) {
+                if (copy[i].id === selectedRuleId) {
+                    copy[i].premises = [...conditions]
+                    copy[i].conclusion = rule.conclusion
+                }
+            }
+            setKB(copy)
+            setSelectedRuleId(-1)
+            axios.post(
+                `http://localhost:8080/updateKB/${selectedRuleId}`,
+                JSON.stringify(rule),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then(response => {
+                alert('Rule Updated')
+                setSelectedRuleId(-1)
+            })
+        }
     }
 
     const matching = () => {
@@ -214,6 +285,25 @@ const ExpertSystem = () => {
         setChosenQuestionId(id)
     }
 
+    // Get KB from DB
+    useEffect(() => {
+        axios.get(`http://localhost:8080/gatAllKB/`).then(response => {
+            let temp = []
+            response.data.map(row => {
+                let getRule = JSON.parse(row.rule)
+                let obj = {
+                    id: row.id,
+                    premises: getRule.premises,
+                    conclusion: getRule.conclusion
+                }
+                temp.push(obj)
+            })
+            setKB(temp)
+            // console.log(temp)
+            // console.log(response.data)
+        })
+    }, [])
+
     useEffect(() => {
         // console.log(JSON.stringify(KB))
         let copy = []
@@ -252,6 +342,7 @@ const ExpertSystem = () => {
         setChildren(copy)
     }, [KB, choicesText, choiceNum])
 
+
     return (
         <Container>
             Click on one to edit
@@ -269,6 +360,7 @@ const ExpertSystem = () => {
                     })
                 }
             </AllConditions>
+
             <Division>
                 <Input
                     onChange={(e) => setAttribute(e.target.value)}
@@ -281,9 +373,11 @@ const ExpertSystem = () => {
                     value={value}
                 />
                 <Btn onClick={addCondition}>Add condition</Btn>
-                <Btn onClick={addConclusion}>Add conclusion</Btn>
                 <Btn onClick={editCondition}>Edit the condition</Btn>
+                <Btn onClick={addConclusion}>Add conclusion</Btn>
+                <Btn onClick={editConclusion}>Edit conclusion</Btn>
                 <Btn onClick={save}>Save Rule</Btn>
+                <Btn onClick={cancel}>Cancel Selection on Rule</Btn>
                 <p>{rule.conclusion.attribute}:{rule.conclusion.value}</p>
                 <p>{rule.premises.map(condition => {
                     return (
@@ -294,11 +388,39 @@ const ExpertSystem = () => {
                     )
                 })}</p>
             </Division>
-            <p>Counter = {counter}</p>
-            <Btn onClick={matching}>Run Algorithm</Btn>
+            <p>Selected Rule = {selectedRuleId}</p>
+            <p>Selected Condition = {counter}</p>
+
+            {/* Show All Rules */}
+            <Division>
+                {
+                    KB ? KB.map(rule => {
+                        return (
+                            <Rule onClick={() => {
+                                setConditions(rule.premises)
+                                setSelectedRuleId(rule.id)
+                                setRule(rule)
+                            }}>
+                                <p>{rule.id}</p>
+                                {
+                                    rule.premises.map(premise => {
+                                        return (
+                                            <p>{premise.attribute}:{premise.value}</p>
+                                        )
+                                    })
+                                }
+                                <p>{rule.conclusion.attribute}:{rule.conclusion.value}</p>
+                            </Rule>
+                        )
+                    })
+                        : null}
+            </Division>
+
+            {/* <Btn onClick={matching}>Run Algorithm</Btn> */}
+
 
             {/* Build decision tree */}
-            <Division style={{ marginTop: "4rem" }}>
+            {/* <Division style={{ marginTop: "4rem" }}>
                 <p>You have chosen question has id = {chosenQuestionId}</p>
                 <Input
                     placeholder='Question text'
@@ -308,9 +430,9 @@ const ExpertSystem = () => {
                 {children}
                 <Btn onClick={addNewChoice}>Add choice</Btn>
                 <Btn onClick={saveQuestion}>Save Question</Btn>
-            </Division>
+            </Division> */}
 
-            <Division>
+            {/* <Division>
                 {
                     choicesText.map(choice => {
                         return (
@@ -320,14 +442,14 @@ const ExpertSystem = () => {
                         )
                     })
                 }
-            </Division>
+            </Division> */}
 
             <Division style={{ backgroundColor: '#ddd', marginTop: '2rem' }}>
 
             </Division>
 
             {/* Display All Questions */}
-            <Division style={{ marginTop: '2rem' }}>
+            {/* <Division style={{ marginTop: '2rem' }}>
                 {
                     decisionTree.map(question => {
                         return (
@@ -352,10 +474,10 @@ const ExpertSystem = () => {
                         )
                     })
                 }
-            </Division>
+            </Division> */}
 
             {/* User Interface */}
-            {decisionTree.length != 0 && nextId > -1 ? (
+            {/* {decisionTree.length != 0 && nextId > -1 ? (
                 <Division style={{ border: '2px solid green', marginTop: '1rem' }}>
                     <p>{decisionTree[nextId].questionText}</p>
                     {
@@ -377,7 +499,7 @@ const ExpertSystem = () => {
                         })
                     }
                 </Division>
-            ) : null}
+            ) : null} */}
         </Container>
     )
 }

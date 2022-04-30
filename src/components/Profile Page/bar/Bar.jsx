@@ -33,6 +33,16 @@ const Bar = ({ id, setId }) => {
                 onClick={(e) => setId(e.target.id)}>
                 Services
             </NavLink>
+            <NavLink to={`/user-profile/expert-system/${localStorage.getItem('loggedIn')}`}
+                className='bar-item'
+                id="expert-system"
+                style={id === "expert-system" ? {
+                    borderBottom: "4px solid rgb(190, 18, 48)",
+                    padding: "8px 6px"
+                } : null}
+                onClick={(e) => setId(e.target.id)}>
+                Problem Diagnosis System
+            </NavLink>
         </Container>
     )
 }
