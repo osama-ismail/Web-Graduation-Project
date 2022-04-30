@@ -67,7 +67,11 @@ const Services = styled.div`
     margin: 1rem 0;
 `
 
-const Row = styled.div``
+const Row = styled.div`
+    margin: 1rem 0;
+    border: 1px solid rgb(210, 210, 210, 0.8);
+    border-radius: 5px;
+`
 
 const Service = styled.div`
     background-color: #d63031;
@@ -98,7 +102,7 @@ const Part = styled.div`
     margin: 0.3rem 0;
 `
 
-const By = styled.span`
+const RateValue = styled.span`
     color: white;
 `
 
@@ -149,6 +153,7 @@ const Slots = styled.section`
 
 const SlotRow = styled.section`
     display: flex;
+    margin: 10px 0;
 `
 
 const Slot = styled.div`
@@ -191,6 +196,71 @@ const SlotBtn = styled.button`
     }
 `
 
+const AddSlotDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    flex: 1;
+`
+
+const AddSlotBtn = styled.button`
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 105%;
+    border: 1px solid rgb(210, 210, 210, 0.8);
+    outline: none;
+    padding: 0.3em;
+    cursor: pointer;
+`
+
+const AddSlotForm = styled.section`
+    background-color: #2d3436;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+`
+
+const AddingInputs = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px;
+`
+
+const AddingLabel = styled.label`
+    flex: 1;
+    margin: 4px 0;
+`
+
+const AddingInput = styled.input`
+    flex: 1;
+    background-color: #0a0a0a;
+    padding: 2px 5px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 110%;
+    border-radius: 3px;
+`
+
+const AddingSlotBtn = styled.button`
+    margin: 4px 0;
+    font-size: 105%;
+    background-color: #636e72;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 3px 0;
+    border-radius: 3px;
+    transition: 300ms;
+
+    &:hover {
+        background-color: #b2bec3;
+        color: #2d3436;
+    }
+`
+
 const GarageServices = () => {
 
     const [maintenance, setMaintenance] = React.useState([])
@@ -208,6 +278,7 @@ const GarageServices = () => {
     const [slotDate, setSlotDate] = React.useState('')
     const [slotStart, setSlotStart] = React.useState('')
     const [slotEnd, setSlotEnd] = React.useState('')
+    const [showNewForm, setShowNewForm] = React.useState(false)
 
     useEffect(() => {
         axios.get(`http://localhost:8080/garages/${garageId}`).then(response => {
@@ -249,6 +320,38 @@ const GarageServices = () => {
         })
     }
 
+    const handleAddingSlot = () => {
+        setShowNewForm(false)
+        // Call API
+        axios.post(
+            `http://localhost:8080/services/${currentService.serviceID}/addSlotTimesForService`,
+            {
+                "date": slotDate,
+                "startTime": slotStart,
+                "endTime": slotEnd
+            },
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Accept": "application/json"
+                }
+            }
+        ).then(response => {
+            setStatus('New Slot Added')
+            setRefresh(!refresh)
+        })
+    }
+
+    const deleteSlotTime = (slotId) => {
+        // Call API
+        axios.get(
+            `http://localhost:8080/garage/${garage.garageID}/service/${currentService.serviceID}/deleteSlotTime/${slotId}`
+        ).then(response => {
+            setStatus('Slot Deleted')
+            setRefresh(!refresh)
+        }).catch(e => alert(e + " Some Error"))
+    }
+
     return (
         <Container>
             <Section>
@@ -286,11 +389,9 @@ const GarageServices = () => {
                                                 >
                                                     <Name>{service.serviceName}</Name>
                                                     <Part>
-                                                        {garage ? (
-                                                            <By>
-                                                                By: {garage.garageName}
-                                                            </By>
-                                                        ) : null}
+                                                        <RateValue>
+                                                            Rating: {service.rateValue.toFixed(2)} / {(5).toFixed(2)}
+                                                        </RateValue>
                                                         <Price>${service.price}</Price>
                                                     </Part>
                                                 </Service>
@@ -300,7 +401,44 @@ const GarageServices = () => {
                                                         setWindowVisible(true)
                                                     }}
                                                 >Edit</EditBtn>
+
+                                                {/* Show Add Slot Button */}
                                             </SubRow>
+                                            {currentService && currentService.serviceID === service.serviceID ? (
+                                                <SubRow>
+                                                    <AddSlotDiv>
+                                                        <AddSlotBtn onClick={() => setShowNewForm(true)}>Add New Slot</AddSlotBtn>
+                                                    </AddSlotDiv>
+                                                </SubRow>
+                                            ) : null}
+
+                                            {/* Show new form for adding new slot */}
+                                            {showNewForm && currentService &&
+                                                currentService.serviceID === service.serviceID ? (
+                                                <AddSlotForm>
+                                                    <AddingInputs>
+                                                        <AddingLabel>Slot Date</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Date"
+                                                            onChange={e => setSlotDate(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot Start Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Start Time"
+                                                            onChange={e => setSlotStart(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot End Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="End Time"
+                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                        />
+                                                    </AddingInputs>
+                                                    <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
+                                                    <AddingSlotBtn onClick={() => setShowNewForm(false)}>Cancel</AddingSlotBtn>
+                                                </AddSlotForm>
+                                            ) : null}
+
+                                            {/* Show Slot Times */}
                                             {currentService &&
                                                 currentService.serviceID === service.serviceID &&
                                                 service.slotTimes.length ? (
@@ -343,7 +481,7 @@ const GarageServices = () => {
                                                                         {canEdit ? (
                                                                             <SlotBtn onClick={() => setCanEdit(false)}>Cancel</SlotBtn>
                                                                         ) : (
-                                                                            <SlotBtn>Delete</SlotBtn>
+                                                                            <SlotBtn onClick={() => deleteSlotTime(slot.slotTimeID)}>Delete</SlotBtn>
                                                                         )}
                                                                     </SlotRow>
                                                                 )
@@ -380,11 +518,9 @@ const GarageServices = () => {
                                                 >
                                                     <Name>{service.serviceName}</Name>
                                                     <Part>
-                                                        {garage ? (
-                                                            <By>
-                                                                By: {garage.garageName}
-                                                            </By>
-                                                        ) : null}
+                                                        <RateValue>
+                                                            Rating: {service.rateValue.toFixed(2)} / {(5).toFixed(2)}
+                                                        </RateValue>
                                                         <Price>${service.price}</Price>
                                                     </Part>
                                                 </Service>
@@ -394,7 +530,44 @@ const GarageServices = () => {
                                                         setWindowVisible(true)
                                                     }}
                                                 >Edit</EditBtn>
+
+                                                {/* Show Add Slot Button */}
                                             </SubRow>
+                                            {currentService && currentService.serviceID === service.serviceID ? (
+                                                <SubRow>
+                                                    <AddSlotDiv>
+                                                        <AddSlotBtn onClick={() => setShowNewForm(true)}>Add New Slot</AddSlotBtn>
+                                                    </AddSlotDiv>
+                                                </SubRow>
+                                            ) : null}
+
+                                            {/* Show new form for adding new slot */}
+                                            {showNewForm && currentService &&
+                                                currentService.serviceID === service.serviceID ? (
+                                                <AddSlotForm>
+                                                    <AddingInputs>
+                                                        <AddingLabel>Slot Date</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Date"
+                                                            onChange={e => setSlotDate(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot Start Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Start Time"
+                                                            onChange={e => setSlotStart(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot End Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="End Time"
+                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                        />
+                                                    </AddingInputs>
+                                                    <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
+                                                    <AddingSlotBtn onClick={() => setShowNewForm(false)}>Cancel</AddingSlotBtn>
+                                                </AddSlotForm>
+                                            ) : null}
+
+                                            {/* Show Slot Times */}
                                             {currentService &&
                                                 currentService.serviceID === service.serviceID &&
                                                 service.slotTimes.length ? (
@@ -437,7 +610,7 @@ const GarageServices = () => {
                                                                         {canEdit ? (
                                                                             <SlotBtn onClick={() => setCanEdit(false)}>Cancel</SlotBtn>
                                                                         ) : (
-                                                                            <SlotBtn>Delete</SlotBtn>
+                                                                            <SlotBtn onClick={() => deleteSlotTime(slot.slotTimeID)}>Delete</SlotBtn>
                                                                         )}
                                                                     </SlotRow>
                                                                 )
@@ -474,11 +647,9 @@ const GarageServices = () => {
                                                 >
                                                     <Name>{service.serviceName}</Name>
                                                     <Part>
-                                                        {garage ? (
-                                                            <By>
-                                                                By: {garage.garageName}
-                                                            </By>
-                                                        ) : null}
+                                                        <RateValue>
+                                                            Rating: {service.rateValue.toFixed(2)} / {(5).toFixed(2)}
+                                                        </RateValue>
                                                         <Price>${service.price}</Price>
                                                     </Part>
                                                 </Service>
@@ -488,7 +659,44 @@ const GarageServices = () => {
                                                         setWindowVisible(true)
                                                     }}
                                                 >Edit</EditBtn>
+
+                                                {/* Show Add Slot Button */}
                                             </SubRow>
+                                            {currentService && currentService.serviceID === service.serviceID ? (
+                                                <SubRow>
+                                                    <AddSlotDiv>
+                                                        <AddSlotBtn onClick={() => setShowNewForm(true)}>Add New Slot</AddSlotBtn>
+                                                    </AddSlotDiv>
+                                                </SubRow>
+                                            ) : null}
+
+                                            {/* Show new form for adding new slot */}
+                                            {showNewForm && currentService &&
+                                                currentService.serviceID === service.serviceID ? (
+                                                <AddSlotForm>
+                                                    <AddingInputs>
+                                                        <AddingLabel>Slot Date</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Date"
+                                                            onChange={e => setSlotDate(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot Start Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="Start Time"
+                                                            onChange={e => setSlotStart(e.target.value)}
+                                                        />
+                                                        <AddingLabel>Slot End Time</AddingLabel>
+                                                        <AddingInput
+                                                            placeholder="End Time"
+                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                        />
+                                                    </AddingInputs>
+                                                    <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
+                                                    <AddingSlotBtn onClick={() => setShowNewForm(false)}>Cancel</AddingSlotBtn>
+                                                </AddSlotForm>
+                                            ) : null}
+
+                                            {/* Show Slot Times */}
                                             {currentService &&
                                                 currentService.serviceID === service.serviceID &&
                                                 service.slotTimes.length ? (
@@ -531,7 +739,7 @@ const GarageServices = () => {
                                                                         {canEdit ? (
                                                                             <SlotBtn onClick={() => setCanEdit(false)}>Cancel</SlotBtn>
                                                                         ) : (
-                                                                            <SlotBtn>Delete</SlotBtn>
+                                                                            <SlotBtn onClick={() => deleteSlotTime(slot.slotTimeID)}>Delete</SlotBtn>
                                                                         )}
                                                                     </SlotRow>
                                                                 )
