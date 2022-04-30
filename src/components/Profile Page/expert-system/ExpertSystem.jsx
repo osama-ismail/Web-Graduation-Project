@@ -136,6 +136,18 @@ const ExpertSystem = () => {
         setValue('')
     }
 
+    const deleteCondition = () => {
+        let copy = [...conditions]
+        copy.splice(counter, 1)
+        setConditions(copy)
+        setRule({
+            premises: [...copy],
+            conclusion: rule.conclusion
+        })
+        setAttribute('')
+        setValue('')
+    }
+
     const editConclusion = () => {
         let copy = [...KB]
         for (let i = 0; i < copy.length; i += 1) {
@@ -374,6 +386,7 @@ const ExpertSystem = () => {
                 />
                 <Btn onClick={addCondition}>Add condition</Btn>
                 <Btn onClick={editCondition}>Edit the condition</Btn>
+                <Btn onClick={deleteCondition}>Delete the condition</Btn>
                 <Btn onClick={addConclusion}>Add conclusion</Btn>
                 <Btn onClick={editConclusion}>Edit conclusion</Btn>
                 <Btn onClick={save}>Save Rule</Btn>
