@@ -62,8 +62,6 @@ const Details = styled.p`
 
 const Contacts = ({ garage }) => {
 
-    const homePage = `/main-login`
-
     return (
         <Contaier>
             <ContactsInfo>

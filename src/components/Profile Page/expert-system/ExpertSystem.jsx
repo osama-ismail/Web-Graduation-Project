@@ -4,49 +4,209 @@ import { forwardChain } from '../../../backend/ForwardChain'
 import axios from 'axios'
 
 const Container = styled.div`
-    background-color: gray;
-    padding-left: 3rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-grow: 1;
+    margin: 0 2rem;
+    transform: translateY(-5rem);
 `
 
-const AllConditions = styled.div``
+const MainSection = styled.section`
+    flex: 1;
+    border: 5px solid rgb(210, 210, 210, 0.8);
+    border-radius: 40px;
+    border-top: none;
+    background-color: gray;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.2rem;
+`
 
-const Condition = styled.h1``
+const SectionTitle = styled.h1`
+    text-align: center;
+    text-transform: uppercase;
+`
+
+const KnowledgeForm = styled.div`
+    margin-top: 1rem;
+`
+
+const Inputs = styled.div`
+    display: flex;
+    margin: 15px 0;
+`
+
+const Cover = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 0 0.3rem;
+`
+
+const Label = styled.label`
+    font-size: 110%;
+    font-weight: bold;
+    color: #ddd;
+`
+
+const Input = styled.input`
+    background-color: #1a1a1a;
+    border: 2px solid #1a1a1a;
+    outline: none;
+    padding: 4px 7px;
+    border-radius: 3px;
+    margin-left: 8px;
+    color: white;
+    font-size: 110%;
+    width: 12rem;
+    transition: 300ms;
+
+    &:focus {
+        border: 2px solid rgb(190, 18, 48);
+    }
+`
+
+const Buttons = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const ButtonGroup = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+`
+
+const Btn = styled.button`
+    margin: 5px 1rem;
+    border-radius: 4px;
+    width: 10rem;
+    background-color: rgb(190, 18, 48);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px 10px;
+    transition: 300ms;
+    font-size: 105%;
+
+    &:hover {
+        background-color: #0a0a0a;
+        color: rgb(210, 210, 210);
+    }
+`
+
+const SelectedRule = styled.section`
+    background-color: #1a1a1a;
+    margin: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    color: #a0a0a0;
+    border-radius: 5px;
+`
+
+const InnerTitle = styled.h2``
+
+const RulePremises = styled.div``
+
+const Premise = styled.h4`
+    display: flex;
+    flex-direction: column;
+    color: rgb(190, 18, 48);
+    transition: 300ms;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #777;
+    }
+`
+
+const RuleConclusion = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0.4rem 0;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        background-color: #777;
+    }
+`
+
+const Info = styled.span`
+    color: rgb(190, 18, 48);
+    margin-left: 5px;
+`
+
+const DB = styled.div`
+    padding: 0 0.5rem;
+    margin: 0.5rem 0;
+`
+
+const Rule = styled.div`
+    background-color: #2a2a2a;
+    padding: 0.4rem;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+    transition: 300ms;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #444;
+    }
+`
+
+const AllPremises = styled.div`
+    color: #ddd;
+    margin-top: 0.5rem;
+`
+
+const AllConclusions = styled.div`
+    color: #ddd;
+    margin-top: 0.5rem;
+`
+
+const Span = styled.span`
+    font-size: 120%;
+    font-weight: bold;
+    color: rgb(190, 180, 48);
+    margin: 0.4rem;
+`
 
 const Division = styled.section``
 
-const Choice = styled.section``
+const Question = styled.div`
+    background-color: #222;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    transition: 300ms;
+    margin: 0.3rem;
 
-const Input = styled.input``
+    &:hover {
+        background-color: #444;
+    }
+`
 
-const Btn = styled.button``
+const ChoicesDiv = styled.div``
 
-const Rule = styled.div`
-    border: 1px solid red;
-    margin: 10px 0;
+const Choice = styled.section`
+    margin: 0.3rem 0;
 `
 
 const ExpertSystem = () => {
 
-    const conditionsArray = [
-        {
-            attribute: 'car type',
-            value: 'Range Rover'
-        },
-        {
-            attribute: 'Battery State',
-            value: 'Bad'
-        },
-    ]
-
+    // Knowledge-Base States
     const [counter, setCounter] = useState(0)
     const [selectedRuleId, setSelectedRuleId] = useState(-1)
     const [conditions, setConditions] = useState([])
+
+    // Decision Tree States
     const [choiceNum, setChoiceNum] = useState(0)
-    const [children, setChildren] = useState([])
     const [choicesText, setChoicesText] = useState([])
     const [question, setQuestion] = useState('')
-    const [sequence, setSequnce] = useState(0)
     const [questionId, setQuestionId] = useState(-1)
+    const [sequence, setSequnce] = useState(0)
+    const [children, setChildren] = useState([])
     const [chosenQuestionId, setChosenQuestionId] = useState(-1)
     const [nextId, setNextId] = useState(0)
     const [assertions, setAssertions] = useState([])
@@ -105,6 +265,7 @@ const ExpertSystem = () => {
         premises: [...conditions],
         conclusion: { attribute: '', value: '' }
     })
+
     const [attribute, setAttribute] = useState('')
     const [value, setValue] = useState('')
 
@@ -112,6 +273,11 @@ const ExpertSystem = () => {
         setCounter(e.target.id)
         setAttribute(obj.attribute)
         setValue(obj.value)
+    }
+
+    const handleClickInConclusion = (conclusion) => {
+        setAttribute(conclusion.attribute)
+        setValue(conclusion.value)
     }
 
     const addCondition = () => {
@@ -179,10 +345,6 @@ const ExpertSystem = () => {
         setSelectedRuleId(-1)
     }
 
-    useEffect(() => {
-        console.log(KB)
-    }, [KB])
-
     const save = () => {
         // Call API
         // let string = JSON.stringify(rule)
@@ -235,6 +397,7 @@ const ExpertSystem = () => {
     }
 
     const matching = () => {
+        // Send Assertions
         let response = forwardChain(KB, [{
             attribute: 'Car type',
             value: 'Fyat'
@@ -267,15 +430,46 @@ const ExpertSystem = () => {
             return questionId == question.id
         })
         if (exist) {
-            copyTree[questionId].questionText = question
-            copyTree[questionId].choices = [...choicesText]
+            let index = -1
+            for (let i = 0; i < copyTree.length; i += 1) {
+                if (copyTree[i].id === questionId) {
+                    index = i
+                }
+            }
+            copyTree[index].questionText = question
+            copyTree[index].choices = [...choicesText]
+            // Update the object in DB
+            axios.post(
+                `http://localhost:8080/updateQuestion/${questionId}`,
+                JSON.stringify({
+                    questionText: question,
+                    choices: [...choicesText]
+                }),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then(response => alert('Question Updated'))
         } else {
-            copyTree.push({
-                id: sequence,
+            let newQuestion = {
                 questionText: question,
                 choices: [...choicesText]
-            })
+            }
+            copyTree.push(newQuestion)
             setSequnce(sequence + 1)
+            // Add the object to DB
+            axios.post(
+                `http://localhost:8080/addQuestion/`,
+                JSON.stringify(newQuestion),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then(response => alert('New Question Added'))
         }
         setDecisionTree(copyTree)
         setChoiceNum(0)
@@ -286,7 +480,12 @@ const ExpertSystem = () => {
     }
 
     const handleEdit = (id) => {
-        let question = decisionTree[id]
+        let question = undefined
+        for (let i = 0; i < decisionTree.length; i += 1) {
+            if (decisionTree[i].id === id) {
+                question = decisionTree[i]
+            }
+        }
         setQuestionId(id)
         setChoiceNum(question.choices.length)
         setChoicesText(question.choices)
@@ -297,8 +496,19 @@ const ExpertSystem = () => {
         setChosenQuestionId(id)
     }
 
-    // Get KB from DB
     useEffect(() => {
+        console.log('KB = ')
+        console.log(KB)
+    }, [KB])
+
+    useEffect(() => {
+        console.log('DT = ')
+        console.log(decisionTree)
+    }, [decisionTree])
+
+    // Get data from DB
+    useEffect(() => {
+        // Get Knowledge-Base
         axios.get(`http://localhost:8080/gatAllKB/`).then(response => {
             let temp = []
             response.data.map(row => {
@@ -314,6 +524,21 @@ const ExpertSystem = () => {
             // console.log(temp)
             // console.log(response.data)
         })
+
+        // Get Decision-Tree
+        axios.get(`http://localhost:8080/getAllQuestions`).then(response => {
+            let temp = []
+            response.data.map(row => {
+                let getQuestion = JSON.parse(row.question)
+                let obj = {
+                    id: row.id,
+                    questionText: getQuestion.questionText,
+                    choices: [...getQuestion.choices]
+                }
+                temp.push(obj)
+            })
+            setDecisionTree(temp)
+        })
     }, [])
 
     useEffect(() => {
@@ -322,32 +547,41 @@ const ExpertSystem = () => {
         for (let i = 0; i < choiceNum; i += 1) {
             copy.push(
                 <Choice>
-                    <Input
-                        placeholder='Write Choice'
-                        id={i}
-                        value={choicesText[i].choiceText}
-                        onChange={(e) => {
-                            let copyArray = [...choicesText]
-                            copyArray[e.target.id] = {
-                                choiceText: e.target.value,
-                                nextQuestion: copyArray[e.target.id].nextQuestion
-                            }
-                            setChoicesText(copyArray)
-                        }}
-                    />
-                    <Input
-                        placeholder='Next Question'
-                        id={i}
-                        value={choicesText[i].nextQuestion}
-                        onChange={e => {
-                            let copyArray = [...choicesText]
-                            copyArray[e.target.id] = {
-                                choiceText: copyArray[e.target.id].choiceText,
-                                nextQuestion: e.target.value
-                            }
-                            setChoicesText(copyArray)
-                        }}
-                    />
+                    <Inputs>
+                        <Cover>
+                            <Label>Choice</Label>
+                            <Input
+                                placeholder='Write Choice'
+                                id={i}
+                                value={choicesText[i].choiceText}
+                                onChange={(e) => {
+                                    let copyArray = [...choicesText]
+                                    copyArray[e.target.id] = {
+                                        choiceText: e.target.value,
+                                        nextQuestion: copyArray[e.target.id].nextQuestion
+                                    }
+                                    setChoicesText(copyArray)
+                                }}
+                            />
+                        </Cover>
+
+                        <Cover>
+                            <Label>Next Question ID</Label>
+                            <Input
+                                placeholder='Next Question'
+                                id={i}
+                                value={choicesText[i].nextQuestion}
+                                onChange={e => {
+                                    let copyArray = [...choicesText]
+                                    copyArray[e.target.id] = {
+                                        choiceText: copyArray[e.target.id].choiceText,
+                                        nextQuestion: e.target.value
+                                    }
+                                    setChoicesText(copyArray)
+                                }}
+                            />
+                        </Cover>
+                    </Inputs>
                 </Choice>
             )
         }
@@ -357,137 +591,205 @@ const ExpertSystem = () => {
 
     return (
         <Container>
-            Click on one to edit
-            <AllConditions>
-                {
-                    conditions.map((condition, index) => {
-                        return (
-                            <Condition
-                                id={index}
-                                onClick={(e) => handleClickOnCondition(e, condition)}
-                            >
-                                {condition.attribute}:{condition.value}
-                            </Condition>
-                        )
-                    })
-                }
-            </AllConditions>
+            {/* Knowledge Base System */}
+            <MainSection>
+                <SectionTitle>Knowledge Base System</SectionTitle>
+                <KnowledgeForm>
+                    <Inputs>
+                        <Cover>
+                            <Label>Attribute</Label>
+                            <Input
+                                onChange={(e) => setAttribute(e.target.value)}
+                                placeholder='Add attribute'
+                                value={attribute}
+                            />
+                        </Cover>
+                        <Cover>
+                            <Label>Value</Label>
+                            <Input
+                                onChange={(e) => setValue(e.target.value)}
+                                placeholder='Add value'
+                                value={value}
+                            />
+                        </Cover>
+                    </Inputs>
 
-            <Division>
-                <Input
-                    onChange={(e) => setAttribute(e.target.value)}
-                    placeholder='Add attribute'
-                    value={attribute}
-                />
-                <Input
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder='Add value'
-                    value={value}
-                />
-                <Btn onClick={addCondition}>Add condition</Btn>
-                <Btn onClick={editCondition}>Edit the condition</Btn>
-                <Btn onClick={deleteCondition}>Delete the condition</Btn>
-                <Btn onClick={addConclusion}>Add conclusion</Btn>
-                <Btn onClick={editConclusion}>Edit conclusion</Btn>
-                <Btn onClick={save}>Save Rule</Btn>
-                <Btn onClick={cancel}>Cancel Selection on Rule</Btn>
-                <p>{rule.conclusion.attribute}:{rule.conclusion.value}</p>
-                <p>{rule.premises.map(condition => {
-                    return (
-                        <div>
-                            <p>attribute: {condition.attribute}</p>
-                            <p>value: {condition.value}</p>
-                        </div>
-                    )
-                })}</p>
-            </Division>
-            <p>Selected Rule = {selectedRuleId}</p>
-            <p>Selected Condition = {counter}</p>
+                    <Buttons>
+                        <ButtonGroup>
+                            <Btn onClick={addCondition}>Add Premise</Btn>
+                            <Btn onClick={editCondition}>Edit Premise</Btn>
+                            <Btn onClick={deleteCondition}>Delete Premise</Btn>
+                        </ButtonGroup>
+                        <ButtonGroup>
+                            <Btn onClick={addConclusion}>Add Conclusion</Btn>
+                            <Btn onClick={editConclusion}>Edit conclusion</Btn>
+                        </ButtonGroup>
+                        <ButtonGroup>
+                            <Btn onClick={cancel}>Unselect Rule</Btn>
+                            <Btn onClick={save}>Save Rule</Btn>
+                        </ButtonGroup>
+                    </Buttons>
+                </KnowledgeForm>
 
-            {/* Show All Rules */}
-            <Division>
-                {
-                    KB ? KB.map(rule => {
-                        return (
-                            <Rule onClick={() => {
-                                setConditions(rule.premises)
-                                setSelectedRuleId(rule.id)
-                                setRule(rule)
-                            }}>
-                                <p>{rule.id}</p>
-                                {
-                                    rule.premises.map(premise => {
-                                        return (
-                                            <p>{premise.attribute}:{premise.value}</p>
-                                        )
-                                    })
-                                }
-                                <p>{rule.conclusion.attribute}:{rule.conclusion.value}</p>
-                            </Rule>
-                        )
-                    })
-                        : null}
-            </Division>
+                <SelectedRule>
+                    <Span>Selected Rule Id: {selectedRuleId > 0 ? selectedRuleId : 'None'}</Span>
+                    <RulePremises>
+                        <InnerTitle>Selected Rule Premises</InnerTitle>
+                        {conditions.map((condition, index) => {
+                            return (
+                                <Premise
+                                    id={index}
+                                    onClick={e => handleClickOnCondition(e, condition)}
+                                >
+                                    {condition.attribute}: {condition.value}
+                                </Premise>
+                            )
+                        })}
+                    </RulePremises>
+                    <InnerTitle>Selected Rule Conclusion</InnerTitle>
+                    <RuleConclusion onClick={() => handleClickInConclusion(rule.conclusion)}>
+                        <Cover>
+                            <Label>Attribute:</Label>
+                            <Info>{rule.conclusion.attribute}</Info>
+                        </Cover>
+                        <Cover>
+                            <Label>Value:</Label>
+                            <Info>{rule.conclusion.value}</Info>
+                        </Cover>
+                    </RuleConclusion>
+                </SelectedRule>
 
+                {/* Show All Rules */}
+                <DB>
+                    <InnerTitle>All Rules</InnerTitle>
+                    {
+                        KB ? KB.map(rule => {
+                            return (
+                                <Rule onClick={() => {
+                                    setConditions(rule.premises)
+                                    setSelectedRuleId(rule.id)
+                                    setRule(rule)
+                                }}>
+                                    <Cover>
+                                        <Label>Rule Id:</Label>
+                                        <Info>{rule.id}</Info>
+                                    </Cover>
+                                    <AllPremises>
+                                        <InnerTitle>Rule Premises</InnerTitle>
+                                        {
+                                            rule.premises.map(premise => {
+                                                return (
+                                                    <div>
+                                                        <Cover>
+                                                            <Label>Attribule:</Label>
+                                                            <Info>{premise.attribute}</Info>
+                                                        </Cover>
+                                                        <Cover>
+                                                            <Label>Value:</Label>
+                                                            <Info>{premise.value}</Info>
+                                                        </Cover>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </AllPremises>
+
+                                    <AllConclusions>
+                                        <InnerTitle>Rule Conlcusion</InnerTitle>
+                                        <Cover>
+                                            <Label>Attribute:</Label>
+                                            <Info>{rule.conclusion.attribute}</Info>
+                                        </Cover>
+                                        <Cover>
+                                            <Label>Value:</Label>
+                                            <Info>{rule.conclusion.value}</Info>
+                                        </Cover>
+                                    </AllConclusions>
+                                </Rule>
+                            )
+                        })
+                            : null}
+                </DB>
+            </MainSection>
+
+
+            {/* Decision Tree System */}
+            <MainSection>
+                <SectionTitle>Questions and taking decision system</SectionTitle>
+
+                <Division>
+                    <Span>Selected question ID = {chosenQuestionId}</Span>
+                    <Inputs>
+                        <Cover>
+                            <Label>Question Text</Label>
+                            <Input
+                                placeholder='Question text'
+                                onChange={(e) => setQuestion(e.target.value)}
+                                value={question}
+                            />
+                        </Cover>
+                    </Inputs>
+                    {children}
+                    <Buttons>
+                        <ButtonGroup>
+                            <Btn onClick={addNewChoice}>Add choice</Btn>
+                            <Btn onClick={saveQuestion}>Save Question</Btn>
+                        </ButtonGroup>
+                    </Buttons>
+                </Division>
+
+                {/* Display All Questions */}
+                <Division>
+                    <InnerTitle>All Questions</InnerTitle>
+                    {
+                        decisionTree.map(question => {
+                            return (
+                                <Question>
+                                    <Cover>
+                                        <Label>Question ID:</Label>
+                                        <Info>{question.id}</Info>
+                                    </Cover>
+                                    <Cover>
+                                        <Label>text:</Label>
+                                        <Info>{question.questionText}</Info>
+                                    </Cover>
+
+                                    <InnerTitle>Question Choices</InnerTitle>
+                                    <ChoicesDiv>
+                                        {
+                                            question.choices.map(choice => {
+                                                return (
+                                                    <Choice>
+                                                        <Cover>
+                                                            <Label>Choice Text:</Label>
+                                                            <Info>{choice.choiceText}</Info>
+                                                        </Cover>
+                                                        <Cover>
+                                                            <Label>Next Question ID:</Label>
+                                                            <Info>{choice.nextQuestion}</Info>
+                                                        </Cover>
+                                                    </Choice>
+                                                )
+                                            })
+                                        }
+                                    </ChoicesDiv>
+                                    <Buttons>
+                                        <ButtonGroup>
+                                            <Btn onClick={() => handleEdit(question.id)}>Edit</Btn>
+                                            <Btn onClick={() => handleChoose(question.id)}>Choose</Btn>
+                                        </ButtonGroup>
+                                    </Buttons>
+                                </Question>
+                            )
+                        })
+                    }
+                </Division>
+            </MainSection>
+
+
+            {/* Copy this line to mobile app */}
             {/* <Btn onClick={matching}>Run Algorithm</Btn> */}
 
-
-            {/* Build decision tree */}
-            {/* <Division style={{ marginTop: "4rem" }}>
-                <p>You have chosen question has id = {chosenQuestionId}</p>
-                <Input
-                    placeholder='Question text'
-                    onChange={(e) => setQuestion(e.target.value)}
-                    value={question}
-                />
-                {children}
-                <Btn onClick={addNewChoice}>Add choice</Btn>
-                <Btn onClick={saveQuestion}>Save Question</Btn>
-            </Division> */}
-
-            {/* <Division>
-                {
-                    choicesText.map(choice => {
-                        return (
-                            <div>
-                                {choice.choiceText} : {choice.nextQuestion}
-                            </div>
-                        )
-                    })
-                }
-            </Division> */}
-
-            <Division style={{ backgroundColor: '#ddd', marginTop: '2rem' }}>
-
-            </Division>
-
-            {/* Display All Questions */}
-            {/* <Division style={{ marginTop: '2rem' }}>
-                {
-                    decisionTree.map(question => {
-                        return (
-                            <div style={{ border: '2px solid orange' }}>
-                                <Btn onClick={() => handleEdit(question.id)}>Edit</Btn>
-                                <Btn onClick={() => handleChoose(question.id)}>Choose</Btn>
-                                <p>id: {question.id}</p>
-                                <p>text: {question.questionText}</p>
-                                <p>
-                                    choices: {
-                                        question.choices.map(choice => {
-                                            return (
-                                                <div>
-                                                    <p>choiceText: {choice.choiceText}</p>
-                                                    <p>next Q: {choice.nextQuestion}</p>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </p>
-                            </div>
-                        )
-                    })
-                }
-            </Division> */}
 
             {/* User Interface */}
             {/* {decisionTree.length != 0 && nextId > -1 ? (
