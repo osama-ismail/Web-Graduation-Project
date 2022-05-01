@@ -204,12 +204,13 @@ const ExpertSystem = () => {
     const [choiceNum, setChoiceNum] = useState(0)
     const [choicesText, setChoicesText] = useState([])
     const [question, setQuestion] = useState('')
+    const [questionAttribute, setQuestionAttribute] = useState('')
     const [questionId, setQuestionId] = useState(-1)
     const [sequence, setSequnce] = useState(0)
     const [children, setChildren] = useState([])
     const [chosenQuestionId, setChosenQuestionId] = useState(-1)
-    const [nextId, setNextId] = useState(0)
-    const [assertions, setAssertions] = useState([])
+    // const [nextId, setNextId] = useState(0)
+    // const [assertions, setAssertions] = useState([])
 
     const [decisionTree, setDecisionTree] = useState([])
 
@@ -255,7 +256,7 @@ const ExpertSystem = () => {
     //         attribute: 'Reason',
     //         value: 'More power on motor could harm it'
     //     }],
-    //     conclusion: { attribute: 'Solution', value: 'Change the outer seat' }
+    //     conclusion: { attribute: 'Solution', value: 'Change Oil' }
     // }
     // ])
 
@@ -436,12 +437,14 @@ const ExpertSystem = () => {
                     index = i
                 }
             }
+            copyTree[index].questionAttribute = questionAttribute
             copyTree[index].questionText = question
             copyTree[index].choices = [...choicesText]
             // Update the object in DB
             axios.post(
                 `http://localhost:8080/updateQuestion/${questionId}`,
                 JSON.stringify({
+                    questionAttribute: questionAttribute,
                     questionText: question,
                     choices: [...choicesText]
                 }),
@@ -454,6 +457,7 @@ const ExpertSystem = () => {
             ).then(response => alert('Question Updated'))
         } else {
             let newQuestion = {
+                questionAttribute: questionAttribute,
                 questionText: question,
                 choices: [...choicesText]
             }
@@ -477,6 +481,17 @@ const ExpertSystem = () => {
         setChoicesText([])
         setQuestion('')
         setQuestionId(-1)
+        setChosenQuestionId(-1)
+        setQuestionAttribute('')
+    }
+
+    const unselectQuestion = () => {
+        setChoiceNum(0)
+        setChoicesText([])
+        setQuestion('')
+        setQuestionAttribute('')
+        setChosenQuestionId(-1)
+        setQuestionId(-1)
     }
 
     const handleEdit = (id) => {
@@ -490,6 +505,7 @@ const ExpertSystem = () => {
         setChoiceNum(question.choices.length)
         setChoicesText(question.choices)
         setQuestion(question.questionText)
+        setQuestionAttribute(question.questionAttribute)
     }
 
     const handleChoose = (id) => {
@@ -532,6 +548,7 @@ const ExpertSystem = () => {
                 let getQuestion = JSON.parse(row.question)
                 let obj = {
                     id: row.id,
+                    questionAttribute: getQuestion.questionAttribute,
                     questionText: getQuestion.questionText,
                     choices: [...getQuestion.choices]
                 }
@@ -539,7 +556,7 @@ const ExpertSystem = () => {
             })
             setDecisionTree(temp)
         })
-    }, [])
+    }, [decisionTree])
 
     useEffect(() => {
         // console.log(JSON.stringify(KB))
@@ -728,12 +745,21 @@ const ExpertSystem = () => {
                                 value={question}
                             />
                         </Cover>
+                        <Cover>
+                            <Label>Question Attribute</Label>
+                            <Input
+                                placeholder='Question attribute'
+                                onChange={(e) => setQuestionAttribute(e.target.value)}
+                                value={questionAttribute}
+                            />
+                        </Cover>
                     </Inputs>
                     {children}
                     <Buttons>
                         <ButtonGroup>
                             <Btn onClick={addNewChoice}>Add choice</Btn>
                             <Btn onClick={saveQuestion}>Save Question</Btn>
+                            <Btn onClick={unselectQuestion}>Unselect Question</Btn>
                         </ButtonGroup>
                     </Buttons>
                 </Division>
@@ -750,8 +776,12 @@ const ExpertSystem = () => {
                                         <Info>{question.id}</Info>
                                     </Cover>
                                     <Cover>
-                                        <Label>text:</Label>
+                                        <Label>Question Text:</Label>
                                         <Info>{question.questionText}</Info>
+                                    </Cover>
+                                    <Cover>
+                                        <Label>Question Attribute:</Label>
+                                        <Info>{question.questionAttribute}</Info>
                                     </Cover>
 
                                     <InnerTitle>Question Choices</InnerTitle>
