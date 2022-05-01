@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { MediumScreen } from '../../responsive/Responsive'
 
@@ -10,11 +10,11 @@ const Container = styled.div`
     border-top-right-radius: 15px;
     padding: 1rem 2rem;
     margin: 0 10rem;
-    transform: translateY(-25%);
+    transform: translateY(-10%);
     background-color: #0a0a0a;
 
     ${MediumScreen({
-    transform: "translateY(-20%)",
+    transform: "translateY(-10%)",
     margin: "1rem 1.5rem",
     transform: "translateY(0)"
 })}
@@ -74,66 +74,132 @@ const Button = styled.button`
     }
 `
 
-const ProfileForm = ({ name }) => {
+const SelectList = styled.select`
+    background-color: #0a0a0a;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    color: white;
+    cursor: pointer;
+    background-color: black;
+`
+
+const Option = styled.option``
+
+const ProfileForm = () => {
 
     const [password, setPassword] = React.useState('')
-    const [confirmPass, setConfirmPass] = React.useState('')
-    const [deleteStatus, setDeleteStatus] = React.useState(false)
+    const [garage, setGarage] = React.useState(null)
+    const [garageName, setGarageName] = React.useState('')
+    const [capacity, setCapacity] = React.useState(0)
+    const [phone, setPhone] = React.useState('')
+    const [startTime, setStartTime] = React.useState('')
+    const [endTime, setEndTime] = React.useState('')
+    const [carType, setCarType] = React.useState('BMW')
+    const [showResult, setShowResult] = React.useState(false)
 
-    const handleDelete = () => {
-        let accountType = localStorage.getItem('accountType')
-        let id = localStorage.getItem('loggedIn')
-        let gottenPass = undefined
-        axios.get(`http://localhost:8080/${accountType === "Garage" ? 'garages' : 'users'}/${id}`).then(response => {
-            console.log(response.data)
-            if (accountType === 'Garage')
-                gottenPass = response.data.garage_password;
-            else
-                gottenPass = response.data.user_password;
-            alert(gottenPass)
-            // if (password !== '') {
-            //     if (password === confirmPass) {
-            //         axios.get(`http://localhost:8080/${accountType === "Garage" ? 'garages' : 'users'}/${id}/${accountType === "Garage" ? 'deleteGarageAccount' : 'deleteAccount'}`)
-            //         localStorage.removeItem('loggedIn')
-            //         localStorage.removeItem('accountType')
-            //         localStorage.removeItem('userName')
-            //         window.location.replace(`http://localhost:3000`)
-            //     }
-            // } else {
-            //     setDeleteStatus(true)
-            // }
+    useEffect(() => {
+        axios.get(`http://localhost:8080/garages/${localStorage.getItem('loggedIn')}`)
+            .then(response => {
+                let garage = response.data
+                setGarage(response.data)
+                setGarageName(garage.garageName)
+                setCapacity(garage.capacity)
+                setPhone(garage.garagePhoneNumber)
+                setStartTime(garage.garageStartTime)
+                setEndTime(garage.garageEndTime)
+                setCarType(garage.carType)
+            })
+    }, [])
+
+    const handleSubmit = () => {
+        axios.post(
+            `http://localhost:8080/garages/${garage.garageID}/profile/editGarageNameAndPasswordAndTimes`,
+            JSON.stringify([garageName, password, startTime, endTime, capacity, phone, carType]),
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Accept": "application/json"
+                }
+            }
+        ).then(response => {
+            setShowResult(true)
         })
     }
 
     return (
         <Container>
             <Section>
-                <Label htmlFor="user-name">User Name</Label>
-                <Input type="text" id="user-name" placeholder='User Name' value={name} />
+                <Label htmlFor="garage-name">Garage Name</Label>
+                <Input
+                    type="text"
+                    id="garage-name"
+                    placeholder='Garage Name'
+                    value={garageName}
+                    onChange={(e) => setGarageName(e.target.value)}
+                />
             </Section>
             <Section>
-                <Label htmlFor="password">New Password</Label>
-                <Input type="password" id="password" placeholder='New Password'
+                <Label htmlFor='start-time'>Start Time</Label>
+                <Input
+                    type="text"
+                    id="start-time"
+                    placeholder='Start Time'
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
+                />
+            </Section>
+            <Section>
+                <Label htmlFor="end-time">End Time:</Label>
+                <Input
+                    type="text"
+                    id="end-time"
+                    placeholder='End Time'
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}
+                />
+            </Section>
+            <Section>
+                <Label htmlFor="capacity">Capacity</Label>
+                <Input
+                    type="number"
+                    id="capacity"
+                    placeholder='Capacity'
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
+                />
+            </Section>
+            <Section>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                    type="number"
+                    id="phone"
+                    placeholder='Phone Number'
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+            </Section>
+            <Section>
+                <Label htmlFor="car-type">Supported Car Type</Label>
+                <SelectList onChange={e => setCarType(e.target.value)}>
+                    <Option value="BMW">BMW</Option>
+                    <Option value="Toyotta">Toyotta</Option>
+                    <Option value="Audi">Audi</Option>
+                </SelectList>
+            </Section>
+            <Section>
+                <Label htmlFor="password">Password</Label>
+                <Input type="password" id="password" placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)} />
             </Section>
-            <Section>
-                <Label htmlFor="confirm-password">Confirm Password</Label>
-                <Input type="password" id="confirm-password" placeholder='Confirm Password'
-                    onChange={(e) => setConfirmPass(e.target.value)} />
-            </Section>
-            {
-                password === confirmPass ? null : <Section>
-                    <Label style={{ color: "rgb(190, 18, 48)" }}>The password does not match</Label>
+            {showResult ? (
+                <Section>
+                    <Label style={{ color: 'rgb(190, 18, 48)' }}>Profile Updated Successfully</Label>
                 </Section>
-            }
-            {
-                deleteStatus ? <Section>
-                    <Label style={{ color: "rgb(190, 18, 48)" }}>Type your password to continue</Label>
-                </Section> : null
-            }
+            ) : null}
             <Buttons>
-                <Button onClick={handleDelete}>Delete Accout</Button>
-                <Button>Save Changes</Button>
+                <Button
+                    onClick={handleSubmit}
+                >Save Changes</Button>
             </Buttons>
         </Container>
     )

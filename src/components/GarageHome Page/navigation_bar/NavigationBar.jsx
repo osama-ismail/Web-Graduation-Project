@@ -105,11 +105,11 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) 
                 </NavLink>
             </Left>
             <Menu>
-                <i class="fa fa-bars" aria-hidden="true"></i>
+                <i className="fa fa-bars" aria-hidden="true"></i>
             </Menu>
             <Center>
                 <Catalog onClick={handleCatalog}>
-                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    <i className="fa fa-bars" aria-hidden="true"></i>
                     <CatalogSpan>Catalog</CatalogSpan>
                 </Catalog>
                 <NavLink to="/main-login" className="navlinks">HOME</NavLink>

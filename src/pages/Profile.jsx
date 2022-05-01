@@ -6,10 +6,11 @@ import ProfileForm from '../components/Profile Page/profile-form/ProfileForm';
 import ProfilePicture from '../components/Profile Page/profile-picture/ProfilePicture';
 import Footer from '../components/Global Components/footer/Footer';
 import { MediumScreen, Tablet } from '../components/responsive/Responsive';
-import CartTable from '../components/Profile Page/cart-table/CartTable';
 import axios from 'axios';
 import { Navigate, useParams } from 'react-router-dom';
 import ParentNavbar from '../components/Global Components/parentNavbar/ParentNavbar';
+import GarageServices from '../components/Profile Page/services/GarageServices';
+import ExpertSystem from '../components/Profile Page/expert-system/ExpertSystem';
 
 const Container = styled.div`
     background-color: #0f0f0f;
@@ -103,8 +104,9 @@ const Profile = (props) => {
                     <Bar id={Id} setId={setId} />
                 </Section>
             </Box>
-            {Id === "edit" ? <ProfileForm name={name} /> : null}
-            {Id === "cart" ? <CartTable /> : null}
+            {Id === "edit" ? <ProfileForm /> : null}
+            {Id === "services" ? <GarageServices /> : null}
+            {Id === "expert-system" ? <ExpertSystem /> : null}
             <Footer />
         </Container>
     )

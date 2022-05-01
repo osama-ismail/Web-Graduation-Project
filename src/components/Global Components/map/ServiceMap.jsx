@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
-import { garagesPopups } from '../../../iterated_variables/garagesPopups';
-import axios from 'axios';
 
 import "./styles.css";
 import manWaving from "./img/man-waving-arm_32.png";
@@ -18,12 +16,9 @@ const Container = styled.div`
 let tt = null;
 let map = null;
 let markers = [];
-var locations = ""
 
 
 // From Taxi app
-const apiKey = 'q2yukmABGuRvQD9NhkGAABCOYtIMoHFD';
-
 let passengerInitCoordinates = undefined;
 
 let passengerMarker;
@@ -31,28 +26,6 @@ let passengerMarker;
 let taxiPassengerBatchCoordinates = [];
 let taxiConfig = [];
 
-// function setDefaultTaxiConfig() {
-//     // taxiConfig = [
-//     //     createTaxi('CAR #1', '#006967', [4.902642, 52.373627], cab1),
-//     //     createTaxi('CAR #2', '#EC619F', [4.927198, 52.365927], cab2),
-//     //     createTaxi('CAR #3', '#002C5E', [4.893488, 52.347878], cab3),
-//     //     createTaxi('CAR #4', '#F9B023', [4.858433, 52.349447], cab4),
-//     // ];
-//     let length = garagesPopups.length;
-//     for (let i = 0; i < length; i = i + 1) {
-//         taxiConfig[i] = createTaxi('Garage #' + garagesPopups[i].id, '#006967', garagesPopups[i].position, 'none')
-//     }
-// }
-
-// function createTaxi(name, color, coordinates, iconFilePath, iconWidth = 55, iconHeight = 55) {
-//     return {
-//         name: name,
-//         color: color,
-//         // icon: "<img src=" + `${iconFilePath}` + " style='width: " + iconWidth + "px; height: " + iconHeight + "px;'>",
-//         icon: null,
-//         coordinates: coordinates
-//     };
-// }
 
 function updateTaxiBatchLocations(passengerCoordinates) {
     taxiPassengerBatchCoordinates = [];
@@ -106,24 +79,6 @@ export function calculateRoute() {
 }
 
 export default class App extends Component {
-    // displayPopups(popupOffsets) {
-    //     var i = 0;
-    //     var markersPositions = []
-    //     var imagesNames = []
-
-    //     garagesPopups.map(garagePopup => {
-    //         imagesNames.push(garagePopup.img)
-    //         markersPositions.push(
-    //             new this.tt.Marker()
-    //                 .setLngLat(garagePopup.position)
-    //                 .addTo(this.map))
-    //     });
-
-    //     for (i = 0; i < garagesPopups.length; ++i) {
-    //         var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div id="${garagesPopups[i].id}" onclick="window.ReactNativeWebView.postMessage(this.id)"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h2>` + `${garagesPopups[i].name}` + '</h2><br /><img width="90%" height="90%" src="' + `${require("../../../assets/images/garages-images/" + imagesNames[i])}"` + 'alt="image" /></a></div>');
-    //         markersPositions[i].setPopup(popup).togglePopup();
-    //     }
-    // }
 
     addMarker(obj, [lng, lat]) {
         var marker = new this.tt.Marker(obj)
@@ -149,16 +104,6 @@ export default class App extends Component {
         this.tt = tt
         this.points = [] // for management of points
 
-        // Display traffic and flow incident
-        // var trafficFlowConfig = {
-        //     key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
-        //     theme: {
-        //         style: 'relative-delay',
-        //         source: 'vector'
-        //     },
-        //     refresh: 3000
-        // };
-
         var trafficIncidentsConfig = {
             key: "q2yukmABGuRvQD9NhkGAABCOYtIMoHFD",
             incidentTiles: {
@@ -168,18 +113,6 @@ export default class App extends Component {
                 style: 's2'
             }
         };
-
-        // Display popups for garages on the map
-        // var popupOffsets = {
-        //     top: [0, 0],
-        //     bottom: [0, -30],
-        //     'bottom-right': [0, -70],
-        //     'bottom-left': [0, -70],
-        //     left: [25, -35],
-        //     right: [-25, -35]
-        // }
-
-        // this.displayPopups(popupOffsets);
 
         const self = this
         map.on('load', () => {
