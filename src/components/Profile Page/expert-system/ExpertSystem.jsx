@@ -321,6 +321,7 @@ const ExpertSystem = () => {
             if (copy[i].id === selectedRuleId) {
                 copy[i].conclusion.attribute = attribute
                 copy[i].conclusion.value = value
+                console.log(copy)
             }
         }
         setKB(copy)
@@ -454,7 +455,10 @@ const ExpertSystem = () => {
                         "Accept": "application/json"
                     }
                 }
-            ).then(response => alert('Question Updated'))
+            ).then(response => {
+                alert('Question Updated')
+                setDecisionTree(copyTree)
+            })
         } else {
             let newQuestion = {
                 questionAttribute: questionAttribute,
@@ -473,9 +477,11 @@ const ExpertSystem = () => {
                         "Accept": "application/json"
                     }
                 }
-            ).then(response => alert('New Question Added'))
+            ).then(response => {
+                alert('New Question Added')
+                setDecisionTree(copyTree)
+            })
         }
-        setDecisionTree(copyTree)
         setChoiceNum(0)
         setChildren([])
         setChoicesText([])
@@ -556,7 +562,7 @@ const ExpertSystem = () => {
             })
             setDecisionTree(temp)
         })
-    }, [decisionTree])
+    }, [decisionTree.length])
 
     useEffect(() => {
         // console.log(JSON.stringify(KB))

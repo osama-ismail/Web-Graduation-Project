@@ -13,16 +13,20 @@ const Container = styled.ul`
 const Bar = ({ id, setId }) => {
     return (
         <Container>
-            <NavLink to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}
-                className='bar-item'
-                id="edit"
-                style={id === "edit" ? {
-                    borderBottom: "4px solid #d63031",
-                    padding: "8px 6px"
-                } : null}
-                onClick={(e) => setId(e.target.id)}>
-                Edit Profile
-            </NavLink>
+            {
+                localStorage.getItem('isAdmin') === 'false' ? (
+                    <NavLink to={`/user-profile/edit-profile/${localStorage.getItem('loggedIn')}`}
+                        className='bar-item'
+                        id="edit"
+                        style={id === "edit" ? {
+                            borderBottom: "4px solid #d63031",
+                            padding: "8px 6px"
+                        } : null}
+                        onClick={(e) => setId(e.target.id)}>
+                        Edit Profile
+                    </NavLink>
+                ) : null
+            }
             {
                 localStorage.getItem('isAdmin') === 'false' ? (
                     <NavLink to={`/user-profile/services/${localStorage.getItem('loggedIn')}`}

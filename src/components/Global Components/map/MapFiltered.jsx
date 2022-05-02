@@ -492,14 +492,14 @@ export default class MapFiltered extends Component {
     }
 
     componentDidMount() {
-        var carType = new URL(window.location).pathname.split('/')[4]
-        var problem = new URL(window.location).pathname.split('/')[5]
+        var problem = new URL(window.location).pathname.split('/')[4]
+        var carType = new URL(window.location).pathname.split('/')[5]
 
         let url = ''
         if (problem !== 'all') {
             url = `http://10.0.0.9:8080/garages/getGarageByServiceTypeAndCarType/${problem}/${carType}`
         } else {
-            url = '`http://10.0.0.9:8080/garages/getGarageByCarType/${carType}'
+            url = `http://10.0.0.9:8080/garages/getGarageByCarType/${carType}`
         }
 
         // Call the API to get garages
