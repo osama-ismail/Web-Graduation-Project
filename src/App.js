@@ -9,6 +9,7 @@ import UsingMapReactNative from "./pages/UsingMapReactNative";
 import ReactNativeMap from "./pages/ReactNativeMap";
 import MapForContactRN from "./pages/MapForContactRN";
 import SetLocationRN from "./pages/SetLocationRN";
+import FilterMapRN from "./pages/FilterMapRN";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/using-map" element={<UsingMap />} />
         <Route path="/using-map/:lng/:lat" element={<UsingMapReactNative />} />
+        <Route path="/using-map/:lng/:lat/:carType/:problem" element={<FilterMapRN />} />
         <Route path="/using-map/:userlng/:userlat/:garagelng/:garagelat" element={<ReactNativeMap />} />
         <Route path="/using-map/setLocation" element={<SetLocationRN />} />
         <Route path="/contactMap/:lng/:lat" element={<MapForContactRN />} />

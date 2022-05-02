@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Background from "../components/Landing Page/background/Background";
 import About from '../components/Landing Page/about/About';
 import Footer from "../components/Landing Page/footer/Footer";
@@ -9,7 +9,6 @@ import FormBackground from "../components/Landing Page/form-background/FormBackg
 import MainNavbar from '../components/Landing Page/main-nav-bar/MainNavbar';
 import NavList from "../components/Landing Page/navlist/NavList";
 import styled from "styled-components";
-import MapForm from "../components/Landing Page/mapForm/MapForm";
 
 const Container = styled.div`
     position: relative;
@@ -18,12 +17,15 @@ const Container = styled.div`
 
 const Home = () => {
     const [showNavList, setShowNavList] = React.useState(false);
-    const [showMapForm, setShowMapForm] = React.useState(false);
-
-    const appearMapForm = () => setShowMapForm(true);
-    const closeMapForm = () => setShowMapForm(false);
 
     const handleClickOnList = () => setShowNavList(!showNavList);
+
+    useEffect(() => {
+        let id = localStorage.getItem('loggedIn')
+        if (id > 0) {
+            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
+        }
+    }, [])
 
     return (
         <Container>
@@ -34,9 +36,8 @@ const Home = () => {
             <Background />
             <About />
             <Services />
-            <FormBackground appearMapForm={appearMapForm} />
+            <FormBackground />
             <Footer />
-            {showMapForm ? <MapForm closeMapForm={closeMapForm} /> : null}
         </Container>
     )
 }

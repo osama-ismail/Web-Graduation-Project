@@ -13,10 +13,10 @@ const backgroundStyle = {
     margin: "4em 0",
 }
 
-const FormBackground = ({ appearMapForm }) => {
+const FormBackground = () => {
     return (
         <div id="FormBackgroundElement" style={backgroundStyle}>
-            <Form appearMapForm={appearMapForm} />
+            <Form />
         </div>
     )
 }

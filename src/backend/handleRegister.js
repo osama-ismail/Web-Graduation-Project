@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const submitLocation = (e, obj) => {
+export const submitLocation = (e, obj, startTime, endTime, carType) => {
     e.preventDefault();
     let garageId = localStorage.getItem('loggedIn');
     axios.post(
@@ -13,7 +13,18 @@ export const submitLocation = (e, obj) => {
             }
         }
     ).then(resp => {
-        window.location.replace(`http://localhost:3000/user-profile/edit-profile/${garageId}`)
+        axios.post(
+            `http://localhost:8080/garages/${garageId}/profile/setGarageStartAndEndTime`,
+            JSON.stringify([startTime, endTime, carType]),
+            {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Accept": "application/json"
+                }
+            }
+        ).then(response => {
+            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${garageId}`)
+        })
     })
 }
 
@@ -38,6 +49,7 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
         ).then((response) => {
             console.log(response.data)
             localStorage.setItem('accountType', 'User')
+            localStorage.setItem('password', password)
             // window.location.replace(`http://localhost:3000/user-profile/edit-profile/${response.data}`)
         })
     else
@@ -53,9 +65,10 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
         ).then((response) => {
             console.log(response.data)
             let garageId = response.data
-            if (garageId != -1) {
+            if (garageId !== -1) {
                 localStorage.setItem('loggedIn', garageId)
                 localStorage.setItem('accountType', 'Garage')
+                localStorage.setItem('password', password)
             }
         })
 

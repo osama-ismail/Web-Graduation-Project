@@ -423,7 +423,7 @@ export const lookingFor = (place, radius) => {
     })
 }
 
-export default class MainMapRN extends Component {
+export default class MapFiltered extends Component {
 
     constructor(props) {
         super(props)
@@ -492,8 +492,18 @@ export default class MainMapRN extends Component {
     }
 
     componentDidMount() {
+        var carType = new URL(window.location).pathname.split('/')[4]
+        var problem = new URL(window.location).pathname.split('/')[5]
+
+        let url = ''
+        if (problem !== 'all') {
+            url = `http://10.0.0.9:8080/garages/getGarageByServiceTypeAndCarType/${problem}/${carType}`
+        } else {
+            url = '`http://10.0.0.9:8080/garages/getGarageByCarType/${carType}'
+        }
+
         // Call the API to get garages
-        axios.get('http://10.0.0.9:8080/garages').then(response => {
+        axios.get(url).then(response => {
             garagesPopups = response.data
             // snip
             tt = window.tt

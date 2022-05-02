@@ -6,7 +6,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 
 const EditProfileImg = styled.button`
-    background-color: rgb(190, 18, 47);
+    background-color: #d63031;
     border: none;
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ const EditProfileImg = styled.button`
     display: none;
 
     &:hover {
-        box-shadow: 0 0 10px rgb(190, 18, 47);
+        box-shadow: 0 0 10px #2d3436;
     }
 `
 
@@ -25,7 +25,7 @@ const Container = styled.div`
     background-size: cover;
     margin-left: 4rem;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 3px solid #fbc531;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +38,7 @@ const Container = styled.div`
     }
 
     &:hover {
-        border: 3px solid rgb(190, 18, 48);
+        border: 3px solid #d63031;
     }
 `
 
@@ -51,7 +51,7 @@ const ParentDiv = styled.div`
 const ButtonUpload = styled.button`
     font-size: 120%;
     color: white;
-    background-color: rgb(190, 18, 48);
+    background-color: #d63031;
     border: none;
     cursor: pointer;
     padding: 0.5rem;

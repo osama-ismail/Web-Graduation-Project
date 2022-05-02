@@ -52,7 +52,7 @@ const Section = styled.section`
 `
 
 const ProfileName = styled.h2`
-    color: white;
+    color: #d63031;
     font-size: 130%;
 `
 

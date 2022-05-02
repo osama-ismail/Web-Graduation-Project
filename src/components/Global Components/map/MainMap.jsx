@@ -4,7 +4,7 @@ import { MediumScreen } from '../../responsive/Responsive';
 import axios from 'axios';
 
 import "./styles.css";
-import manWaving from "./img/man-waving-arm_32.png";
+import manWaving from "./img/R.png";
 
 const Container = styled.div`
     height: ${props => props.height};

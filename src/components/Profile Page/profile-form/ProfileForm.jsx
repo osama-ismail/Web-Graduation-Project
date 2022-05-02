@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { MediumScreen } from '../../responsive/Responsive'
 
 const Container = styled.div`
-    color: white;
-    border: 2px solid rgb(190, 18, 48);
+    color: #dfe6e9;
+    border: 2px solid #d63031;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     padding: 1rem 2rem;
@@ -14,7 +14,6 @@ const Container = styled.div`
     background-color: #0a0a0a;
 
     ${MediumScreen({
-    transform: "translateY(-10%)",
     margin: "1rem 1.5rem",
     transform: "translateY(0)"
 })}
@@ -37,21 +36,21 @@ const Section = styled.section`
 `
 
 const Label = styled.label`
-    color: rgb(220, 220, 220);
+    color: #dcdde1;
 `
 
 const Input = styled.input`
     background-color: black;
     border: 2px solid black;
     padding: 0.6rem 1rem;
-    color: white;
+    color: #f5f6fa;
     font-size: 120%;
     margin-top: 6px;
     outline: none;
     border-radius: 7px;
 
     &:focus {
-        border: 2px solid rgb(190, 18, 48);
+        border: 2px solid #d63031;
     }
 `
 
@@ -61,17 +60,14 @@ const Buttons = styled.section`
 `
 
 const Button = styled.button`
-    margin: 0 1rem;
-    border: 1px solid rgb(210, 210, 210, 0.5);
+    margin: 0.4rem 1rem;
+    border: 1px solid #f5f6fa;
     background-color: black;
     color: white;
     padding: 0.4rem 1rem;
     font-size: 120%;
     cursor: pointer;
-
-    &:last-child {
-        background-color: rgb(190, 18, 48);
-    }
+    background-color: #d63031;
 `
 
 const SelectList = styled.select`
@@ -81,9 +77,12 @@ const SelectList = styled.select`
     color: white;
     cursor: pointer;
     background-color: black;
+    border-radius: 5px;
 `
 
-const Option = styled.option``
+const Option = styled.option`
+    font-size: 120%;
+`
 
 const ProfileForm = () => {
 
@@ -143,7 +142,7 @@ const ProfileForm = () => {
                 <Input
                     type="text"
                     id="start-time"
-                    placeholder='Start Time'
+                    placeholder='Start Time - hh:mm:ss'
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
                 />
@@ -153,7 +152,7 @@ const ProfileForm = () => {
                 <Input
                     type="text"
                     id="end-time"
-                    placeholder='End Time'
+                    placeholder='End Time - hh:mm:ss'
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}
                 />
