@@ -3,6 +3,7 @@
     background-color: inherit;
     z-index: 1000;
 }
+
 .navbar-scroll {
     width: 100%;
     position: sticky;
@@ -11,6 +12,7 @@
     background-color: inherit;
     opacity: 0.95;
 }
+
 .wrapper {
     padding: 0 25px;
     display: flex;
@@ -25,20 +27,22 @@
     padding: 5px;
     border: none;
     font-size: 26px;
-    background-color: rgb(230, 18, 47);
+    background-color: #d63031;
     cursor: pointer;
     border-radius: 50%;
     color: rgb(28, 28, 28);
     transition: 300ms;
 }
+
 #navbar-list:hover {
-    color: #aaa;
+    color: #dcdde1;
 }
 
 /* Left Navbar */
 #left {
     flex: 1;
 }
+
 .logo {
     margin: 15px 10px;
 }
@@ -50,6 +54,7 @@
     justify-content: flex-end;
     align-items: center;
 }
+
 .headers {
     width: 100%;
     font-size: 16px;
@@ -58,7 +63,7 @@
     padding: 0 1em;
     margin: 0 1em;
     text-decoration: none;
-    color: white;
+    color: #dcdde1;
     letter-spacing: 2px;
     transition: 200ms;
     text-align: center;
@@ -70,9 +75,10 @@
     justify-content: center;
     clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
+
 .headers:hover {
-    color: white;
-    background-color: rgb(190, 25, 30);
+    color: #f5f6fa;
+    background-color: #d63031;
 }
 
 @media only screen and (max-width: 720px) {
@@ -80,12 +86,15 @@
         justify-content: space-between;
         align-items: center;
     }
+
     #right {
         display: none;
     }
+
     #left {
         flex: 0;
     }
+
     #navbar-list {
         display: block;
     }

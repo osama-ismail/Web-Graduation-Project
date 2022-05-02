@@ -30,7 +30,7 @@ const Logo = styled.img`
 `
 
 const Info = styled.div`
-    color: white;
+    color: #dfe6e9;
     display: flex;
 `
 
@@ -48,7 +48,7 @@ const Left = styled.div`
 
 const Email = styled.a`
     text-decoration: none;
-    color: white;
+    color: #dfe6e9;
     text-align: center;
     margin: 10px 5px;
     display: flex;
@@ -60,7 +60,7 @@ const Phone = styled.span`
 `
 
 const MobileApp = styled.div`
-    color: white;
+    color: #dfe6e9;
     text-align: center;
     margin: 10px 5px;
 `
@@ -76,7 +76,7 @@ const CopyrightWrapper = styled.div`
 `
 
 const Copyright = styled.div`
-    color: white;
+    color: #dfe6e9;
     font-size: 12px;
     letter-spacing: 2px;
 `

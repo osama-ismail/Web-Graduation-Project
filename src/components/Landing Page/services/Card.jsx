@@ -6,15 +6,15 @@ const Container = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgb(28, 28, 28);
+    background-color: #2d3436;
     padding: 2em;
     transition: 0.3s;
     margin: 2em 2em 2em 2em;
     width: 15em;
-    border: 12px solid rgb(230, 18, 47);
+    border: 12px solid #d63031;
 
     &:hover {
-        background-color: rgb(230, 18, 47);
+        background-color: #d63031;
     }
 `
 
@@ -24,7 +24,7 @@ const MaskTop = styled.div`
     left: 0;
     width: 50%;
     height: 13px;
-    background-color: #0a0a0a;
+    background-color: #2d3436;
 `
 
 const MaskLeft = styled.div`
@@ -33,7 +33,7 @@ const MaskLeft = styled.div`
     left: -13px;
     width: 13px;
     height: 50%;
-    background-color: #0a0a0a;
+    background-color: #2d3436;
 `
 
 const MaskRight = styled.div`
@@ -42,7 +42,7 @@ const MaskRight = styled.div`
     right: -13px;
     width: 13px;
     height: 50%;
-    background-color: #0a0a0a;
+    background-color: #2d3436;
 `
 
 const MaskBottom = styled.div`
@@ -51,7 +51,7 @@ const MaskBottom = styled.div`
     right: -13px;
     width: 50%;
     height: 13px;
-    background-color: #0a0a0a;
+    background-color: #2d3436;
 `
 
 const LogoBox = styled.div`
@@ -60,13 +60,13 @@ const LogoBox = styled.div`
 `
 
 const Header = styled.h2`
-    color: white;
+    color: #dcdde1;
     margin: 1em 0;
 `
 
 const Description = styled.p`
     font-size: 20px;
-    color: white;
+    color: #dcdde1;
 `
 
 const Card = (props) => {
@@ -97,7 +97,7 @@ const Card = (props) => {
                         aria-hidden="true"
                         style={{
                             fontSize: "40px",
-                            color: 'white',
+                            color: '#dcdde1',
                         }}
                     >
                     </i>
