@@ -86,6 +86,7 @@ const Option = styled.option`
 
 const ProfileForm = () => {
 
+    const [expertName, setExpertName] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [garage, setGarage] = React.useState(null)
     const [garageName, setGarageName] = React.useState('')
@@ -111,62 +112,100 @@ const ProfileForm = () => {
     }, [])
 
     const handleSubmit = () => {
-        axios.post(
-            `http://localhost:8080/garages/${garage.garageID}/profile/editGarageNameAndPasswordAndTimes`,
-            JSON.stringify([garageName, password, startTime, endTime, capacity, phone, carType]),
-            {
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Accept": "application/json"
+        if (localStorage.getItem('isAdmin') === 'true') {
+            axios.post(
+                `http://localhost:8080/users/${localStorage.getItem('loggedIn')}/profile/editUserNameAndPassword`,
+                JSON.stringify([expertName, password, phone]),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
                 }
-            }
-        ).then(response => {
-            setShowResult(true)
-        })
+            ).then(response => {
+                setShowResult(true)
+            })
+        } else {
+            axios.post(
+                `http://localhost:8080/garages/${garage.garageID}/profile/editGarageNameAndPasswordAndTimes`,
+                JSON.stringify([garageName, password, startTime, endTime, capacity, phone, carType]),
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            ).then(response => {
+                setShowResult(true)
+            })
+        }
     }
 
     return (
         <Container>
-            <Section>
-                <Label htmlFor="garage-name">Garage Name</Label>
-                <Input
-                    type="text"
-                    id="garage-name"
-                    placeholder='Garage Name'
-                    value={garageName}
-                    onChange={(e) => setGarageName(e.target.value)}
-                />
-            </Section>
-            <Section>
-                <Label htmlFor='start-time'>Start Time</Label>
-                <Input
-                    type="text"
-                    id="start-time"
-                    placeholder='Start Time - hh:mm:ss'
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                />
-            </Section>
-            <Section>
-                <Label htmlFor="end-time">End Time:</Label>
-                <Input
-                    type="text"
-                    id="end-time"
-                    placeholder='End Time - hh:mm:ss'
-                    value={endTime}
-                    onChange={(e) => setEndTime(e.target.value)}
-                />
-            </Section>
-            <Section>
-                <Label htmlFor="capacity">Capacity</Label>
-                <Input
-                    type="number"
-                    id="capacity"
-                    placeholder='Capacity'
-                    value={capacity}
-                    onChange={(e) => setCapacity(e.target.value)}
-                />
-            </Section>
+            {localStorage.getItem('isAdmin') === 'true' ? (
+                <Section>
+                    <Label htmlFor="expert-name">User Name</Label>
+                    <Input
+                        type="text"
+                        id="expert-name"
+                        placeholder='User Name'
+                        value={garageName}
+                        onChange={(e) => setExpertName(e.target.value)}
+                    />
+                </Section>
+            ) : (
+                <div>
+                    <Section>
+                        <Label htmlFor="garage-name">Garage Name</Label>
+                        <Input
+                            type="text"
+                            id="garage-name"
+                            placeholder='Garage Name'
+                            value={garageName}
+                            onChange={(e) => setGarageName(e.target.value)}
+                        />
+                    </Section>
+                    <Section>
+                        <Label htmlFor='start-time'>Start Time</Label>
+                        <Input
+                            type="text"
+                            id="start-time"
+                            placeholder='Start Time - hh:mm:ss'
+                            value={startTime}
+                            onChange={(e) => setStartTime(e.target.value)}
+                        />
+                    </Section>
+                    <Section>
+                        <Label htmlFor="end-time">End Time:</Label>
+                        <Input
+                            type="text"
+                            id="end-time"
+                            placeholder='End Time - hh:mm:ss'
+                            value={endTime}
+                            onChange={(e) => setEndTime(e.target.value)}
+                        />
+                    </Section>
+                    <Section>
+                        <Label htmlFor="capacity">Capacity</Label>
+                        <Input
+                            type="number"
+                            id="capacity"
+                            placeholder='Capacity'
+                            value={capacity}
+                            onChange={(e) => setCapacity(e.target.value)}
+                        />
+                    </Section>
+                    <Section>
+                        <Label htmlFor="car-type">Supported Car Type</Label>
+                        <SelectList onChange={e => setCarType(e.target.value)}>
+                            <Option value="BMW">BMW</Option>
+                            <Option value="Toyotta">Toyotta</Option>
+                            <Option value="Audi">Audi</Option>
+                        </SelectList>
+                    </Section>
+                </div>
+            )}
             <Section>
                 <Label htmlFor="phone">Phone</Label>
                 <Input
@@ -178,21 +217,13 @@ const ProfileForm = () => {
                 />
             </Section>
             <Section>
-                <Label htmlFor="car-type">Supported Car Type</Label>
-                <SelectList onChange={e => setCarType(e.target.value)}>
-                    <Option value="BMW">BMW</Option>
-                    <Option value="Toyotta">Toyotta</Option>
-                    <Option value="Audi">Audi</Option>
-                </SelectList>
-            </Section>
-            <Section>
                 <Label htmlFor="password">Password</Label>
                 <Input type="password" id="password" placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)} />
             </Section>
             {showResult ? (
                 <Section>
-                    <Label style={{ color: 'rgb(190, 18, 48)' }}>Profile Updated Successfully</Label>
+                    <Label style={{ color: '#d63031' }}>Profile Updated Successfully</Label>
                 </Section>
             ) : null}
             <Buttons>

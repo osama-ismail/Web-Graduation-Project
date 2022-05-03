@@ -21,11 +21,18 @@ export const handleLogin = (e, { email, password }) => {
     ).then((response) => {
         console.log(response.data)
         id = response.data
+        let isAdmin = false
         if (email === 'iDrive252114@gmail.com') {
             localStorage.setItem('isAdmin', 'true')
+            isAdmin = true
         }
         if (id != -1) {
-            window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
+            if (isAdmin) {
+                window.location.replace(`http://localhost:3000/user-profile/expert-system/${id}`)
+            }
+            else {
+                window.location.replace(`http://localhost:3000/user-profile/edit-profile/${id}`)
+            }
             localStorage.setItem('loggedIn', id)
             localStorage.setItem('accountType', 'User')
         }

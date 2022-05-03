@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import "./styles.css";
 import manWaving from "./img/R.png";
+import { springPort, ip } from './ipAndPort';
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -478,7 +479,7 @@ export default class MapFiltered extends Component {
         garagesPopups.map(garagePopup => {
             random = Math.floor(Math.random() * 99999999)
             var position = [garagePopup.garageLocation.longitude, garagePopup.garageLocation.latitude]
-            imagesNames.push(`http://10.0.0.9:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
+            imagesNames.push(`http://${ip}:${springPort}/garages/${garagePopup.garageID}/profileImage/${random}`)
             markersPositions.push(
                 new this.tt.Marker()
                     .setLngLat(position)
@@ -497,9 +498,9 @@ export default class MapFiltered extends Component {
 
         let url = ''
         if (problem !== 'all') {
-            url = `http://10.0.0.9:8080/garages/getGarageByServiceTypeAndCarType/${problem}/${carType}`
+            url = `http://${ip}:${springPort}/garages/getGarageByServiceTypeAndCarType/${problem}/${carType}`
         } else {
-            url = `http://10.0.0.9:8080/garages/getGarageByCarType/${carType}`
+            url = `http://${ip}:${springPort}/garages/getGarageByCarType/${carType}`
         }
 
         // Call the API to get garages

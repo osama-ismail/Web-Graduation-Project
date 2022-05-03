@@ -53,12 +53,13 @@ const Section = styled.section`
 
 const ProfileName = styled.h2`
     color: #d63031;
-    font-size: 130%;
+    font-size: 200%;
 `
 
 const Email = styled.span`
     color: rgb(210, 210, 210, 0.7);
     margin-top: 0.4rem;
+    font-size: 120%;
 `
 
 const Profile = (props) => {

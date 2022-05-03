@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import "./styles.css";
 import manWaving from "./img/R.png";
+import { springPort, ip } from './ipAndPort';
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -478,7 +479,7 @@ export default class App extends Component {
         garagesPopups.map(garagePopup => {
             random = Math.floor(Math.random() * 99999999)
             var position = [garagePopup.garageLocation.longitude, garagePopup.garageLocation.latitude]
-            imagesNames.push(`http://localhost:8080/garages/${garagePopup.garageID}/profileImage/${random}`)
+            imagesNames.push(`http://localhost:${springPort}/garages/${garagePopup.garageID}/profileImage/${random}`)
             markersPositions.push(
                 new this.tt.Marker()
                     .setLngLat(position)
@@ -493,7 +494,7 @@ export default class App extends Component {
 
     componentDidMount() {
         // Call the API to get garages
-        axios.get('http://localhost:8080/garages').then(response => {
+        axios.get(`http://localhost:${springPort}/garages`).then(response => {
             garagesPopups = response.data
             // snip
             tt = window.tt

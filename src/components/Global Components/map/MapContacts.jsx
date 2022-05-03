@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
+import { springPort } from './ipAndPort';
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -41,7 +42,7 @@ export default class App extends Component {
 
         const self = this
         map.on('load', () => {
-            axios.get(`http://localhost:8080/garages/${this.props.userId}/location`).then(response => {
+            axios.get(`http://localhost:${springPort}/garages/${this.props.userId}/location`).then(response => {
                 this.map.flyTo({
                     center: {
                         lng: response.data[0],
