@@ -64,7 +64,7 @@ const Before = styled.span`
 const Notification = (props) => {
     return (
         <Container>
-            <Image src={require("../../../assets/images/" + props.img)} />
+            {/* <Image src={require("../../../assets/images/" + props.img)} /> */}
             <Box>
                 <Text>
                     <UserName>{props.name} </UserName>
