@@ -8,7 +8,7 @@ const Container = styled.div`
     align-items: stretch;
 `
 
-const Map = () => {
+const ReactNativeMap = () => {
     return (
         <Container>
             <ServiceMap height="100%" width="100%" borderRadius="0" />
@@ -16,4 +16,4 @@ const Map = () => {
     );
 };
 
-export default Map;
+export default ReactNativeMap;

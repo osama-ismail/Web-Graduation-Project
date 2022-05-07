@@ -49,10 +49,10 @@ const About = () => {
             </ImageWrapper>
             <Article>
                 <SectionName>
-                    About <span style={{ color: "rgb(230, 18, 47)", fontStyle: "italic" }}>iDrive</span>
+                    About <span style={{ color: "rgb(230, 40, 47)", fontStyle: "italic" }}>iDrive</span>
                 </SectionName>
                 <Paragraph>
-                    A website which groups all garages and facilitates contacting with nearest and appropriate car experts to solve your problem
+                    A website/mobile application which groups all garages and facilitates contacting with nearest and appropriate car experts to solve your problem
                 </Paragraph>
             </Article>
         </Container>

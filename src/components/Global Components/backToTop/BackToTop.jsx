@@ -5,17 +5,22 @@ const Container = styled.button`
     position: fixed;
     width: 50px;
     height: 50px;
-    background-color: rgb(230, 18, 47);
+    background-color: #d63031;
     right: 30px;
     bottom: 30px;
     border: none;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
+    transition: 300ms;
 
     animation-name: button-fade-in;
     animation-duration: 400ms;
     animation-timing-function: ease-in-out;
+
+    &:hover {
+        background-color: #ff3838;
+    }
 
     @keyframes button-fade-in {
         from { opacity: 0; }

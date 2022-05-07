@@ -14,13 +14,18 @@ const Container = styled.div`
 const Input = styled.input`
     background-color: black;
     padding: 12px 5px 12px 15px;
-    color: white;
+    color: #dcdde1;
     font-size: 17px;
     border: none;
     outline: none;
     border: 1px solid rgb(210, 210, 210, 0.5);
     margin-bottom: 2rem;
     border-radius: 3px;
+    transition: 300ms;
+
+    &:focus {
+        border: 1px solid #d63031;
+    }
 `;
 
 const SignIn = (props) => {

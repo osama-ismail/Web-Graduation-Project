@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 
+
 const Container = styled.button`
     position: relative;
     border: none;
@@ -28,17 +29,15 @@ const Counter = styled.span`
     text-align: center;
 `
 
-const NotificationBox = ({ handleNotificationBox }) => {
+const NotificationBox = ({ handleNotificationBox, counter }) => {
     const [clickedFlag, setClickedFlag] = useState(false)
     const [showCounter, setShowCounter] = useState(true)
 
     const handleClick = () => {
         setClickedFlag(!clickedFlag)
         setShowCounter(!showCounter)
-        handleNotificationBox();
+        handleNotificationBox()
     }
-
-    let counter = 3;
 
     return (
         <Container border={clickedFlag} onClick={handleClick}>

@@ -17,7 +17,7 @@ const Container = styled.div`
 const TopHeader = styled.h1`
     font-size: 45px;
     font-weight: 800;
-    color: white;
+    color: #dcdde1;
     margin-top: 2rem;
 `
 
@@ -36,7 +36,7 @@ const Services = () => {
         <Container id="ServicesElement">
             <TopHeader>
                 <span style={{
-                    color: "rgb(230, 18, 47)",
+                    color: "rgb(230, 40, 47)",
                     fontStyle: "italic"
                 }}>iDrive</span> Services
             </TopHeader>

@@ -17,7 +17,7 @@ const TextWrapper = styled.div`
 `
 
 const Title1 = styled.h1`
-    color: white;
+    color: #dcdde1;
     font-weight: 900;
     font-size: 4rem;
     animation-name: title1-animation;
@@ -41,7 +41,7 @@ const Title1 = styled.h1`
 `
 
 const Title2 = styled.h1`
-    color: white;
+    color: #dcdde1;
     font-weight: 900;
     font-size: 2.8rem;
 
@@ -69,7 +69,7 @@ const Title2 = styled.h1`
 
 const Paragraph = styled.p`
     margin-top: 2rem;
-    color: white;
+    color: #dcdde1;
     font-size: 1.2rem;
     opacity: 0;
 
@@ -101,15 +101,15 @@ const GetStarted = styled.button`
     cursor: pointer;
     padding: 0.4em 0.7em;
     border-radius: 40px;
-    background-color: white;
-    color: rgb(230, 18, 47);
+    background-color: #dcdde1;
+    color: #d63031;
     font-weight: bold;
     transition: 150ms;
     opacity: 0;
 
     &:hover {
         color: white;
-        background-color: rgb(230, 18, 47);
+        background-color: rgb(230, 40, 50);
     }
 
     animation-name: button-animation;

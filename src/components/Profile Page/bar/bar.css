@@ -6,9 +6,10 @@
     border-radius: 4px;
     margin-right: 0.3rem;
     font-size: 120%;
-    color: white;
+    color: #dcdde1;
     text-decoration: none;
 }
+
 .bar-item:hover {
-    color: rgb(190, 18, 48);
+    color: #d63031;
 }

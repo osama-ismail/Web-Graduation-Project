@@ -9,6 +9,7 @@ const LogoImage = styled.img`
     border-radius: 50%;
     width: 70px;
     height: 70px;
+    border: 3px solid #d63031;
 `
 
 const Navbar = (props) => {

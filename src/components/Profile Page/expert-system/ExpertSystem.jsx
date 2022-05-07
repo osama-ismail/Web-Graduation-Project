@@ -13,10 +13,10 @@ const Container = styled.div`
 
 const MainSection = styled.section`
     flex: 1;
-    border: 5px solid rgb(210, 210, 210, 0.8);
+    border: 5px solid #fdcb6e;
     border-radius: 40px;
     border-top: none;
-    background-color: gray;
+    background-color: #2d3436;
     margin: 0 1rem;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@ const MainSection = styled.section`
 const SectionTitle = styled.h1`
     text-align: center;
     text-transform: uppercase;
+    color: #d63031;
 `
 
 const KnowledgeForm = styled.div`
@@ -46,23 +47,23 @@ const Cover = styled.div`
 const Label = styled.label`
     font-size: 110%;
     font-weight: bold;
-    color: #ddd;
+    color: #dfe6e9;
 `
 
 const Input = styled.input`
-    background-color: #1a1a1a;
-    border: 2px solid #1a1a1a;
+    background-color: #191919;
+    border: 2px solid #191919;
     outline: none;
     padding: 4px 7px;
     border-radius: 3px;
     margin-left: 8px;
-    color: white;
+    color: #dfe6e9;
     font-size: 110%;
     width: 12rem;
     transition: 300ms;
 
     &:focus {
-        border: 2px solid rgb(190, 18, 48);
+        border: 2px solid #d63031;
     }
 `
 
@@ -81,9 +82,9 @@ const Btn = styled.button`
     margin: 5px 1rem;
     border-radius: 4px;
     width: 10rem;
-    background-color: rgb(190, 18, 48);
+    background-color: #d63031;
     border: none;
-    color: white;
+    color: #dfe6e9;
     cursor: pointer;
     padding: 4px 10px;
     transition: 300ms;
@@ -91,31 +92,33 @@ const Btn = styled.button`
 
     &:hover {
         background-color: #0a0a0a;
-        color: rgb(210, 210, 210);
+        color: #dfe6e9;
     }
 `
 
 const SelectedRule = styled.section`
-    background-color: #1a1a1a;
+    background-color: #191919;
     margin: 0.5rem;
     padding: 0.4rem 0.8rem;
     color: #a0a0a0;
     border-radius: 5px;
 `
 
-const InnerTitle = styled.h2``
+const InnerTitle = styled.h2`
+    color: #fdcb6e;
+`
 
 const RulePremises = styled.div``
 
 const Premise = styled.h4`
     display: flex;
     flex-direction: column;
-    color: rgb(190, 18, 48);
+    color: #d63031;
     transition: 300ms;
     cursor: pointer;
 
     &:hover {
-        background-color: #777;
+        background-color: #b2bec3;
     }
 `
 
@@ -127,12 +130,12 @@ const RuleConclusion = styled.div`
     transition: 300ms;
 
     &:hover {
-        background-color: #777;
+        background-color: #2d3436;
     }
 `
 
 const Info = styled.span`
-    color: rgb(190, 18, 48);
+    color: #d63031;
     margin-left: 5px;
 `
 
@@ -142,7 +145,7 @@ const DB = styled.div`
 `
 
 const Rule = styled.div`
-    background-color: #2a2a2a;
+    background-color: #191919;
     padding: 0.4rem;
     border-radius: 5px;
     margin: 0.5rem 0;
@@ -152,7 +155,7 @@ const Rule = styled.div`
     cursor: pointer;
 
     &:hover {
-        background-color: #444;
+        background-color: #2a2a2a;
     }
 `
 
@@ -169,21 +172,23 @@ const AllConclusions = styled.div`
 const Span = styled.span`
     font-size: 120%;
     font-weight: bold;
-    color: rgb(190, 180, 48);
+    color: #d63031;
     margin: 0.4rem;
 `
 
-const Division = styled.section``
+const Division = styled.section`
+    margin-top: 30px;
+`
 
 const Question = styled.div`
-    background-color: #222;
+    background-color: #191919;
     padding: 0.2rem 0.5rem;
     border-radius: 5px;
     transition: 300ms;
     margin: 0.3rem;
 
     &:hover {
-        background-color: #444;
+        background-color: #2a2a2a;
     }
 `
 
@@ -191,6 +196,48 @@ const ChoicesDiv = styled.div``
 
 const Choice = styled.section`
     margin: 0.3rem 0;
+`
+
+const SearchInput = styled.input`
+    border: none;
+    outline: none;
+    padding: 7px 0;
+    background: none;
+    color: #dfe6e9;
+    font-size: 16px;
+    transition: 400ms;
+    width: 0;
+`
+
+const SearchWrapper = styled.div`
+    background-color: #d63031;
+    padding: 3px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    margin-left: 10px;
+
+    &:hover > .search-txt {
+        width: 18em;
+        padding: 0 7px;
+    }
+`
+
+const SearchButton = styled.button`
+    color: #dfe6e9;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #2d3436;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 `
 
 const ExpertSystem = () => {
@@ -213,6 +260,10 @@ const ExpertSystem = () => {
     // const [assertions, setAssertions] = useState([])
 
     const [decisionTree, setDecisionTree] = useState([])
+
+    // Filters
+    const [filterKB, setFilterKB] = useState('')
+    const [filterDT, setFilterDT] = useState('')
 
     // const [KB, setKB] = useState([{
     //     premises: [{
@@ -321,6 +372,7 @@ const ExpertSystem = () => {
             if (copy[i].id === selectedRuleId) {
                 copy[i].conclusion.attribute = attribute
                 copy[i].conclusion.value = value
+                console.log(copy)
             }
         }
         setKB(copy)
@@ -454,7 +506,10 @@ const ExpertSystem = () => {
                         "Accept": "application/json"
                     }
                 }
-            ).then(response => alert('Question Updated'))
+            ).then(response => {
+                alert('Question Updated')
+                setDecisionTree(copyTree)
+            })
         } else {
             let newQuestion = {
                 questionAttribute: questionAttribute,
@@ -473,9 +528,11 @@ const ExpertSystem = () => {
                         "Accept": "application/json"
                     }
                 }
-            ).then(response => alert('New Question Added'))
+            ).then(response => {
+                alert('New Question Added')
+                setDecisionTree(copyTree)
+            })
         }
-        setDecisionTree(copyTree)
         setChoiceNum(0)
         setChildren([])
         setChoicesText([])
@@ -556,7 +613,7 @@ const ExpertSystem = () => {
             })
             setDecisionTree(temp)
         })
-    }, [decisionTree])
+    }, [decisionTree.length])
 
     useEffect(() => {
         // console.log(JSON.stringify(KB))
@@ -676,11 +733,27 @@ const ExpertSystem = () => {
                     </RuleConclusion>
                 </SelectedRule>
 
+                <SearchWrapper>
+                    <SearchInput
+                        className="search-txt"
+                        type="text"
+                        placeholder="Search for a rule by conclusion attribute"
+                        onChange={(e) => setFilterKB(e.target.value)}
+                    />
+                    <SearchButton>
+                        <i className="fa fa-search" aria-hidden="true"></i>
+                    </SearchButton>
+                </SearchWrapper>
+
                 {/* Show All Rules */}
                 <DB>
                     <InnerTitle>All Rules</InnerTitle>
                     {
-                        KB ? KB.map(rule => {
+                        KB ? KB.filter(rule => {
+                            if (filterKB !== "")
+                                return rule.conclusion.attribute.indexOf(filterKB) >= 0
+                            return rule
+                        }).map(rule => {
                             return (
                                 <Rule onClick={() => {
                                     setConditions(rule.premises)
@@ -764,11 +837,27 @@ const ExpertSystem = () => {
                     </Buttons>
                 </Division>
 
+                <SearchWrapper style={{ margin: '20px 5px' }}>
+                    <SearchInput
+                        className="search-txt"
+                        type="text"
+                        placeholder="Search for a question by attribute"
+                        onChange={(e) => setFilterDT(e.target.value)}
+                    />
+                    <SearchButton>
+                        <i className="fa fa-search" aria-hidden="true"></i>
+                    </SearchButton>
+                </SearchWrapper>
+
                 {/* Display All Questions */}
-                <Division>
-                    <InnerTitle>All Questions</InnerTitle>
+                <Division style={{ marginTop: '0' }}>
+                    <InnerTitle style={{ marginLeft: "5px" }}>All Questions</InnerTitle>
                     {
-                        decisionTree.map(question => {
+                        decisionTree.filter(question => {
+                            if (filterDT !== "")
+                                return question.questionAttribute.indexOf(filterDT) >= 0
+                            return question
+                        }).map(question => {
                             return (
                                 <Question>
                                     <Cover>

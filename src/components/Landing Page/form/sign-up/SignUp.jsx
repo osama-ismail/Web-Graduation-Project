@@ -1,7 +1,8 @@
 import "../form.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { handleRegister } from "../../../../backend/handleRegister";
 import styled from "styled-components";
+import MapForm from "../../mapForm/MapForm";
 
 const Container = styled.div`
     padding: 10px;
@@ -9,18 +10,26 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    
+    &:last-child {
+        margin-bottom: 3rem;
+    }
 `
 
 const Input = styled.input`
-    background-color: black;
+    background-color: #0d0d0d;
     padding: 12px 5px 12px 15px;
-    color: white;
+    color: #dcdde1;
     font-size: 17px;
-    border: none;
     outline: none;
-    border: 1px solid rgb(210, 210, 210, 0.5);
+    border: 1px solid #b2bec3;
     margin-bottom: 2rem;
     border-radius: 3px;
+    transition: 300ms;
+
+    &:focus {
+        border: 1px solid #d63031;
+    }
 `
 
 const SignUp = (props) => {
@@ -28,11 +37,14 @@ const SignUp = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [accountType, setAccountType] = useState('User Account')
+    const [accountType, setAccountType] = useState('Garage Account')
 
     const handleClick = (e) => {
         handleRegister(e, { name, email, password, phoneNumber, accountType });
     }
+
+    const closeMapForm = () => setShowMapForm(false);
+    const [showMapForm, setShowMapForm] = React.useState(false);
 
     return (
         <Container>
@@ -80,7 +92,7 @@ const SignUp = (props) => {
                     width: "100%"
                 }}
             />
-            <div id="account-type">
+            {/* <div id="account-type">
                 <span>Account Type:</span>
                 <select
                     id="select-account-type"
@@ -89,18 +101,22 @@ const SignUp = (props) => {
                     <option>User Account</option>
                     <option>Garage Account</option>
                 </select>
-            </div>
+            </div> */}
             <button className="toggle" onClick={props.handleClick}>
                 Have an account? login
             </button>
             <button className="submit-button" onClick={(e) => {
                 handleClick(e);
-                if (accountType === "Garage Account")
-                    props.appearMapForm();
+                // if (accountType === "Garage Account")
+                setShowMapForm(true)
             }}>
                 Create account
             </button>
-        </Container >
+
+            {showMapForm ? (
+                <MapForm closeMapForm={closeMapForm} />
+            ) : null}
+        </Container>
     )
 }
 
