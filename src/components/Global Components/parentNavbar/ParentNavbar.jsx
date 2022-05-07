@@ -48,6 +48,11 @@ const ParentNavbar = () => {
             setCounter(prev => prev + 1)
             setMsg(prev => [...prev, message])
         })
+
+        socket?.on("new-garage", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
     }, [socket])
 
 
