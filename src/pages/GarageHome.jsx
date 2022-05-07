@@ -7,9 +7,7 @@ import { garageServices } from "../iterated_variables/garageServices";
 import { advantages } from "../iterated_variables/advantages";
 import { Mobile, Tablet } from '../components/responsive/Responsive';
 import Team from '../components/GarageHome Page/team/Team';
-import NavigationBar from '../components/GarageHome Page/navigation_bar/NavigationBar';
 import BackToTop from '../components/Global Components/backToTop/BackToTop';
-import Catalog from '../components/Global Components/catalog/Catalog';
 import ParentNavbar from '../components/Global Components/parentNavbar/ParentNavbar';
 
 const Container = styled.div`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { io } from "socket.io-client";
+
 
 const Container = styled.button`
     position: relative;
@@ -29,32 +29,15 @@ const Counter = styled.span`
     text-align: center;
 `
 
-const NotificationBox = ({ handleNotificationBox }) => {
+const NotificationBox = ({ handleNotificationBox, counter }) => {
     const [clickedFlag, setClickedFlag] = useState(false)
     const [showCounter, setShowCounter] = useState(true)
-    const [socket, setSocket] = useState(null)
 
     const handleClick = () => {
         setClickedFlag(!clickedFlag)
         setShowCounter(!showCounter)
         handleNotificationBox()
-        socket.emit("notification", {
-            senderId: parseInt('' + localStorage.getItem('loggedIn')),
-            receiverId: 5,
-        })
     }
-
-    let counter = 3;
-
-    React.useEffect(() => {
-        const socketCopy = io.connect("http://localhost:5000")
-        setSocket(socketCopy)
-        socketCopy.emit("enter", localStorage.getItem('loggedIn'))
-    }, [])
-
-    React.useEffect(() => {
-        socket?.on("booking", msg => alert(msg))
-    }, [socket])
 
     return (
         <Container border={clickedFlag} onClick={handleClick}>

@@ -4,6 +4,8 @@ import UserList from "../user-list/UserList";
 import NavigationBar from '../../GarageHome Page/navigation_bar/NavigationBar';
 import Catalog from '../catalog/Catalog';
 import styled from 'styled-components';
+import { io } from "socket.io-client";
+import axios from "axios";
 
 const Container = styled.nav``
 
@@ -11,6 +13,44 @@ const ParentNavbar = () => {
     const [showUserList, setShowUserList] = useState(false)
     const [showNotificationList, setShowNotificationList] = useState(false)
     const [showCatalog, setShowCatalog] = useState(false)
+    const [socket, setSocket] = useState(null)
+    // Notification body
+    const [counter, setCounter] = useState(0)
+    const [msg, setMsg] = useState([])
+
+    React.useEffect(() => {
+        let notificationTexts = []
+        axios.get(`http://localhost:8080/garage/${localStorage.getItem('loggedIn')}/notifications`)
+            .then(response => {
+                for (let i = 0; i < response.data.length; i += 1) {
+                    notificationTexts.push(response.data[i].notificationText)
+                }
+                setCounter(response.data.length)
+                setMsg(notificationTexts)
+            })
+    }, [])
+
+    React.useEffect(() => {
+        const socketCopy = io.connect("http://localhost:5000")
+        setSocket(socketCopy)
+        // Send my info to server
+        socketCopy.emit("enter", localStorage.getItem('loggedIn'), localStorage.getItem('userName'))
+    }, [])
+
+    React.useEffect(() => {
+        // Show me a notification when booking
+        socket?.on("booking", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
+
+        socket?.on("unbooking", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
+    }, [socket])
+
+
     const handleUserClick = () => {
         setShowUserList(!showUserList)
     }
@@ -30,12 +70,13 @@ const ParentNavbar = () => {
             }
             {
                 showNotificationList ?
-                    <NotificationList /> : null
+                    <NotificationList msg={msg} counter={counter} /> : null
             }
             <NavigationBar
                 handleUserBox={handleUserClick}
                 handleNotificationBox={hanleNotificationClick}
                 handleCatalog={handleCatalog}
+                counter={counter}
             />
             {showCatalog ? <Catalog /> : null}
         </Container>

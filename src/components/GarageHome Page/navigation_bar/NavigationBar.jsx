@@ -87,7 +87,7 @@ const Catalog = styled.div`
     }
 `
 
-const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) => {
+const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog, counter }) => {
     const [showBackground, setBackground] = React.useState(false)
 
     window.addEventListener("scroll", () => {
@@ -120,7 +120,7 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog }) 
                 <SearchBar />
             </Center>
             <Right>
-                <NotificationBox handleNotificationBox={handleNotificationBox} />
+                <NotificationBox handleNotificationBox={handleNotificationBox} counter={counter} />
                 <UserBox handleUserBox={handleUserBox} />
             </Right>
         </Container >
