@@ -6,6 +6,7 @@ import Catalog from '../catalog/Catalog';
 import styled from 'styled-components';
 import { io } from "socket.io-client";
 import axios from "axios";
+import { springPort } from '../map/ipAndPort';
 
 const Container = styled.nav``
 
@@ -35,6 +36,22 @@ const ParentNavbar = () => {
         setSocket(socketCopy)
         // Send my info to server
         socketCopy.emit("enter", localStorage.getItem('loggedIn'), localStorage.getItem('userName'))
+        if (localStorage.getItem('garage-register') === 'true') {
+            const garageName = localStorage.getItem('userName')
+            const id = localStorage.getItem('loggedIn')
+            socketCopy.emit("garage-register", { garageName: garageName })
+            axios.post(
+                `http://localhost:${springPort}/sendNotificationForAllUsers/fromGarage/${id}`,
+                `New garage "${garageName}" has joined the app!`,
+                {
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Accept": "application/json"
+                    }
+                }
+            )
+            localStorage.removeItem('garage-register')
+        }
     }, [])
 
     React.useEffect(() => {
@@ -50,6 +67,11 @@ const ParentNavbar = () => {
         })
 
         socket?.on("new-garage", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
+
+	socket?.on("ordering", message => {
             setCounter(prev => prev + 1)
             setMsg(prev => [...prev, message])
         })

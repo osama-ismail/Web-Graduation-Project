@@ -69,6 +69,9 @@ export const handleRegister = (e, { name, email, password, phoneNumber, accountT
                 localStorage.setItem('loggedIn', garageId)
                 localStorage.setItem('accountType', 'Garage')
                 localStorage.setItem('password', password)
+                localStorage.setItem('garage-register', 'true')
+                localStorage.setItem('userName', name)
+                localStorage.setItem('isAdmin', 'false')
             }
         })
 

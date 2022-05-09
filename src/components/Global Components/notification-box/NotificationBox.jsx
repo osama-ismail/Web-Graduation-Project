@@ -47,8 +47,12 @@ const NotificationBox = ({ handleNotificationBox, counter }) => {
                 style={{
                     color: `${clickedFlag ? "rgb(230, 18, 47)" : "black"}`
                 }}
-            ></i>
-            {showCounter ? <Counter>{counter}</Counter> : null}
+            />
+            {
+                counter !== 0 ? (
+                    showCounter ? <Counter>{counter}</Counter> : null
+                ) : null
+            }
         </Container>
     );
 };
