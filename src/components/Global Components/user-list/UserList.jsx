@@ -65,6 +65,8 @@ const UserList = () => {
         localStorage.removeItem('userName')
         localStorage.removeItem('isAdmin')
         localStorage.removeItem('password')
+        localStorage.removeItem('garage-register')
+        localStorage.clear()
     }
 
     return (
