@@ -71,7 +71,12 @@ const ParentNavbar = () => {
             setMsg(prev => [...prev, message])
         })
 
-	socket?.on("ordering", message => {
+        socket?.on("ordering", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
+
+        socket?.on("unordering", message => {
             setCounter(prev => prev + 1)
             setMsg(prev => [...prev, message])
         })
