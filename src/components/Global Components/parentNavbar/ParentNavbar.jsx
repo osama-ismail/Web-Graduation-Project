@@ -23,10 +23,12 @@ const ParentNavbar = () => {
         let notificationTexts = []
         axios.get(`http://localhost:8080/garage/${localStorage.getItem('loggedIn')}/notifications`)
             .then(response => {
-                for (let i = 0; i < response.data.length; i += 1) {
-                    notificationTexts.push(response.data[i].notificationText)
+                let copy = [...response.data]
+                copy = copy.sort((a, b) => a.notificationId - b.notificationId)
+                for (let i = 0; i < copy.length; i += 1) {
+                    notificationTexts.push(copy[i].notificationText)
                 }
-                setCounter(response.data.length)
+                setCounter(copy.length)
                 setMsg(notificationTexts)
             })
     }, [])
@@ -39,10 +41,23 @@ const ParentNavbar = () => {
         if (localStorage.getItem('garage-register') === 'true') {
             const garageName = localStorage.getItem('userName')
             const id = localStorage.getItem('loggedIn')
-            socketCopy.emit("garage-register", { garageName: garageName })
+            const notification = {
+                type: 'garage-register',
+                senderId: id,
+                senderName: garageName,
+                receiverId: -1,
+                receiverName: -1,
+                message: `New garage "${garageName}" has joined the app!`,
+                otherData: {
+                    serviceId: null,
+                    slotId: null,
+                    locations: null
+                }
+            }
+            socketCopy.emit("garage-register", notification)
             axios.post(
                 `http://localhost:${springPort}/sendNotificationForAllUsers/fromGarage/${id}`,
-                `New garage "${garageName}" has joined the app!`,
+                JSON.stringify(notification),
                 {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",
@@ -72,6 +87,11 @@ const ParentNavbar = () => {
         })
 
         socket?.on("ordering", message => {
+            setCounter(prev => prev + 1)
+            setMsg(prev => [...prev, message])
+        })
+
+        socket?.on("tracking", message => {
             setCounter(prev => prev + 1)
             setMsg(prev => [...prev, message])
         })

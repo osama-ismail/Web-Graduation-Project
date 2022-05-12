@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MediumScreen } from '../../responsive/Responsive';
 
 import "./styles.css";
-import manWaving from "./img/man-waving-arm_32.png";
+import manWaving from "./img/R.png";
 
 const Container = styled.div`
     height: ${props => props.height};
@@ -16,6 +16,7 @@ const Container = styled.div`
 let tt = null;
 let map = null;
 let markers = [];
+let marker = null;
 
 
 // From Taxi app
@@ -87,6 +88,18 @@ export default class App extends Component {
         return marker
     }
 
+    addMarkerClick(e, obj) {
+        if (marker != null)
+            marker.remove();
+        marker = new this.tt.Marker(obj)
+            .setLngLat(e.lngLat)
+            .addTo(this.map)     // Don't forget to specify a map to be display
+        // console.log(e.lngLat)
+        // console.log(e.lngLat.lng + " " + e.lngLat.lat)
+        // setLocation(e.lngLat);
+        window.ReactNativeWebView.postMessage(`${e.lngLat.lng},${e.lngLat.lat}`)
+    }
+
     componentDidMount() {
         // snip
         tt = window.tt
@@ -122,7 +135,7 @@ export default class App extends Component {
             var garagelatitude = parseFloat(new URL(window.location).pathname.split('/')[5])
 
             const garageMarker = this.addMarker({
-                color: 'rgb(190, 18, 47)',
+                color: 'orange',
                 width: '40',
                 height: '50'
             }, [garagelongitude, garagelatitude])
@@ -139,7 +152,7 @@ export default class App extends Component {
             tt.setProductInfo('Taxi dispatcher example application', '1.00');
 
             passengerMarker = createPassengerMarker(passengerInitCoordinates,
-                new tt.Popup({ offset: 45 }).setHTML("<h1>You are here</h1>"));
+                new tt.Popup({ offset: 45 }).setHTML("<h1>Driver is here</h1>"));
             markers.push(passengerMarker);
             markers.push(garageMarker)
             passengerMarker.togglePopup();
@@ -147,6 +160,14 @@ export default class App extends Component {
             // map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
             calculateRoute();
         });
+
+        map.on('click', (event) => {
+            this.addMarkerClick(event, {
+                color: 'blue',
+                width: '40',
+                height: '50'
+            });
+        })
     }
 
     render() {
