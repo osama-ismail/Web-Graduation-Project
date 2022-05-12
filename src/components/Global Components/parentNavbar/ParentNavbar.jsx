@@ -39,10 +39,23 @@ const ParentNavbar = () => {
         if (localStorage.getItem('garage-register') === 'true') {
             const garageName = localStorage.getItem('userName')
             const id = localStorage.getItem('loggedIn')
-            socketCopy.emit("garage-register", { garageName: garageName })
+            const notification = {
+                type: 'garage-register',
+                senderId: id,
+                senderName: garageName,
+                receiverId: -1,
+                receiverName: -1,
+                message: `New garage "${garageName}" has joined the app!`,
+                otherData: {
+                    serviceId: null,
+                    slotId: null,
+                    locations: null
+                }
+            }
+            socketCopy.emit("garage-register", notification)
             axios.post(
                 `http://localhost:${springPort}/sendNotificationForAllUsers/fromGarage/${id}`,
-                `New garage "${garageName}" has joined the app!`,
+                JSON.stringify(notification),
                 {
                     headers: {
                         "Content-type": "application/json; charset=UTF-8",

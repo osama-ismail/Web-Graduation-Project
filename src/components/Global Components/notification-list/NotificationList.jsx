@@ -60,6 +60,7 @@ const Notification = styled.div`
 `
 
 const NotificationList = ({ msg, counter }) => {
+    console.log(msg)
     return (
         <Container>
             <TopDiv>
@@ -70,7 +71,7 @@ const NotificationList = ({ msg, counter }) => {
             <Notifications>
                 {
                     [...msg].reverse().map(
-                        message => { return <Notification>{message}</Notification> }
+                        notification => { return <Notification>{JSON.parse(notification).message}</Notification> }
                     )
                 }
             </Notifications>
