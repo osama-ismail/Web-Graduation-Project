@@ -73,32 +73,32 @@ const ParentNavbar = () => {
         // Show me a notification when booking
         socket?.on("booking", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
 
         socket?.on("unbooking", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
 
         socket?.on("new-garage", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
 
         socket?.on("ordering", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
 
         socket?.on("tracking", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
 
         socket?.on("unordering", message => {
             setCounter(prev => prev + 1)
-            setMsg(prev => [...prev, message])
+            setMsg(prev => [...prev, JSON.stringify(message)])
         })
     }, [socket])
 
