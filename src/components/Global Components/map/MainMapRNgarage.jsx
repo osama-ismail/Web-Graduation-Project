@@ -21,6 +21,9 @@ let map = null;
 let markers = [];
 var locations = ""
 
+var LONGITUDE = null
+var LATITUDE = null
+
 var garagesPopups = null;
 
 // From Taxi app
@@ -387,41 +390,41 @@ export async function calculateRoute() {
 
 export const lookingFor = (place, radius) => {
     var lng = undefined, lat = undefined;
-    navigator.geolocation.getCurrentPosition(position => {
-        lng = position.coords.longitude;
-        lat = position.coords.latitude;
-        axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD")
-            .then(response => {
-                console.log(response.data)
-                let results = response.data.results
-                for (let i = 0; i < results.length; i += 1) {
-                    let popup = new tt.Popup({
-                        offset: {
-                            top: [0, 0],
-                            bottom: [0, -30],
-                            'bottom-right': [0, -70],
-                            'bottom-left': [0, -70],
-                            left: [25, -35],
-                            right: [-25, -35]
-                        }
-                    }).setHTML(
-                        `<div>
+    // navigator.geolocation.getCurrentPosition(position => {
+    // lng = position.coords.longitude;
+    // lat = position.coords.latitude;
+    axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + LATITUDE + "&lon=" + LONGITUDE + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD")
+        .then(response => {
+            console.log(response.data)
+            let results = response.data.results
+            for (let i = 0; i < results.length; i += 1) {
+                let popup = new tt.Popup({
+                    offset: {
+                        top: [0, 0],
+                        bottom: [0, -30],
+                        'bottom-right': [0, -70],
+                        'bottom-left': [0, -70],
+                        left: [25, -35],
+                        right: [-25, -35]
+                    }
+                }).setHTML(
+                    `<div>
                         <h1 style="font-weight: 900">${results[i].poi.name}</h1>
                     </div>`
-                    )
+                )
 
-                    let marker = new tt.Marker({
-                        color: 'orange',
-                        width: '40',
-                        height: '50',
-                    }).setLngLat(results[i].position).addTo(map)
+                let marker = new tt.Marker({
+                    color: 'orange',
+                    width: '40',
+                    height: '50',
+                }).setLngLat(results[i].position).addTo(map)
 
-                    marker.setPopup(popup).togglePopup()
+                marker.setPopup(popup).togglePopup()
 
-                    markers.push(marker)
-                }
-            })
-    })
+                markers.push(marker)
+            }
+        })
+    // })
 }
 
 export default class MainMapRNgarage extends Component {
@@ -496,11 +499,29 @@ export default class MainMapRNgarage extends Component {
     componentDidMount() {
         var id = new URL(window.location).pathname.split('/')[4]
 
-        let url = `http://${ip}:${springPort}/garages/${id}/garageCustomersList`
+        let url = `http://${ip}:${springPort}/garage/${id}/getAllGarageCustomers`
 
         // Call the API to get garages
         axios.get(url).then(response => {
-            garagesPopups = response.data
+            garagesPopups = []
+            for (let i = 0; i < response.data.length; i += 1) {
+                for (let j = 0; j < response.data[i].services.length; j += 1) {
+                    let supportedGarageID = response.data[i].services[j].supportedGarageID
+                    if (supportedGarageID == parseInt(id)) {
+                        let flagOrder = true
+                        for (let k = 0; k < response.data[i].services[j].slotTimes.length; k += 1) {
+                            if (response.data[i].services[j].slotTimes[k].bookedUserID == response.data[i].user_Id) {
+                                flagOrder = false
+                                break
+                            }
+                        }
+                        if (flagOrder) {
+                            garagesPopups.push(response.data[i])
+                            break
+                        }
+                    }
+                }
+            }
             // snip
             tt = window.tt
 
@@ -553,7 +574,8 @@ export default class MainMapRNgarage extends Component {
             map.on('load', () => {
                 var longitude = parseFloat(new URL(window.location).pathname.split('/')[2])
                 var latitude = parseFloat(new URL(window.location).pathname.split('/')[3])
-
+                LONGITUDE = longitude
+                LATITUDE = latitude
                 this.map.flyTo({
                     center: {
                         lng: longitude,
@@ -607,7 +629,7 @@ export default class MainMapRNgarage extends Component {
                 borderRadius={this.props.borderRadius}
             >
                 <div id="labels-container">
-                    <label>Find the garage that will arrive fastest</label>
+                    <label>Find the customers who need immediate help</label>
                     <div id="route-labels"></div>
                     <input type="button" id="submit-button" value="Submit" onClick={submitButtonHandler} />
                 </div>
