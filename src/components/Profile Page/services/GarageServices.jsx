@@ -419,18 +419,21 @@ const GarageServices = () => {
                                                     <AddingInputs>
                                                         <AddingLabel>Slot Date</AddingLabel>
                                                         <AddingInput
+                                                            type="date"
                                                             placeholder="Date"
                                                             onChange={e => setSlotDate(e.target.value)}
                                                         />
                                                         <AddingLabel>Slot Start Time</AddingLabel>
                                                         <AddingInput
-                                                            placeholder="Start Time"
-                                                            onChange={e => setSlotStart(e.target.value)}
+                                                            type="time"
+                                                            placeholder="Start Time (hh:mm:ss)"
+                                                            onChange={e => setSlotStart(e.target.value + ":00")}
                                                         />
                                                         <AddingLabel>Slot End Time</AddingLabel>
                                                         <AddingInput
-                                                            placeholder="End Time"
-                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                            type="time"
+                                                            placeholder="End Time (hh:mm:ss)"
+                                                            onChange={e => setSlotEnd(e.target.value + ":00")}
                                                         />
                                                     </AddingInputs>
                                                     <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
@@ -450,17 +453,23 @@ const GarageServices = () => {
                                                                     <SlotRow>
                                                                         {canEdit ? (
                                                                             <Slot>
+                                                                                Date:
                                                                                 <SlotInput
+                                                                                    type="date"
                                                                                     placeholder='Date'
                                                                                     onChange={e => setSlotDate(e.target.value)}
                                                                                 />
+                                                                                Start time:
                                                                                 <SlotInput
-                                                                                    placeholder='Start Time'
-                                                                                    onChange={e => setSlotStart(e.target.value)}
+                                                                                    type="time"
+                                                                                    placeholder='Start Time (hh:mm:ss)'
+                                                                                    onChange={e => setSlotStart(e.target.value + ":00")}
                                                                                 />
+                                                                                End time:
                                                                                 <SlotInput
-                                                                                    placeholder='End Time'
-                                                                                    onChange={e => setSlotEnd(e.target.value)}
+                                                                                    type="time"
+                                                                                    placeholder='End Time (hh:mm:ss)'
+                                                                                    onChange={e => setSlotEnd(e.target.value + ":00")}
                                                                                 />
                                                                             </Slot>
                                                                         ) : (
@@ -548,18 +557,21 @@ const GarageServices = () => {
                                                     <AddingInputs>
                                                         <AddingLabel>Slot Date</AddingLabel>
                                                         <AddingInput
+                                                            type="date"
                                                             placeholder="Date"
                                                             onChange={e => setSlotDate(e.target.value)}
                                                         />
                                                         <AddingLabel>Slot Start Time</AddingLabel>
                                                         <AddingInput
-                                                            placeholder="Start Time"
-                                                            onChange={e => setSlotStart(e.target.value)}
+                                                            type="time"
+                                                            placeholder="Start Time (hh:mm:ss)"
+                                                            onChange={e => setSlotStart(e.target.value + ":00")}
                                                         />
                                                         <AddingLabel>Slot End Time</AddingLabel>
                                                         <AddingInput
-                                                            placeholder="End Time"
-                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                            type="time"
+                                                            placeholder="End Time (hh:mm:ss)"
+                                                            onChange={e => setSlotEnd(e.target.value + ":00")}
                                                         />
                                                     </AddingInputs>
                                                     <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
@@ -580,16 +592,19 @@ const GarageServices = () => {
                                                                         {canEdit ? (
                                                                             <Slot>
                                                                                 <SlotInput
+                                                                                    type="date"
                                                                                     placeholder='Date'
                                                                                     onChange={e => setSlotDate(e.target.value)}
                                                                                 />
                                                                                 <SlotInput
-                                                                                    placeholder='Start Time'
-                                                                                    onChange={e => setSlotStart(e.target.value)}
+                                                                                    type="time"
+                                                                                    placeholder='Start Time (hh:mm:ss)'
+                                                                                    onChange={e => setSlotStart(e.target.value + ":00")}
                                                                                 />
                                                                                 <SlotInput
-                                                                                    placeholder='End Time'
-                                                                                    onChange={e => setSlotEnd(e.target.value)}
+                                                                                    type="time"
+                                                                                    placeholder='End Time (hh:mm:ss)'
+                                                                                    onChange={e => setSlotEnd(e.target.value + ":00")}
                                                                                 />
                                                                             </Slot>
                                                                         ) : (
@@ -677,18 +692,21 @@ const GarageServices = () => {
                                                     <AddingInputs>
                                                         <AddingLabel>Slot Date</AddingLabel>
                                                         <AddingInput
+                                                            type="date"
                                                             placeholder="Date"
                                                             onChange={e => setSlotDate(e.target.value)}
                                                         />
                                                         <AddingLabel>Slot Start Time</AddingLabel>
                                                         <AddingInput
+                                                            type="time"
                                                             placeholder="Start Time"
-                                                            onChange={e => setSlotStart(e.target.value)}
+                                                            onChange={e => setSlotStart(e.target.value + ":00")}
                                                         />
                                                         <AddingLabel>Slot End Time</AddingLabel>
                                                         <AddingInput
+                                                            type="time"
                                                             placeholder="End Time"
-                                                            onChange={e => setSlotEnd(e.target.value)}
+                                                            onChange={e => setSlotEnd(e.target.value + ":00")}
                                                         />
                                                     </AddingInputs>
                                                     <AddingSlotBtn onClick={handleAddingSlot}>Save</AddingSlotBtn>
@@ -712,13 +730,17 @@ const GarageServices = () => {
                                                                                     placeholder='Date'
                                                                                     onChange={e => setSlotDate(e.target.value)}
                                                                                 />
+                                                                                Start time:
                                                                                 <SlotInput
+                                                                                    type="time"
                                                                                     placeholder='Start Time'
-                                                                                    onChange={e => setSlotStart(e.target.value)}
+                                                                                    onChange={e => setSlotStart(e.target.value + ":00")}
                                                                                 />
+                                                                                End time:
                                                                                 <SlotInput
+                                                                                    type="time"
                                                                                     placeholder='End Time'
-                                                                                    onChange={e => setSlotEnd(e.target.value)}
+                                                                                    onChange={e => setSlotEnd(e.target.value + ":00")}
                                                                                 />
                                                                             </Slot>
                                                                         ) : (

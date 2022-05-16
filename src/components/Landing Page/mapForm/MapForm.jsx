@@ -121,15 +121,15 @@ const MapForm = ({ closeMapForm }) => {
             <Inputs>
                 <Input
                     value={startTime}
-                    onChange={e => setStartTime(e.target.value)}
-                    type="text"
+                    onChange={e => setStartTime(e.target.value + ":00")}
+                    type="time"
                     required
                     placeholder="Start Time - hh:mm:ss"
                 />
                 <Input
                     value={endTime}
-                    onChange={e => setEndTime(e.target.value)}
-                    type="text"
+                    onChange={e => setEndTime(e.target.value + ":00")}
+                    type="time"
                     required
                     placeholder="End Time - hh:mm:ss"
                 />

@@ -44,15 +44,6 @@ const Menu = styled.div`
     ${MediumScreen({ display: "flex" })}
 `
 
-const Center = styled.div`
-    text-align: center;
-    display: flex;
-    align-items: center;
-    margin: 0 1rem;
-    
-    ${MediumScreen({ display: "none" })}
-`
-
 const Left = styled.div``
 
 const Logo = styled.img`
@@ -107,18 +98,6 @@ const NavigationBar = ({ handleUserBox, handleNotificationBox, handleCatalog, co
             <Menu>
                 <i className="fa fa-bars" aria-hidden="true"></i>
             </Menu>
-            <Center>
-                <Catalog onClick={handleCatalog}>
-                    <i className="fa fa-bars" aria-hidden="true"></i>
-                    <CatalogSpan>Catalog</CatalogSpan>
-                </Catalog>
-                <NavLink to="/main-login" className="navlinks">HOME</NavLink>
-                <NavLink to="/shop" className="navlinks">Shop</NavLink>
-                <NavLink to="/login/:garageId/booking" className="booking">
-                    Booking
-                </NavLink>
-                <SearchBar />
-            </Center>
             <Right>
                 <NotificationBox handleNotificationBox={handleNotificationBox} counter={counter} />
                 <UserBox handleUserBox={handleUserBox} />
