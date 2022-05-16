@@ -12,7 +12,7 @@ const Container = styled.div`
     padding: 5px;
 
     ${MediumScreen({ flexDirection: "column-reverse", height: '110vh' })}
-    ${Mobile({ flexDirection: "column-reverse", height: '130vh' })}
+    ${Mobile({ flexDirection: "column-reverse", height: '160vh' })}
 `
 
 const Right = styled.section`

@@ -11,6 +11,8 @@ const Container = styled.div`
     padding: 0.5rem 5px;
     transition: 250ms;
     width: 97%;
+    height: 10rem;
+    overflow-y: scroll;
     
     display: flex;
     flex-direction: column;

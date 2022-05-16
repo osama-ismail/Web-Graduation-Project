@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchBar from '../../Global Components/search-bar/SearchBar';
+import SearchBarRNGarage from '../../Global Components/search-bar/SearchBarRNGarage';
 import {
     clearMarkers,
     calculateRoute
@@ -52,7 +52,7 @@ const LeftSideRNgarage = () => {
 
     return (
         <Container>
-            <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+            <SearchBarRNGarage searchValue={searchValue} setSearchValue={setSearchValue} />
             <Buttons>
                 <Button onClick={() => clearMarkers()}>Delete all markers</Button>
                 <Button onClick={() => {

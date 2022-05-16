@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchBar from '../../Global Components/search-bar/SearchBar';
+import SearchBarRN from '../../Global Components/search-bar/SearchBarRN';
 import {
     clearMarkers,
     calculateRoute
@@ -52,7 +52,7 @@ const LeftSide = () => {
 
     return (
         <Container>
-            <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+            <SearchBarRN searchValue={searchValue} setSearchValue={setSearchValue} />
             <Buttons>
                 <Button onClick={() => clearMarkers()}>Delete all markers</Button>
                 <Button onClick={() => {
