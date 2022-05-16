@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import MapFiltered from '../components/Global Components/map/MapFiltered';
-import LeftSideRN from '../components/Map Page/left-side/LeftSideRN';
 import { MediumScreen, Mobile } from '../components/responsive/Responsive';
 
 const Container = styled.div`
@@ -15,20 +14,10 @@ const Container = styled.div`
     ${Mobile({ flexDirection: "column-reverse", height: '130vh' })}
 `
 
-const Right = styled.section`
-    flex: 2;
-    margin-left: 3px;
-    
-    ${MediumScreen({ height: '100vh' })}
-`
-
 const FilterMapRN = () => {
     return (
         <Container>
-            <LeftSideRN />
-            <Right>
-                <MapFiltered height="100%" width="100%" borderRadius="4px" />
-            </Right>
+            <MapFiltered height="100%" width="100%" borderRadius="4px" />
         </Container>
     );
 };

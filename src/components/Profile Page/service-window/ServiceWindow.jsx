@@ -163,7 +163,7 @@ const ServiceWindow = ({ currentService, setWindowVisible, refresh, setRefresh, 
                 <Label>Service Time</Label>
                 <Input
                     type="text"
-                    placeholder='Service Time'
+                    placeholder='Service Time: hh:mm:ss'
                     value={serviceTime}
                     onChange={e => setServiceTime(e.target.value)}
                 />
