@@ -589,13 +589,14 @@ export default class MapFiltered extends Component {
             routeLabelsDiv = document.getElementById('route-labels');
 
 
-            // map.on('click', (event) => {
-            //     this.addMarkerOnClick(event, {
-            //         color: 'rgb(190, 18, 47)',
-            //         width: '40',
-            //         height: '50'
-            //     });
-            // });
+            map.on('click', (event) => {
+                // this.addMarkerOnClick(event, {
+                //     color: 'rgb(190, 18, 47)',
+                //     width: '40',
+                //     height: '50'
+                // });
+                this.displayPopups(this.state.popupOffsets)
+            });
 
             modal.addEventListener('click', function () {
                 modal.style.display = 'none';
