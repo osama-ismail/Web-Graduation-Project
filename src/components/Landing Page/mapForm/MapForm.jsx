@@ -134,9 +134,9 @@ const MapForm = ({ closeMapForm }) => {
                     placeholder="End Time - hh:mm:ss"
                 />
                 <SelectList onChange={e => setCarType(e.target.value)}>
-                    <Option value="BMW">BMW</Option>
-                    <Option value="Toyotta">Toyotta</Option>
-                    <Option value="Audi">Audi</Option>
+                    <Option value="VW">VW</Option>
+                    <Option value="Mercedes-Benz">Mercedes-Benz</Option>
+                    <Option value="Skoda">Skoda</Option>
                 </SelectList>
             </Inputs>
             <SubmitBtn onClick={e => submitLocation(e, location, startTime, endTime, carType)}>Submit</SubmitBtn>
