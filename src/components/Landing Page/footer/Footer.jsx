@@ -4,6 +4,7 @@ import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import logoImg from "../../../assets/images/iDrive.jpg";
 import { Tablet } from "../../responsive/Responsive";
+import mobile from "../../../assets/images/mobile.jpg";
 
 const Container = styled.div``
 
@@ -37,12 +38,13 @@ const Info = styled.div`
 const Right = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 `
 
 const Left = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-start;
     margin: 10px 5px;
 `
 
@@ -102,7 +104,9 @@ const Footer = () => {
                             </Phone>
                         </Right>
                     </Info>
-                    <MobileApp>Mobile App Image</MobileApp>
+                    <MobileApp>
+                        <img src={mobile} alt="" width="150px" height="300px" />
+                    </MobileApp>
                 </Wrapper>
             </Ftr>
             <Separator />
