@@ -21,6 +21,9 @@ let map = null;
 let markers = [];
 var locations = ""
 
+var LONGITUDE = null
+var LATITUDE = null
+
 var garagesPopups = null;
 
 // From Taxi app
@@ -390,7 +393,7 @@ export const lookingFor = (place, radius) => {
     // navigator.geolocation.getCurrentPosition(position => {
     //     lng = position.coords.longitude;
     //     lat = position.coords.latitude;
-    axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + lat + "&lon=" + lng + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD")
+    axios.get("https://api.tomtom.com/search/2/search/" + place + ".json?lat=" + LATITUDE + "&lon=" + LONGITUDE + "&radius=" + radius + "&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=q2yukmABGuRvQD9NhkGAABCOYtIMoHFD")
         .then(response => {
             console.log(response.data)
             let results = response.data.results
@@ -548,6 +551,8 @@ export default class MainMapRN extends Component {
             map.on('load', () => {
                 var longitude = parseFloat(new URL(window.location).pathname.split('/')[2])
                 var latitude = parseFloat(new URL(window.location).pathname.split('/')[3])
+                LONGITUDE = longitude
+                LATITUDE = latitude
 
                 this.map.flyTo({
                     center: {
