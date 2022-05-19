@@ -487,7 +487,7 @@ export default class MapFiltered extends Component {
         });
 
         for (i = 0; i < garagesPopups.length; ++i) {
-            var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div style="width: 150px" id="${garagesPopups[i].garageID}" onclick="window.ReactNativeWebView.postMessage(this.id)"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h1 style="font-weight: 900">` + `${garagesPopups[i].garageName}` + `</h1><br /><img width="100%" height="100%" src="${imagesNames[i]}" alt="image" /></a></div>`);
+            var popup = new tt.Popup({ offset: popupOffsets }).setHTML(`<div style="width: 60px" id="${garagesPopups[i].garageID}" onclick="window.ReactNativeWebView.postMessage(this.id)"><a style="color: black;text-decoration: none; display:flex; flex-direction: column; align-items: center" href="#"><h1 style="font-weight: 900">` + `${garagesPopups[i].garageName}` + `</h1><br /><img width="100%" height="100%" src="${imagesNames[i]}" alt="image" /></a></div>`);
             markersPositions[i].setPopup(popup).togglePopup();
         }
     }
